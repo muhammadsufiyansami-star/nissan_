@@ -1,0 +1,1196 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan QX50</title>
+  <link rel="icon" type="image/x-icon" href="https://www.optikauto.com/cdn/shop/files/Infiniti-QX50-_2019-2022_-Front-Grille-Emblem-_Chrome_-INFINITI-32176240.jpg">
+
+  <style>
+    /* ===== GLOBAL ===== */
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: whitesmoke;
+      color: gray;
+      width: 100%;
+      overflow-x: hidden; /* ✅ Prevents sideways scroll */
+    }
+
+    /* ===== HERO IMAGE ===== */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .hero {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-section {
+        height: auto;
+      }
+      .hero {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+    }
+
+    /* ===== PERFORMANCE SECTION ===== */
+    .performance-section {
+      text-align: center;
+      max-width: 900px;
+      margin: 100px auto;
+      padding: 60px 20px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .performance-section h1 {
+      font-weight: bold;
+      font-size: 28px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: #111;
+    }
+
+    .performance-section p {
+      font-size: 16px;
+      color: #555;
+      max-width: 700px;
+      margin: 10px auto 40px;
+      line-height: 1.5;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      text-align: center;
+      width: 100%;
+    }
+
+    .stat {
+      flex: 1;
+      min-width: 200px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .stat h2 {
+      font-size: 24px;
+      color: #111;
+      margin-bottom: 5px;
+    }
+
+    .stat p {
+      font-size: 14px;
+      color: #666;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .stats {
+        flex-direction: column;
+        align-items: center;
+      }
+      .stat {
+        margin-bottom: 20px;
+      }
+    }
+
+    /* ===== HEADER (BOTTOM FIXED) ===== */
+    header {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 20px;
+      z-index: 2000; /* ✅ raised above hero */
+      border-top: 2px solid rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      overflow: visible; /* ✅ allows dropdowns to open fully */
+    }
+
+    /* ===== MENUS ===== */
+    .menu-left {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+    }
+
+    .menu-right {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+    }
+
+    .menu-toggle {
+      width: 28px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 100%;
+      background: black;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* ===== LOGO ===== */
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: white;
+      text-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+      text-align: center;
+      margin-top: 5px;
+    }
+
+    .logo span {
+      color: #e60000;
+    }
+
+    /* ===== SEARCH BAR ===== */
+    .search-bar {
+      margin-top: 8px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-bar input {
+      width: 180px;
+      padding: 6px 12px;
+      border-radius: 25px;
+      border: none;
+      font-size: 13px;
+      color: white;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .search-bar input:focus {
+      border-color: #e60000;
+      box-shadow: 0 0 8px rgba(230, 0, 0, 0.5);
+      outline: none;
+    }
+
+    /* ===== DROPDOWN MENUS ===== */
+    .dropdown {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+      min-width: 200px;
+      z-index: 2100; /* ✅ ensures above header */
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    .dropdown.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transform: translateX(-40px);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    .dropdown.active a {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .dropdown a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    #dropdown1 {
+      bottom: 55px;
+      left: 10px;
+    }
+
+    #dropdown2 {
+      bottom: 55px;
+      right: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .logo {
+        font-size: 1.5rem;
+      }
+      .search-bar input {
+        width: 150px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/QX50/my25/overview/offers/2025-infiniti-qx50-exterior-passenger-side-profile.jpg" alt="Infiniti Q50 Hero" class="hero">
+  </section>
+<!-- HEADER (BOTTOM) -->
+  <header>
+    <div class="menu-left">
+      <div id="menu1" class="menu-toggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="menu-right">
+      <div id="menu2" class="menu-toggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="logo">NISSAN <span>LUXURY</span></div>
+
+  
+
+    <div id="dropdown1" class="dropdown">
+      <a href="nissan.html">Home</a>
+      <a href="models.html">Models</a>
+      <a href="performance.html">Performance</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div id="dropdown2" class="dropdown">
+      <a href="normal.html">Normal</a>
+      <a href="sports.html">Sports</a>
+      <a href="luxury.html">Luxury</a>
+      <a href="premium.html">Premium</a>
+    </div>
+  </header>
+
+  <!-- JS MENU FUNCTIONALITY -->
+  <script>
+    const menu1 = document.getElementById("menu1");
+    const menu2 = document.getElementById("menu2");
+    const dropdown1 = document.getElementById("dropdown1");
+    const dropdown2 = document.getElementById("dropdown2");
+
+    menu1.addEventListener("click", () => {
+      menu1.classList.toggle("open");
+      dropdown1.classList.toggle("active");
+      dropdown2.classList.remove("active");
+      menu2.classList.remove("open");
+    });
+
+    menu2.addEventListener("click", () => {
+      menu2.classList.toggle("open");
+      dropdown2.classList.toggle("active");
+      dropdown1.classList.remove("active");
+      menu1.classList.remove("open");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!menu1.contains(e.target) && !dropdown1.contains(e.target) &&
+          !menu2.contains(e.target) && !dropdown2.contains(e.target)) {
+        dropdown1.classList.remove("active");
+        dropdown2.classList.remove("active");
+        menu1.classList.remove("open");
+        menu2.classList.remove("open");
+      }
+    });
+  </script>
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2025 INFINITI QX50</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #222;
+    }
+
+    .qx50-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 50px;
+      gap: 40px;
+      flex-wrap: wrap;
+      background-color: #fff;
+    }
+
+    .qx50-section img {
+      width: 480px;
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .qx50-text {
+      max-width: 500px;
+    }
+
+    .qx50-text h2 {
+      font-size: 28px;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .qx50-text h3 {
+      font-size: 22px;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    .qx50-text p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .qx50-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+      }
+      .qx50-text {
+        max-width: 90%;
+      }
+    }
+  </style>
+
+
+
+  <section class="qx50-section">
+    <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/smart-digital/custom-content/qx50/build.jpg" alt="2025 INFINITI QX50 luxury crossover SUV">
+    <div class="qx50-text">
+      <h2>2025 INFINITI QX50</h2>
+      <h3>Starting MSRP $43,000*</h3>
+      <p>
+        Crafted with precision – built entirely around you. Experience a luxury crossover SUV designed with 
+        innovation in mind behind the wheel of the 2025 INFINITI QX50. Its sculpted exterior and premium 
+        interior deliver both performance and elegance, ensuring every drive is as inspiring as it is comfortable.
+      </p>
+    </div>
+  </section>
+
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2025 INFINITI QX50 Trims</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #222;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 100vh;
+    }
+
+    .buttons {
+      flex: 1;
+      min-width: 220px;
+      background-color: #111;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+      padding: 20px;
+    }
+
+    .buttons button {
+      background: none;
+      color: white;
+      border: 2px solid #666;
+      margin: 10px 0;
+      padding: 15px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+      border-radius: 8px;
+    }
+
+    .buttons button:hover, .buttons button.active {
+      background-color: #b89c5d;
+      border-color: #b89c5d;
+      color: white;
+    }
+
+    .content {
+      flex: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .trim {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .trim.active {
+      display: flex;
+    }
+
+    .trim img {
+      width: 45%;
+      max-width: 450px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .trim .info {
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .trim h2 {
+      font-size: 26px;
+      margin-bottom: 10px;
+      color: #111;
+    }
+
+    .trim p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .trim {
+        flex-direction: column;
+        text-align: center;
+      }
+      .trim img {
+        width: 100%;
+      }
+    }
+  </style>
+
+
+  <section class="container">
+    <div class="buttons">
+      <button class="active" onclick="showTrim('pure')">PURE</button>
+      <button onclick="showTrim('luxe')">LUXE</button>
+      <button onclick="showTrim('sport')">SPORT</button>
+    </div>
+
+    <div class="content">
+      <div id="pure" class="trim active">
+        <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/QX50/my25/overview/trims-pricing/2025-infiniti-qx50-pure-trim-v2.jpg" alt="INFINITI QX50 PURE">
+        <div class="info">
+          <h2>2025 QX50 PURE</h2>
+          <p><strong>Starting MSRP:</strong> $43,000<br><br>
+          The fundamental QX50 experience. Step inside and discover a world of luxury designed around you.<br><br>
+          2.0L VC-Turbo engine producing 268 hp and 280 lb-ft of torque.<br>
+          INFINITI InTouch® Connected Services with available onboard Wi-Fi.<br>
+          ProPILOT Assist with Steering Assist and Intelligent Cruise Control.</p>
+        </div>
+      </div>
+
+      <div id="luxe" class="trim">
+        <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/QX50/my25/overview/trims-pricing/2025-infiniti-qx50-luxe-trim-v2.jpg" alt="INFINITI QX50 LUXE">
+        <div class="info">
+          <h2>2025 QX50 LUXE</h2>
+          <p><strong>Starting MSRP:</strong> $46,000<br><br>
+          A refined evolution of luxury. Experience premium materials, enhanced comfort, and intuitive technology at your fingertips.<br><br>
+          Panoramic Moonroof, heated front seats, and leather-appointed interior.  
+          Enhanced driver assistance and larger 20-inch wheels complete the experience.</p>
+        </div>
+      </div>
+
+      <div id="sport" class="trim">
+        <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/QX50/my25/overview/trims-pricing/2025-infiniti-qx50-sport-trim-v2.jpg" alt="INFINITI QX50 SPORT">
+        <div class="info">
+          <h2>2025 QX50 SPORT</h2>
+          <p><strong>Starting MSRP:</strong> $49,000<br><br>
+          Dynamic design meets exhilarating performance. The SPORT trim delivers a bolder look and advanced handling.<br><br>
+          Includes adaptive front lighting, sport-tuned suspension, and signature black exterior accents.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function showTrim(id) {
+      document.querySelectorAll('.trim').forEach(trim => trim.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+
+      document.querySelectorAll('.buttons button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+  </script>
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Your QX50</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #222;
+    }
+
+    .design-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 60px;
+      background-color: white;
+    }
+
+    .design-text {
+      width: 50%;
+    }
+
+    .design-text h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .design-text p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .design-text p span {
+      font-weight: bold;
+    }
+
+    .design-image {
+      width: 45%;
+    }
+
+    .design-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 0; /* edges not curved */
+    }
+
+    @media (max-width: 768px) {
+      .design-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .design-text, .design-image {
+        width: 100%;
+      }
+
+      .design-image {
+        margin-top: 20px;
+      }
+    }
+  </style>
+
+
+
+  <section class="design-section">
+    <div class="design-text">
+      <h1>DESIGN YOUR QX50</h1>
+      <p>Build Your Dream QX50 Today<br>
+      <span>White or graphite quilted semi-aniline leather-appointed seats? Hermosa Blue or Dynamic Sunstone Red exterior color?</span> Design the QX50 of your dreams.</p>
+    </div>
+    <div class="design-image">
+      <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/smart-digital/custom-content/qx50/build.jpg" alt="INFINITI QX50 Design">
+    </div>
+  </section>
+
+
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2025 QX50 Feature Highlights</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f8f8f8;
+      color: #222;
+    }
+
+    .feature-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px;
+      background-color: #fff;
+      gap: 20px;
+    }
+
+    .feature-text {
+      width: 100%;
+      text-align: left;
+      padding: 0 20px;
+    }
+
+    .feature-text h2 {
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .feature-text p {
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .side-images {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      width: 100%;
+      padding: 0 20px;
+    }
+
+    .side-images img {
+      width: 48%;
+      height: auto;
+      display: block;
+      border-radius: 0; /* no curved edges */
+    }
+
+    .bottom-image {
+      width: 100%;
+      margin-top: 20px;
+      border-radius: 0; /* no curved edges */
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .side-images {
+        flex-direction: column;
+      }
+
+      .side-images img {
+        width: 100%;
+      }
+    }
+  </style>
+
+
+
+  <!-- 2025 QX50 FEATURE HIGHLIGHTS -->
+  <section class="feature-section">
+    <div class="feature-text">
+      <h2>2025 QX50 Feature Highlights</h2>
+      <p><strong>Design, Detailed</strong><br>
+      Get up-close with QX50 and discover just how deep the details of INFINITI luxury go. The 2025 QX50 combines sculpted lines, luxurious craftsmanship, and cutting-edge technology — embodying a balance of performance and beauty.</p>
+    </div>
+
+    <div class="side-images">
+      <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/QX50/my25/overview/highlights/2025-infiniti-qx50-interior-gear-shifter-v3-xl.jpg" alt="2025 QX50 Front View">
+      <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/QX50/my25/overview/highlights/2025-infiniti-qx50-exterior-v3-xl.jpg" alt="2025 QX50 Interior View">
+    </div>
+
+    <img class="bottom-image" src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/QX50/my25/overview/highlights/2025-infiniti-qx50-exterior-downtown-street-v3-xl.jpg" alt="2025 QX50 Rear View">
+  </section>
+
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Luxury of QX50 Ownership</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #fff;
+      color: #222;
+    }
+
+    .ownership-section {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .ownership-section h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .ownership-section p {
+      font-size: 1.1em;
+      max-width: 800px;
+      margin: 10px auto 30px;
+      line-height: 1.6;
+    }
+
+    .ownership-section p.bold {
+      font-weight: bold;
+    }
+
+    .three-images {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .three-images div {
+      flex: 1 1 300px;
+      max-width: 350px;
+      text-align: left;
+    }
+
+    .three-images img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .three-images h3 {
+      margin-top: 15px;
+      font-size: 1.2em;
+    }
+
+    .three-images p {
+      font-size: 1em;
+      color: #444;
+      margin-bottom: 8px;
+    }
+
+    .three-images a {
+      color: #b30000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 900px) {
+      .three-images {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .three-images div {
+        text-align: center;
+        max-width: 90%;
+      }
+
+      .three-images img {
+        height: auto;
+      }
+    }
+  </style>
+
+
+  <section class="ownership-section">
+    <h1>The Luxury of QX50 Ownership</h1>
+    <p class="bold">Experience INFINITI</p>
+    <p>
+      INFINITI vehicles are designed with a thoughtful eye toward welcoming, accommodating luxury – and we carry that same singular philosophy through to our award-winning ownership experience.
+    </p>
+
+    <div class="three-images">
+      <!-- Left Image -->
+      <div>
+        <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/QX50/my25/overview/ownership/infiniti-premium-care-qx50-v2.jpg" alt="INFINITI Premium Care">
+        <h3>INFINITI Premium Care</h3>
+        <p>Our commitment to owners is made clear through our definitive INFINITI Premium Care initiative, ensuring that your QX50 ownership experience is one steeped in first-class ease and convenience.</p>
+      </div>
+
+      <!-- Center Image -->
+      <div>
+        <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/QX50/my25/overview/ownership/2025-infiniti-qx50-infiniti-intouch.jpg" alt="INFINITI InTouch Infotainment System">
+        <h3>Premium InTouch® Experience</h3>
+        <p>Keep connected to what matters with INFINITI InTouch® – now featuring a three-year Premium service subscription on all new model year 2025 INFINITI vehicles equipped with InTouch® services.</p>
+      </div>
+
+      <!-- Right Image -->
+      <div>
+        <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/QX50/my25/overview/ownership/2025-infiniti-qx50-limited-warranty.jpg" alt="Couple beside INFINITI QX50">
+        <h3>Confidence-Inspiring Coverage</h3>
+        <p>Enjoy the luxury of confidence knowing that your new QX50 comes with the peace of mind offered by standard INFINITI limited warranties – in addition to the added coverage available through our Elite Extended Protection plans.</p>
+      </div>
+    </div>
+  </section>
+
+
+<footer class="footer-real">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand-chat">
+        <a href="/" class="footer-logo" aria-label="Homepage">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png" alt="Brand Logo">
+        </a>
+        <button class="footer-live-chat" aria-label="Live Chat">Live Chat</button>
+      </div>
+
+      <nav class="footer-nav">
+        <div class="footer-column">
+          <h4>ABOUT</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/about.html">About Nissan</a></li>
+            <li><a href="https://www.nissanusa.com/about/culture.html">Culture</a></li>
+            <li><a href="https://usa.nissannews.com/en-US/">News &amp; Events</a></li>
+            <li><a href="https://www.nissanusa.com/business-fleet.html">Business &amp; Fleet</a></li>
+            <li><a href="https://www.nissanusa.com/accessibility.html">Accessibility</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>SHOP</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/vehicles/new.html">All Vehicles</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/search-inventory">Search Inventory</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-brochure.html">View a Brochure</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/build-price">Build &amp; Price</a></li>
+            <li><a href="https://www.nissanusa.com/dealer-locator.html">Locate a Dealer</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OWNERS</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/owners.html">Owner Portal</a></li>
+            <li><a href="https://www.nissanusa.com/parts-service">Schedule Service</a></li>
+            <li><a href="https://www.nissanusa.com/owners/manuals-guides.html">Manuals &amp; Guides</a></li>
+            <li><a href="https://www.nissanusa.com/connect.html">Connected Services</a></li>
+            <li><a href="https://www.nissanusa.com/maintenance-schedules/">Maintenance Schedules</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OFFERS &amp; FINANCING</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/shopping-tools/deals-incentives-offers.html">Deals &amp; Offers</a></li>
+            <li><a href="https://www.nissanfinance.com/s/login/?language=en_US">Financing Options</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/lease-finance-payment-calculator">Estimate Payments</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/pre-approval.html">Get Pre-Approved</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-internet-quote.html">Internet Quote</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-middle">
+      <div class="footer-social">
+        <a href="https://www.tiktok.com/@nissanusa?lang=en" aria-label="TikTok">TikTok</a>
+        <a href="https://www.instagram.com/nissanusa/" aria-label="Instagram">Instagram</a>
+        <a href="https://www.youtube.com/user/nissanusa/featured" aria-label="YouTube">YouTube</a>
+        <a href="https://twitter.com/NissanUSA" aria-label="Twitter">Twitter</a>
+        <a href="https://www.facebook.com/nissanusa/" aria-label="Facebook">Facebook</a>
+        <a href="https://www.pinterest.com/nissanusa/" aria-label="Pinterest">Pinterest</a>
+      </div>
+
+      <div class="footer-extras">
+        <div class="footer-language">
+          <label for="lang-select" class="sr-only">Select Language</label>
+          <select id="lang-select" aria-label="Language selection">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+        <div class="footer-links-small">
+          <a href="https://www.nissanusa.com/sitemap.html">Site Map</a>
+          <a href="https://www.nissanusa.com/contact-us.html">Contact Us</a>
+          <a href="https://www.nissanusa.com/data-privacy.html">Do Not Sell or Share My Personal Information</a>
+          <a href="https://www.nissanusa.com/legal-terms.html">Terms of Use</a>
+          <a href="https://www.nissanusa.com/privacy.html">Privacy Notice</a>
+          <a href="https://www.nissanusa.com/recalls-vin">Recall Information</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="current-year">2025</span> Nissan. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* ✅ Prevent horizontal overflow */
+  }
+
+  .footer-real {
+    background-color: whitesmoke;
+    color: darkred;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 40px 20px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .footer-brand-chat {
+    flex: 1 1 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo img {
+    height: 110px;
+    max-width: 100%;
+    filter: brightness(0.95) contrast(1);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .footer-logo img:hover {
+    filter: brightness(1) contrast(1.05);
+    transform: scale(1.05);
+  }
+
+  .footer-live-chat {
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid darkred;
+    color: black;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .footer-live-chat:hover {
+    border-color: darkred;
+    background-color: whitesmoke;
+  }
+
+  .footer-nav {
+    flex: 3 1 600px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+  }
+
+  .footer-column h4 {
+    color: black;
+    font-size: 13px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-column li {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .footer-column li a {
+    color: darkred;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  .footer-column li a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-middle {
+    border-top: 1px solid darkred;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-social a {
+    color: darkred;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover {
+    color: black;
+  }
+
+  .footer-extras {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .footer-language select {
+    background-color: transparent;
+    color: black;
+    border: 1px solid darkred;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .footer-links-small {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links-small a {
+    color: black;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .footer-links-small a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid darkred;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: darkred;
+  }
+
+  /* ✅ Responsive Fixes */
+  @media (max-width: 900px) {
+    .footer-nav {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+    }
+    .footer-nav {
+      grid-template-columns: 1fr;
+    }
+    .footer-middle {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .footer-extras {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .footer-links-small {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+
+</body></html>

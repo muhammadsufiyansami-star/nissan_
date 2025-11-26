@@ -1,0 +1,1409 @@
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Nissan Navara</title>
+
+<link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&amp;display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: whitesmoke;
+    overflow-x: hidden;
+  }
+
+  /* HERO SECTION */
+  .hero-section {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .hero-section img.hero {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-section {
+      height: auto;
+    }
+    .hero-section img.hero {
+      height: auto;
+      object-fit: contain;
+    }
+  }
+
+  /* HEADER */
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 10px 20px;
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* LOGO */
+  .logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 0 12px rgba(0,0,0,0.8);
+  }
+  .logo span {
+    color: #e60000;
+  }
+
+  /* SEARCH BAR */
+  .search-bar {
+    position: absolute;
+    top: 65px;
+  }
+
+  .search-bar input {
+    width: 260px;
+    padding: 8px 14px;
+    border-radius: 25px;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+  }
+
+  /* HAMBURGERS */
+  .menu-toggle {
+    width: 28px;
+    height: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1200;
+  }
+
+  .menu-left { left: 20px; top: 10px; }
+  .menu-right { right: 20px; top: 10px; }
+
+  .menu-toggle span {
+    height: 3px;
+    background: black;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; }
+  .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  /* DROPDOWNS */
+  .dropdown {
+    position: absolute;
+    background: rgba(0,0,0,0.9);
+    border-radius: 10px;
+    padding: 0;
+    min-width: 200px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 2000;
+
+    /* FIX: force vertical layout */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .dropdown.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .dropdown a {
+    display: block !important;
+    width: 100%;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: white;
+    transition: 0.25s ease;
+  }
+
+  .dropdown a:hover {
+    background: rgba(255,255,255,0.1);
+  }
+
+  .left-dropdown { left: 20px; top: 60px; }
+  .right-dropdown { right: 20px; top: 60px; }
+
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero-section">
+  <img class="hero" src="https://www.nissan-global.com/JP/INNOVATION/DESIGN/DESIGNWORKS/NAVARA/ASSETS/IMG/NAVARA_main.jpg">
+  </section>
+
+<!-- HEADER -->
+<header>
+
+  <!-- LEFT MENU -->
+  <div id="menuLeft" class="menu-toggle menu-left">
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- RIGHT MENU -->
+  <div id="menuRight" class="menu-toggle menu-right">
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- LOGO -->
+  <div class="logo">NISSAN <span>PREMIUM</span></div>
+
+ 
+
+  <!-- LEFT DROPDOWN -->
+  <div id="dropdownLeft" class="dropdown left-dropdown">
+    <a href="nissan.html">Home</a>
+    <a href="models.html">Models</a>
+    <a href="performance.html">Performance</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- RIGHT DROPDOWN -->
+  <div id="dropdownRight" class="dropdown right-dropdown">
+    <a href="normal.html">Normal</a>
+    <a href="sports.html">Sports</a>
+    <a href="luxury.html">Luxury</a>
+    <a href="premium.html">Premium</a>
+  </div>
+
+</header>
+
+<script>
+  const menuLeft = document.getElementById("menuLeft");
+  const menuRight = document.getElementById("menuRight");
+  const dropdownLeft = document.getElementById("dropdownLeft");
+  const dropdownRight = document.getElementById("dropdownRight");
+
+  function toggle(menu, dropdown, otherMenu, otherDropdown) {
+    menu.classList.toggle("open");
+    dropdown.classList.toggle("active");
+
+    otherMenu.classList.remove("open");
+    otherDropdown.classList.remove("active");
+  }
+
+  menuLeft.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggle(menuLeft, dropdownLeft, menuRight, dropdownRight);
+  });
+
+  menuRight.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggle(menuRight, dropdownRight, menuLeft, dropdownLeft);
+  });
+
+  document.addEventListener("click", () => {
+    menuLeft.classList.remove("open");
+    menuRight.classList.remove("open");
+    dropdownLeft.classList.remove("active");
+    dropdownRight.classList.remove("active");
+  });
+</script>
+<!-- ===== Nissan Navara Key Specs Section ===== -->
+<div class="navara-specs-section">
+  <div class="specs-text">
+    <h2>The Nissan Navara</h2>
+    <p class="warranty-info">
+      AUSTRALIA'S ONLY 10 YEAR<br>
+      300,000KM WARRANTY WHEN SERVICING WITH NISSAN°°
+    </p>
+  </div>
+
+  <div class="specs-stats">
+    <div class="stat">
+      <span class="stat-value">Up to 140 kW</span>
+      <span class="stat-label">POWER</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">Up to 450 Nm</span>
+      <span class="stat-label">TORQUE</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">3,500 kg</span>
+      <span class="stat-label">BRAKED TOWING CAPACITY¹</span>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Nissan Navara Key Specs Section */
+.navara-specs-section {
+  padding: 80px 50px;
+  background-color: #f5f5f5;
+  color: #111;
+  text-align: left;
+}
+
+.navara-specs-section h2 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.warranty-info {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+.specs-stats {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: bold;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navara-specs-section {
+    padding: 50px 20px;
+  }
+
+  .navara-specs-section h2 {
+    font-size: 28px;
+  }
+
+  .specs-stats {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .stat-value {
+    font-size: 24px;
+  }
+
+  .stat-label {
+    font-size: 14px;
+  }
+}
+</style>
+<!-- ===== New Car Offers Section ===== -->
+<div class="offers-section">
+  <div class="offers-image">
+    <img src="https://www-asia.nissan-cdn.net/content/dam/Nissan/AU/Images/vehicles/Navara/overview/navara-sto-component.jpg-vlp-comp.jpg.ximg.m_12_h.smart.jpg" alt="New Car Offers">
+  </div>
+  <div class="offers-text">
+    <h2>NEW CAR OFFERS</h2>
+    <h3>GREAT DRIVEAWAY DEALS ON NAVARA</h3>
+    <p>Plus Australia's only 10 year 300,000km warranty when servicing with Nissan°°.</p>
+    <a href="https://www.nissan.com.au/offers.html#category=Offer&amp;model=29299" class="offers-button">VIEW OFFERS</a>
+  </div>
+</div>
+
+<style>
+/* New Car Offers Section */
+.offers-section {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 60vh;
+  background-color: #f5f5f5;
+  margin-top: 50px;
+}
+
+.offers-image {
+  flex: 1;
+}
+
+.offers-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.offers-text {
+  flex: 1;
+  padding: 50px;
+  text-align: left;
+}
+
+.offers-text h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.offers-text h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.offers-text p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.offers-button {
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.3s;
+  cursor: pointer;
+}
+
+.offers-button:hover {
+  border-bottom: 2px solid black;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .offers-section {
+    flex-direction: column;
+  }
+
+  .offers-text {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .offers-text h2 {
+    font-size: 28px;
+  }
+
+  .offers-text h3 {
+    font-size: 22px;
+  }
+
+  .offers-text p {
+    font-size: 16px;
+  }
+
+  .offers-button {
+    font-size: 16px;
+  }
+}
+</style>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infiniti Q70 Fullscreen Video</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      background: white;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* Full screen video section */
+    .video-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Video fills screen */
+    video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* fills fully, no black bars */
+      z-index: 1;
+    }
+
+    /* Overlay text top-left */
+    .overlay-content {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      color: white;
+      font-family: Arial, sans-serif;
+      z-index: 2;
+      text-align: left;
+      opacity: 0; /* hidden initially */
+      transform: translateX(-60px); /* start off-screen to the left */
+      transition: all 1s ease;
+    }
+
+    /* Animate in when visible */
+    .overlay-content.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .overlay-content h1 {
+      font-size: 3rem;
+      letter-spacing: 1px;
+    }
+
+    .overlay-content p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    /* Responsive text sizes */
+    @media (max-width: 768px) {
+      .overlay-content {
+        top: 20px;
+        left: 20px;
+      }
+
+      .overlay-content h1 {
+        font-size: 2rem;
+      }
+      .overlay-content p {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .overlay-content {
+        top: 15px;
+        left: 15px;
+      }
+
+      .overlay-content h1 {
+        font-size: 1.6rem;
+      }
+      .overlay-content p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+
+
+
+
+  <!-- Infiniti Q70 video section -->
+  <section class="video-section">
+    <video id="infinitiVideo" muted="" autoplay="" loop="" playsinline="">
+      <source src="https://videos.nissan-cdn.net/nissan/en-AU/videos/new-navara-banner-option-2-r2-desk_1080p.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <div class="overlay-content" id="textOverlay">
+      <p>Life Without Limits. </p>
+    </div>
+  </section>
+
+  <script>
+    const video = document.getElementById('infinitiVideo');
+    const overlay = document.getElementById('textOverlay');
+
+    // Observer to trigger video and text animation
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Play video
+          video.play().catch(err => console.log('Autoplay blocked:', err));
+          // Animate overlay text
+          overlay.classList.add('active');
+        } else {
+          video.pause();
+          overlay.classList.remove('active');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(video);
+  </script>
+
+<!-- ===== Navara Engine & Performance Specs Section ===== -->
+<div class="performance-section">
+  <h2>Performance &amp; Engine</h2>
+
+  <div class="performance-stats">
+    <div class="stat">
+      <span class="stat-value">140 kW</span>
+      <span class="stat-label">Power</span>
+      <span class="stat-sub">2.3L TWIN TURBO DIESEL ENGINE</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">450 Nm</span>
+      <span class="stat-label">Torque</span>
+      <span class="stat-sub">2.3L TWIN TURBO DIESEL ENGINE</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">7.2 L/100 km</span>
+      <span class="stat-label">Fuel Efficiency*</span>
+      <span class="stat-sub">SL SINGLE CAB-CHASSIS 2WD MT</span>
+    </div>
+  </div>
+
+  <p class="disclaimer">
+    *Figures tested in accordance with ADR81/02 (combined test). Figures stated for the purposes of comparison amongst vehicles only. It is unlikely that this fuel consumption figure will be achieved in real world driving conditions. Actual fuel consumption depends on factors such as traffic conditions, vehicle condition, how you drive and any accessories fitted.
+  </p>
+</div>
+
+<style>
+/* Performance Section */
+.performance-section {
+  padding: 80px 50px;
+  background-color: #ffffff;
+  color: #111;
+  text-align: left;
+}
+
+.performance-section h2 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.performance-stats {
+  display: flex;
+  gap: 60px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #111;
+}
+
+.stat-label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.stat-sub {
+  font-size: 14px;
+  color: #777;
+}
+
+.disclaimer {
+  font-size: 12px;
+  color: #777;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .performance-section {
+    padding: 50px 20px;
+  }
+
+  .performance-section h2 {
+    font-size: 28px;
+  }
+
+  .performance-stats {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .stat-value {
+    font-size: 24px;
+  }
+
+  .stat-label {
+    font-size: 14px;
+  }
+
+  .stat-sub {
+    font-size: 12px;
+  }
+
+  .disclaimer {
+    font-size: 11px;
+  }
+}
+</style>
+
+
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nissan Navara Overview</title>
+<style>
+  * { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+
+  body {
+    overflow-x: hidden;
+    background: #f5f5f5;
+  }
+
+  /* ===== General Containers ===== */
+  .container {
+    display: flex;
+    width: 100%;
+  }
+
+  .fixed-text {
+    width: 40%;
+    padding: 50px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background-color: #1e1e1e;
+    color: white;
+    text-shadow: 1px 1px 5px black;
+  }
+
+  .fixed-text h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  .fixed-text p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .scroll-section {
+    width: 60%;
+  }
+
+  .image-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+  }
+
+  .image-section img {
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+  }
+
+  .bottom-text {
+    margin: 20px 0;
+    font-size: 20px;
+    color: white;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .bottom-text.show {
+    opacity: 1;
+  }
+
+  .down-arrow {
+    font-size: 36px;
+    cursor: pointer;
+    animation: bounce 2s infinite;
+    margin-bottom: 20px;
+    background: none;
+    border: none;
+    color: white;
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+  }
+
+  /* ===== Accessories vertical text section ===== */
+  .accessories-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .full-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+    padding: 50px;
+    gap: 30px;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  }
+
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+
+  .vertical-text.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .text-content {
+    max-width: 500px;
+  }
+
+  .text-content h2 {
+    margin-bottom: 20px;
+    font-size: 32px;
+  }
+
+  .text-content p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  /* ===== CTA Section ===== */
+  .cta-section {
+    padding: 80px 20px;
+    text-align: center;
+    background: #f5f5f5;
+  }
+
+  .cta-section h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #000;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .cta-button::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: black;
+    left: 0;
+    bottom: -4px;
+    transition: width 0.3s;
+  }
+
+  .cta-button:hover::after {
+    width: 100%;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+    .fixed-text {
+      position: relative;
+      width: 100%;
+      height: auto;
+      padding: 20px;
+    }
+    .scroll-section {
+      width: 100%;
+    }
+    .text-overlay {
+      flex-direction: column;
+      padding: 20px;
+      gap: 15px;
+    }
+    .vertical-text {
+      writing-mode: horizontal-tb;
+      font-size: 28px;
+    }
+    .text-content h2 {
+      font-size: 24px;
+    }
+    .text-content p {
+      font-size: 16px;
+    }
+    .cta-buttons {
+      gap: 20px;
+    }
+    .cta-section h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+  }
+</style>
+
+
+
+<!-- Features Section -->
+<div class="container">
+  <div class="fixed-text">
+    <h2>Go Anywhere Capability</h2>
+    <p>The Navara is available with locally tuned and tested suspension⁽²⁾ that addresses the diverse needs of Australian pickup buyers. This unique domestic experience and engineering knowledge aims for exceptional on-road and off-road performance.</p>
+    <p>⁽²⁾ Locally Tuned Suspension - Suspension developed &amp; quality assured for the Australian &amp; New Zealand Markets by Premcar Pty. Ltd.</p>
+  </div>
+
+  <div class="scroll-section">
+    <div class="image-section" id="section1">
+      <img src="https://www-asia.nissan-cdn.net/content/dam/Nissan/AU/Images/vehicles/Navara/overview/2026NissanNavaraTesting033-comp.jpg.ximg.m_12_h.smart.jpg" alt="Go Anywhere Capability">
+      <div class="bottom-text">Go anywhere capability supported by locally tuned suspension⁽²⁾ for comfort and confidence on- and off-road</div>
+      <button class="down-arrow" onclick="scrollToNext('section2')">▼</button>
+    </div>
+
+    <div class="image-section" id="section2">
+      <img src="https://www-asia.nissan-cdn.net/content/dam/Nissan/AU/Images/vehicles/Navara/overview/2026NissanNavaraTesting008-comp.jpg.ximg.m_12_h.smart.jpg" alt="Large Load">
+      <div class="bottom-text">Large load-carrying capability for maximum payloads</div>
+      <button class="down-arrow" onclick="scrollToNext('section3')">▼</button>
+    </div>
+
+    <div class="image-section" id="section3">
+      <img src="https://www-asia.nissan-cdn.net/content/dam/Nissan/AU/Images/vehicles/Navara/overview/2026NissanNavaraTesting039-comp.jpg.ximg.m_12_h.smart.jpg" alt="Steadfast Handling">
+      <div class="bottom-text">Steadfast handling when towing for confidence on the road</div>
+      <button class="down-arrow" onclick="scrollToNext('accessories')">▼</button>
+    </div>
+  </div>
+</div>
+
+<!-- Accessories Section -->
+<div class="accessories-container" id="accessories">
+  <img src="https://wieck-nissanao-production.s3.amazonaws.com/photos/a003c9b8a32272aee00cb4a9531a7803cab014ce/preview-928x522.jpg" alt="Nissan Navara Accessories" class="full-image">
+  <div class="text-overlay">
+    <div class="vertical-text">ACCESSORIES</div>
+    <div class="text-content">
+      <h2>Nissan Genuine Accessories</h2>
+      <p>Customise your Navara to your needs with an extensive range of Nissan Genuine Accessories, each designed and developed to ensure perfect integration and quality.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Technology Section -->
+<div class="container">
+  <div class="fixed-text">
+    <h2>TECHNOLOGY<br>Connected, Intelligent, Intuitive</h2>
+    <p>The Navara incorporates a comprehensive technology suite designed to enhance both work and lifestyle applications.</p>
+  </div>
+
+  <div class="scroll-section">
+    <div class="image-section" id="tech1">
+      <img src="https://www-asia.nissan-cdn.net/content/dam/Nissan/AU/Images/vehicles/Navara/overview/2026NissanNavaraPRO-4X107-comp.jpg.ximg.m_12_h.smart.jpg" alt="9-inch Infotainment">
+      <div class="bottom-text">9-inch advanced infotainment system features DAB digital radio, Android Auto⁽²⁴⁾ and wireless Apple CarPlay⁽²⁴⁾ connectivity</div>
+      <button class="down-arrow" onclick="scrollToNext('tech2')">▼</button>
+    </div>
+
+    <div class="image-section" id="tech2">
+      <img src="https://www-asia.nissan-cdn.net/content/dam/Nissan/AU/Images/vehicles/Navara/overview/2026NissanNavaraPRO-4X051-comp.jpg.ximg.m_12_h.smart.jpg" alt="Wireless Charging">
+      <div class="bottom-text">ST-X and PRO-4X grades feature wireless⁽²⁴⁾ smartphone charging</div>
+      <button class="down-arrow" onclick="scrollToNext('tech3')">▼</button>
+    </div>
+
+    <div class="image-section" id="tech3">
+      <img src="https://www-asia.nissan-cdn.net/content/dam/Nissan/AU/Images/vehicles/Navara/overview/2026NissanNavaraClusters001-comp.jpg.ximg.m_12_h.smart.jpg" alt="7-inch TFT Dash">
+      <div class="bottom-text">7-inch colour TFT dash display provides clear vehicle information for the driver</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CTA Section ===== -->
+<div class="cta-section">
+  <h1>TAKE THE NEXT STEP</h1>
+  <div class="cta-buttons">
+    <a class="cta-button" href="https://www.nissan.com.au/vehicles/browse-range/all-new-navara/register-your-interest.html">KEEP ME INFORMED</a>
+    <a class="cta-button" href="https://www.nissan.com.au/find-a-dealer.html">FIND A DEALER</a>
+  </div>
+</div>
+
+<script>
+  // Smooth scroll
+  function scrollToNext(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Intersection Observer for bottom text fade-in
+  const allSections = document.querySelectorAll('.image-section');
+  const bottomObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const bottomText = entry.target.querySelector('.bottom-text');
+      if(entry.isIntersecting) {
+        bottomText.classList.add('show');
+      } else {
+        bottomText.classList.remove('show');
+      }
+    });
+  }, { threshold: 0.5 });
+  allSections.forEach(section => bottomObserver.observe(section));
+
+  // Intersection Observer for vertical text animation
+  const verticalText = document.querySelector('.vertical-text');
+  const verticalObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        verticalText.classList.add('show');
+        verticalObserver.unobserve(verticalText);
+      }
+    });
+  }, { threshold: 0.5 });
+  verticalObserver.observe(verticalText);
+</script>
+
+
+
+
+<div class="warranty-section">
+  <img src="https://www-asia.nissan-cdn.net/content/dam/Nissan/AU/Images/vehicles/Navara/overview/2026NissanNavaraPRO-4X072-vlp-tile-d-r3.jpg" alt="Nissan New Car Warranty" class="warranty-image">
+  <div class="warranty-text">
+    <h2>NISSAN NEW CAR WARRANTY</h2>
+    <p>No matter where you’re going, enjoy the journey with your Nissan New Car Warranty.</p>
+    <a href="https://www.nissan.com.au/vehicles/browse-range/all-new-navara/warranty.html#how-it-works" class="warranty-button">HOW IT WORKS</a>
+  </div>
+</div>
+
+<style>
+/* Warranty Section */
+.warranty-section {
+  position: relative;
+  width: 100%;
+  height: 80vh; /* Adjust image height */
+  overflow: hidden;
+  margin-top: 50px;
+}
+
+.warranty-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.warranty-text {
+  position: absolute;
+  top: 50px; /* distance from top */
+  left: 50px; /* distance from left */
+  color: white;
+  max-width: 400px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+.warranty-text h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.warranty-text p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.warranty-button {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.3s;
+}
+
+.warranty-button:hover {
+  border-bottom: 2px solid white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .warranty-text {
+    top: 20px;
+    left: 20px;
+    max-width: 90%;
+  }
+
+  .warranty-text h2 {
+    font-size: 28px;
+  }
+
+  .warranty-text p {
+    font-size: 16px;
+  }
+
+  .warranty-button {
+    font-size: 16px;
+  }
+}
+</style>
+<footer class="footer-real">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand-chat">
+        <a href="/" class="footer-logo" aria-label="Homepage">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png" alt="Brand Logo">
+        </a>
+        <button class="footer-live-chat" aria-label="Live Chat">Live Chat</button>
+      </div>
+
+      <nav class="footer-nav">
+        <div class="footer-column">
+          <h4>ABOUT</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/about.html">About Nissan</a></li>
+            <li><a href="https://www.nissanusa.com/about/culture.html">Culture</a></li>
+            <li><a href="https://usa.nissannews.com/en-US/">News &amp; Events</a></li>
+            <li><a href="https://www.nissanusa.com/business-fleet.html">Business &amp; Fleet</a></li>
+            <li><a href="https://www.nissanusa.com/accessibility.html">Accessibility</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>SHOP</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/vehicles/new.html">All Vehicles</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/search-inventory">Search Inventory</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-brochure.html">View a Brochure</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/build-price">Build &amp; Price</a></li>
+            <li><a href="https://www.nissanusa.com/dealer-locator.html">Locate a Dealer</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OWNERS</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/owners.html">Owner Portal</a></li>
+            <li><a href="https://www.nissanusa.com/parts-service">Schedule Service</a></li>
+            <li><a href="https://www.nissanusa.com/owners/manuals-guides.html">Manuals &amp; Guides</a></li>
+            <li><a href="https://www.nissanusa.com/connect.html">Connected Services</a></li>
+            <li><a href="https://www.nissanusa.com/maintenance-schedules/">Maintenance Schedules</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OFFERS &amp; FINANCING</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/shopping-tools/deals-incentives-offers.html">Deals &amp; Offers</a></li>
+            <li><a href="https://www.nissanfinance.com/s/login/?language=en_US">Financing Options</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/lease-finance-payment-calculator">Estimate Payments</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/pre-approval.html">Get Pre-Approved</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-internet-quote.html">Internet Quote</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-middle">
+      <div class="footer-social">
+        <a href="https://www.tiktok.com/@nissanusa?lang=en" aria-label="TikTok">TikTok</a>
+        <a href="https://www.instagram.com/nissanusa/" aria-label="Instagram">Instagram</a>
+        <a href="https://www.youtube.com/user/nissanusa/featured" aria-label="YouTube">YouTube</a>
+        <a href="https://twitter.com/NissanUSA" aria-label="Twitter">Twitter</a>
+        <a href="https://www.facebook.com/nissanusa/" aria-label="Facebook">Facebook</a>
+        <a href="https://www.pinterest.com/nissanusa/" aria-label="Pinterest">Pinterest</a>
+      </div>
+
+      <div class="footer-extras">
+        <div class="footer-language">
+          <label for="lang-select" class="sr-only">Select Language</label>
+          <select id="lang-select" aria-label="Language selection">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+        <div class="footer-links-small">
+          <a href="https://www.nissanusa.com/sitemap.html">Site Map</a>
+          <a href="https://www.nissanusa.com/contact-us.html">Contact Us</a>
+          <a href="https://www.nissanusa.com/data-privacy.html">Do Not Sell or Share My Personal Information</a>
+          <a href="https://www.nissanusa.com/legal-terms.html">Terms of Use</a>
+          <a href="https://www.nissanusa.com/privacy.html">Privacy Notice</a>
+          <a href="https://www.nissanusa.com/recalls-vin">Recall Information</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="current-year">2025</span> Nissan. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* ✅ Prevent horizontal overflow */
+  }
+
+  .footer-real {
+    background-color: whitesmoke;
+    color: darkred;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 40px 20px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .footer-brand-chat {
+    flex: 1 1 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo img {
+    height: 110px;
+    max-width: 100%;
+    filter: brightness(0.95) contrast(1);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .footer-logo img:hover {
+    filter: brightness(1) contrast(1.05);
+    transform: scale(1.05);
+  }
+
+  .footer-live-chat {
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid darkred;
+    color: black;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .footer-live-chat:hover {
+    border-color: darkred;
+    background-color: whitesmoke;
+  }
+
+  .footer-nav {
+    flex: 3 1 600px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+  }
+
+  .footer-column h4 {
+    color: black;
+    font-size: 13px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-column li {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .footer-column li a {
+    color: darkred;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  .footer-column li a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-middle {
+    border-top: 1px solid darkred;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-social a {
+    color: darkred;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover {
+    color: black;
+  }
+
+  .footer-extras {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .footer-language select {
+    background-color: transparent;
+    color: black;
+    border: 1px solid darkred;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .footer-links-small {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links-small a {
+    color: black;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .footer-links-small a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid darkred;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: darkred;
+  }
+
+  /* ✅ Responsive Fixes */
+  @media (max-width: 900px) {
+    .footer-nav {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+    }
+    .footer-nav {
+      grid-template-columns: 1fr;
+    }
+    .footer-middle {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .footer-extras {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .footer-links-small {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+
+</body></html>

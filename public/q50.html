@@ -1,0 +1,1318 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan Q50</title>
+  <link rel="icon" type="image/x-icon" href="https://www.optikauto.com/cdn/shop/files/Infiniti-QX50-_2019-2022_-Front-Grille-Emblem-_Chrome_-INFINITI-32176240.jpg">
+
+  <style>
+    /* ===== GLOBAL ===== */
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: whitesmoke;
+      color: gray;
+      width: 100%;
+      overflow-x: hidden; /* ✅ Prevents sideways scroll */
+    }
+
+    /* ===== HERO IMAGE ===== */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .hero {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-section {
+        height: auto;
+      }
+      .hero {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+    }
+
+    /* ===== PERFORMANCE SECTION ===== */
+    .performance-section {
+      text-align: center;
+      max-width: 900px;
+      margin: 100px auto;
+      padding: 60px 20px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .performance-section h1 {
+      font-weight: bold;
+      font-size: 28px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: #111;
+    }
+
+    .performance-section p {
+      font-size: 16px;
+      color: #555;
+      max-width: 700px;
+      margin: 10px auto 40px;
+      line-height: 1.5;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      text-align: center;
+      width: 100%;
+    }
+
+    .stat {
+      flex: 1;
+      min-width: 200px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .stat h2 {
+      font-size: 24px;
+      color: #111;
+      margin-bottom: 5px;
+    }
+
+    .stat p {
+      font-size: 14px;
+      color: #666;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .stats {
+        flex-direction: column;
+        align-items: center;
+      }
+      .stat {
+        margin-bottom: 20px;
+      }
+    }
+
+    /* ===== HEADER (BOTTOM FIXED) ===== */
+    header {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 20px;
+      z-index: 2000; /* ✅ raised above hero */
+      border-top: 2px solid rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      overflow: visible; /* ✅ allows dropdowns to open fully */
+    }
+
+    /* ===== MENUS ===== */
+    .menu-left {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+    }
+
+    .menu-right {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+    }
+
+    .menu-toggle {
+      width: 28px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 100%;
+      background: black;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* ===== LOGO ===== */
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: white;
+      text-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+      text-align: center;
+      margin-top: 5px;
+    }
+
+    .logo span {
+      color: #e60000;
+    }
+
+    /* ===== SEARCH BAR ===== */
+    .search-bar {
+      margin-top: 8px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-bar input {
+      width: 180px;
+      padding: 6px 12px;
+      border-radius: 25px;
+      border: none;
+      font-size: 13px;
+      color: white;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .search-bar input:focus {
+      border-color: #e60000;
+      box-shadow: 0 0 8px rgba(230, 0, 0, 0.5);
+      outline: none;
+    }
+
+    /* ===== DROPDOWN MENUS ===== */
+    .dropdown {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+      min-width: 200px;
+      z-index: 2100; /* ✅ ensures above header */
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    .dropdown.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transform: translateX(-40px);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    .dropdown.active a {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .dropdown a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    #dropdown1 {
+      bottom: 55px;
+      left: 10px;
+    }
+
+    #dropdown2 {
+      bottom: 55px;
+      right: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .logo {
+        font-size: 1.5rem;
+      }
+      .search-bar input {
+        width: 150px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/discontinued/q50/carousel/infiniti-q50-red-sport-400.jpg" alt="Infiniti Q50 Hero" class="hero">
+  </section>
+
+  <!-- PERFORMANCE SECTION -->
+  <section class="performance-section">
+    <h1>INFINITI Q50 PERFORMANCE SPECIFICATIONS</h1>
+    <p><strong>Own Every Road</strong><br>
+    Whatever the road, Q50 was engineered to offer an exceptional driving experience – artfully balancing between refined luxury and blistering performance.</p>
+
+    <div class="stats">
+      <div class="stat" style="text-align: left;">
+        <h2>Up to 400 hp</h2>
+        <p>Horsepower</p>
+      </div>
+
+      <div class="stat" style="text-align: center;">
+        <h2>Up to 350 lb-ft</h2>
+        <p>Torque</p>
+      </div>
+
+      <div class="stat" style="text-align: right;">
+        <h2>Up to 23 mpg</h2>
+        <p>Combined City/Highway</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HEADER (BOTTOM) -->
+  <header>
+    <div class="menu-left">
+      <div id="menu1" class="menu-toggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="menu-right">
+      <div id="menu2" class="menu-toggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="logo">NISSAN <span>LUXURY</span></div>
+
+ 
+    <div id="dropdown1" class="dropdown">
+      <a href="nissan.html">Home</a>
+      <a href="models.html">Models</a>
+      <a href="performance.html">Performance</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div id="dropdown2" class="dropdown">
+      <a href="normal.html">Normal</a>
+      <a href="sports.html">Sports</a>
+      <a href="luxury.html">Luxury</a>
+      <a href="premium.html">Premium</a>
+    </div>
+  </header>
+
+  <!-- JS MENU FUNCTIONALITY -->
+  <script>
+    const menu1 = document.getElementById("menu1");
+    const menu2 = document.getElementById("menu2");
+    const dropdown1 = document.getElementById("dropdown1");
+    const dropdown2 = document.getElementById("dropdown2");
+
+    menu1.addEventListener("click", () => {
+      menu1.classList.toggle("open");
+      dropdown1.classList.toggle("active");
+      dropdown2.classList.remove("active");
+      menu2.classList.remove("open");
+    });
+
+    menu2.addEventListener("click", () => {
+      menu2.classList.toggle("open");
+      dropdown2.classList.toggle("active");
+      dropdown1.classList.remove("active");
+      menu1.classList.remove("open");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!menu1.contains(e.target) && !dropdown1.contains(e.target) &&
+          !menu2.contains(e.target) && !dropdown2.contains(e.target)) {
+        dropdown1.classList.remove("active");
+        dropdown2.classList.remove("active");
+        menu1.classList.remove("open");
+        menu2.classList.remove("open");
+      }
+    });
+  </script>
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INFINITI Q50 Performance</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #222;
+    }
+
+    .performance-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 10%;
+      background: #fff;
+      gap: 40px;
+    }
+
+    .performance-image {
+      flex: 1;
+    }
+
+    .performance-image img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      object-position: left center;
+      border-radius: 10px;
+    }
+
+    .performance-text {
+      flex: 1;
+    }
+
+    .performance-text h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+      color: #000;
+    }
+
+    .performance-text h2 {
+      font-size: 24px;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .performance-text p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    @media (max-width: 900px) {
+      .performance-section {
+        flex-direction: column;
+        padding: 40px 5%;
+      }
+
+      .performance-image, .performance-text {
+        width: 100%;
+      }
+
+      .performance-image img {
+        border-radius: 8px;
+      }
+
+      .performance-text h1 {
+        font-size: 28px;
+      }
+
+      .performance-text h2 {
+        font-size: 20px;
+      }
+
+      .performance-text p {
+        font-size: 16px;
+      }
+    }
+  </style>
+
+
+
+  <section class="performance-section">
+    <div class="performance-image">
+      <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/discontinued/q50/performance/infiniti-q50-twin-turbocharged-v6-engine.png" alt="INFINITI Q50 Performance">
+    </div>
+
+    <div class="performance-text">
+      <h1>INFINITI Q50 PERFORMANCE</h1>
+      <h2>Engineering Unleashed</h2>
+      <p>
+        Q50 was built to perform. Its available twin-turbocharged V6 boasted up to 400 horsepower to pair perfectly with its available Dynamic Digital Suspension system, bringing confident exhilaration to each and every corner.
+      </p>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INFINITI Q50 Interior Design</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #222;
+    }
+
+    .section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+      gap: 30px;
+    }
+
+    /* Add spacing on the first section image */
+    .section:first-of-type .image-container img {
+      margin-top: 60px;
+    }
+
+    .image-container {
+      position: relative;
+      flex: 1 1 500px;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    }
+
+    .image-container h2 {
+      position: absolute;
+      top: 20px;
+      left: 25px;
+      color: white;
+      font-weight: bold;
+      font-size: 1.6rem;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+      margin: 0;
+    }
+
+    .text-container {
+      flex: 1 1 400px;
+      max-width: 500px;
+    }
+
+    .text-container h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #111;
+    }
+
+    .text-container h4 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #555;
+      font-weight: normal;
+    }
+
+    .text-container p {
+      line-height: 1.6;
+      color: #333;
+      font-size: 1rem;
+    }
+
+    /* Second layout (Seats & Sunroof) */
+    .section-alt {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 80px auto;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding: 0 20px;
+    }
+
+    .section-alt img {
+      width: 48%;
+      height: auto;
+      border-radius: 16px;
+      object-fit: cover;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: transform 0.4s ease;
+    }
+
+    .section-alt img:hover {
+      transform: scale(1.03);
+    }
+
+    .text {
+      width: 48%;
+    }
+
+    .text h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .text h3 {
+      font-size: 22px;
+      margin: 5px 0 15px;
+      color: #555;
+    }
+
+    .text p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .seats-section img {
+      margin-bottom: -80px;
+    }
+    .sunroof-section img {
+      margin-top: -80px;
+    }
+
+    @media (max-width: 768px) {
+      .section,
+      .section-alt {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .section img,
+      .section-alt img,
+      .text,
+      .text-container {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .seats-section img,
+      .sunroof-section img {
+        margin: 0;
+      }
+
+      .image-container h2 {
+        font-size: 1.4rem;
+        top: 15px;
+        left: 15px;
+      }
+    }
+  </style>
+
+
+  <!-- INTERIOR DESIGN SECTION -->
+  <section class="section">
+    <div class="image-container">
+      <h2>INFINITI Q50 Interior </h2>
+      <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/discontinued/q50/interior/infiniti-q50-interior-t.jpg" alt="INFINITI Q50 Interior">
+    </div>
+
+    <div class="text-container">
+      <h3>INFINITI Q50 Cockpit</h3>
+      <h4>A Commanding Experience</h4>
+      <p>
+        Command is yours behind the wheel of Q50. Intuitive inputs including available
+        steering wheel-mounted paddle shifters allowed you to customize your every
+        drive exactly to your liking.
+      </p>
+    </div>
+  </section>
+
+  <!-- SEATS SECTION -->
+  <section class="section-alt seats-section">
+    <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/discontinued/q50/interior/infiniti-q50-seats-t.jpg" alt="INFINITI Q50 Seats">
+    <div class="text">
+      <h2><b>INFINITI Q50 Seats</b></h2>
+      <h3>The Best of Everything</h3>
+      <p>
+        Q50’s available semi-aniline leather-appointed seats were bolstered for corners 
+        and built for comfort – the best of both worlds. Experience the same level of 
+        quality and comfort in every INFINITI today.
+      </p>
+    </div>
+  </section>
+
+  <!-- SUNROOF SECTION -->
+  <section class="section-alt sunroof-section">
+    <div class="text">
+      <h2><b>INFINITI Q50 Sunroof</b></h2>
+      <h3>Lit</h3>
+      <p>
+        The Q50 canopy was designed with two key considerations in mind: providing 
+        optimal visibility for performance driving and letting in the perfect amount of 
+        natural light for a pleasant interior ambience.
+      </p>
+    </div>
+    <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/discontinued/q50/interior/infiniti-q50-sunroof-t.jpg" alt="INFINITI Q50 Sunroof">
+  </section>
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INFINITI Q50 Exterior Design</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f7f7f7;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      font-weight: 600;
+      margin-top: 40px;
+      color: #333;
+    }
+
+    p {
+      font-size: 1.05em;
+      color: #444;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .text {
+      flex: 1 1 45%;
+      min-width: 300px;
+    }
+
+    .text h2 {
+      margin-top: 0;
+    }
+
+    .image {
+      flex: 1 1 45%;
+      min-width: 300px;
+      text-align: center;
+    }
+
+    .image img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .text, .image {
+        flex: 1 1 100%;
+      }
+
+      .image img {
+        max-width: 100%;
+      }
+    }
+  </style>
+
+
+
+  <div class="container">
+    <h1>INFINITI Q50 </h1>
+    <div class="intro">
+      <h2>Understated Excellence</h2>
+      <p>When it comes to style, it’s the little things that make all the difference – and Q50 always knew it.</p>
+    </div>
+
+    <div class="content">
+      <div class="text">
+        <h2>INFINITI Q50 Exterior Styling</h2>
+        <h3>Designed for Drama</h3>
+        <p>A sculpted, sophisticated front fascia brought striking drama to Q50’s wide stance and aerodynamic profile.</p>
+      </div>
+
+      <div class="image">
+        <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/discontinued/q50/exterior/infiniti-q50-exterior-design-t.jpg" alt="INFINITI Q50 Exterior">
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INFINITI Q50 Exterior &amp; Safety</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    /* --- EXTERIOR SECTION --- */
+    .section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 20px;
+      gap: 40px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .section img {
+      width: 50%;
+      border-radius: 20px;
+      transition: transform 0.4s ease;
+    }
+
+    .section img:hover {
+      transform: scale(1.03);
+    }
+
+    .text {
+      width: 50%;
+    }
+
+    .text h2 {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .text h3 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .text p {
+      font-size: 17px;
+      color: #444;
+    }
+
+    .reverse {
+      flex-direction: row-reverse;
+      position: relative;
+    }
+
+    .reverse img {
+      position: relative;
+      left: -30px;
+      top: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    /* --- SPACING BETWEEN SECTIONS --- */
+    .section + .section {
+      margin-top: 80px;
+    }
+
+    /* --- SAFETY SECTION --- */
+    .safety-section {
+      max-width: 1200px;
+      margin: 100px auto;
+      padding: 60px 20px;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .safety-section h1 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .safety-section h2 {
+      text-align: center;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    .safety-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 30px;
+    }
+
+    .safety-image {
+      flex: 1 1 45%;
+      text-align: center;
+    }
+
+    .safety-image img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .safety-text {
+      flex: 1 1 50%;
+    }
+
+    .safety-text h3 {
+      font-weight: bold;
+      margin-top: 20px;
+      color: #111;
+    }
+
+    .safety-text p {
+      margin: 10px 0 25px;
+      color: #333;
+    }
+
+    @media (max-width: 768px) {
+      .section, .reverse, .safety-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .section img, .reverse img, .text, .safety-image, .safety-text {
+        width: 100%;
+        left: 0;
+        top: 0;
+      }
+
+      .safety-section {
+        margin: 60px 15px;
+      }
+    }
+  </style>
+
+
+
+  <!-- HEADLIGHTS SECTION -->
+  <div class="section">
+    <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/discontinued/q50/exterior/infiniti-q50-headlights-t.jpg" alt="INFINITI Q50 Headlights">
+    <div class="text">
+      <h2>INFINITI Q50 Headlights</h2>
+      <h3>Eye Candy</h3>
+      <p>Multi-mode jeweled headlights were accented by Q50's expressive LED daytime running lights, adding a distinctive and modern edge to its already captivating front design. Every curve and beam was engineered to make a bold statement on the road, both day and night.</p>
+    </div>
+  </div>
+
+  <!-- RIMS SECTION -->
+  <div class="section reverse">
+    <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/discontinued/q50/exterior/infiniti-q50-rims-t.jpg" alt="INFINITI Q50 Rims">
+    <div class="text">
+      <h2>INFINITI Q50 Rims</h2>
+      <h3>Making a Scene</h3>
+      <p>Available 19-inch aluminum-alloy wheels created a contemporary elegance that added to Q50’s distinct presence. Their refined design and dynamic stance emphasized performance as much as aesthetics, ensuring Q50 always looked ready to move.</p>
+    </div>
+  </div>
+
+  <!-- SAFETY & TECHNOLOGY SECTION -->
+  <section class="safety-section">
+    <h1>INFINITI Q50 Safety and Technology Features</h1>
+    <h2>Intelligence in Every Direction</h2>
+
+    <p style="text-align:center; max-width:900px; margin:0 auto 50px;">
+      The notion of luxury performance is rooted in the philosophy of a confident, convenient driving experience – 
+      and Q50's suite of safety and technology features more than delivered.
+    </p>
+
+    <div class="safety-content">
+      <div class="safety-image">
+        <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/discontinued/q50/safety/infiniti-q50-exterior-side-profile.jpg" alt="INFINITI Q50 Safety Technology">
+      </div>
+
+      <div class="safety-text">
+        <h3>Around View® Monitor with Moving Object Detection</h3>
+        <p>
+          A virtual bird’s-eye view helped Q50 drivers navigate even the tightest parking spots – a forward-thinking
+          safety technology that remains available on even the latest INFINITI models.
+        </p>
+
+        <h3>Intelligent Cruise Control</h3>
+        <p>
+          Built-in sensors helped Q50 adjust speed and distance relative to the vehicle in front of it while cruise
+          control was active, making highway drives an exercise in ease.
+        </p>
+
+        <h3>Apple CarPlay®, Android Auto™, and INFINITI InTouch®</h3>
+        <p>
+          Q50 kept you connected to your world with INFINITI InTouch®, Apple CarPlay®, and Android Auto™ all ready 
+          to deliver news, information, and entertainment at your fingertips.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+ 
+<footer class="footer-real">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand-chat">
+        <a href="/" class="footer-logo" aria-label="Homepage">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png" alt="Brand Logo">
+        </a>
+        <button class="footer-live-chat" aria-label="Live Chat">Live Chat</button>
+      </div>
+
+      <nav class="footer-nav">
+        <div class="footer-column">
+          <h4>ABOUT</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/about.html">About Nissan</a></li>
+            <li><a href="https://www.nissanusa.com/about/culture.html">Culture</a></li>
+            <li><a href="https://usa.nissannews.com/en-US/">News &amp; Events</a></li>
+            <li><a href="https://www.nissanusa.com/business-fleet.html">Business &amp; Fleet</a></li>
+            <li><a href="https://www.nissanusa.com/accessibility.html">Accessibility</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>SHOP</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/vehicles/new.html">All Vehicles</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/search-inventory">Search Inventory</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-brochure.html">View a Brochure</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/build-price">Build &amp; Price</a></li>
+            <li><a href="https://www.nissanusa.com/dealer-locator.html">Locate a Dealer</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OWNERS</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/owners.html">Owner Portal</a></li>
+            <li><a href="https://www.nissanusa.com/parts-service">Schedule Service</a></li>
+            <li><a href="https://www.nissanusa.com/owners/manuals-guides.html">Manuals &amp; Guides</a></li>
+            <li><a href="https://www.nissanusa.com/connect.html">Connected Services</a></li>
+            <li><a href="https://www.nissanusa.com/maintenance-schedules/">Maintenance Schedules</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OFFERS &amp; FINANCING</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/shopping-tools/deals-incentives-offers.html">Deals &amp; Offers</a></li>
+            <li><a href="https://www.nissanfinance.com/s/login/?language=en_US">Financing Options</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/lease-finance-payment-calculator">Estimate Payments</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/pre-approval.html">Get Pre-Approved</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-internet-quote.html">Internet Quote</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-middle">
+      <div class="footer-social">
+        <a href="https://www.tiktok.com/@nissanusa?lang=en" aria-label="TikTok">TikTok</a>
+        <a href="https://www.instagram.com/nissanusa/" aria-label="Instagram">Instagram</a>
+        <a href="https://www.youtube.com/user/nissanusa/featured" aria-label="YouTube">YouTube</a>
+        <a href="https://twitter.com/NissanUSA" aria-label="Twitter">Twitter</a>
+        <a href="https://www.facebook.com/nissanusa/" aria-label="Facebook">Facebook</a>
+        <a href="https://www.pinterest.com/nissanusa/" aria-label="Pinterest">Pinterest</a>
+      </div>
+
+      <div class="footer-extras">
+        <div class="footer-language">
+          <label for="lang-select" class="sr-only">Select Language</label>
+          <select id="lang-select" aria-label="Language selection">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+        <div class="footer-links-small">
+          <a href="https://www.nissanusa.com/sitemap.html">Site Map</a>
+          <a href="https://www.nissanusa.com/contact-us.html">Contact Us</a>
+          <a href="https://www.nissanusa.com/data-privacy.html">Do Not Sell or Share My Personal Information</a>
+          <a href="https://www.nissanusa.com/legal-terms.html">Terms of Use</a>
+          <a href="https://www.nissanusa.com/privacy.html">Privacy Notice</a>
+          <a href="https://www.nissanusa.com/recalls-vin">Recall Information</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="current-year">2025</span> Nissan. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* ✅ Prevent horizontal overflow */
+  }
+
+  .footer-real {
+    background-color: whitesmoke;
+    color: darkred;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 40px 20px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .footer-brand-chat {
+    flex: 1 1 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo img {
+    height: 110px;
+    max-width: 100%;
+    filter: brightness(0.95) contrast(1);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .footer-logo img:hover {
+    filter: brightness(1) contrast(1.05);
+    transform: scale(1.05);
+  }
+
+  .footer-live-chat {
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid darkred;
+    color: black;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .footer-live-chat:hover {
+    border-color: darkred;
+    background-color: whitesmoke;
+  }
+
+  .footer-nav {
+    flex: 3 1 600px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+  }
+
+  .footer-column h4 {
+    color: black;
+    font-size: 13px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-column li {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .footer-column li a {
+    color: darkred;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  .footer-column li a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-middle {
+    border-top: 1px solid darkred;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-social a {
+    color: darkred;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover {
+    color: black;
+  }
+
+  .footer-extras {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .footer-language select {
+    background-color: transparent;
+    color: black;
+    border: 1px solid darkred;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .footer-links-small {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links-small a {
+    color: black;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .footer-links-small a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid darkred;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: darkred;
+  }
+
+  /* ✅ Responsive Fixes */
+  @media (max-width: 900px) {
+    .footer-nav {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+    }
+    .footer-nav {
+      grid-template-columns: 1fr;
+    }
+    .footer-middle {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .footer-extras {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .footer-links-small {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+</body></html>

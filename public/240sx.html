@@ -1,0 +1,1083 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan 240SX</title>
+  <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: whitesmoke;
+      overflow-x: hidden;
+      color: gray;
+    }
+
+    /* ===== HEADER (bottom fixed) ===== */
+    header {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 20px;
+      z-index: 1000;
+      border-top: 2px solid rgba(0, 0, 0, 0.1);
+    }
+
+    /* ===== LEFT MENU ===== */
+    .menu-left {
+      position: absolute;
+      left: 20px;
+      bottom: 10px;
+    }
+
+    /* ===== RIGHT MENU ===== */
+    .menu-right {
+      position: absolute;
+      right: 20px;
+      bottom: 10px;
+    }
+
+    .menu-toggle {
+      width: 28px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 100%;
+      background: black;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* ===== LOGO ===== */
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: white;
+      text-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+      text-align: center;
+      margin-top: 5px;
+    }
+
+    .logo span {
+      color: #e60000;
+    }
+
+    /* ===== SEARCH BAR ===== */
+    .search-bar {
+      margin-top: 8px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-bar input {
+      width: 180px;
+      padding: 6px 12px;
+      border-radius: 25px;
+      border: none;
+      font-size: 13px;
+      color: white;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .search-bar input:focus {
+      border-color: #e60000;
+      box-shadow: 0 0 8px rgba(230, 0, 0, 0.5);
+      outline: none;
+    }
+
+    /* ===== DROPDOWNS ===== */
+    .dropdown {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
+      min-width: 200px;
+      z-index: 1200;
+      overflow: hidden;
+    }
+
+    .dropdown.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transform: translateX(-40px);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    .dropdown.active a {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .dropdown a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    #dropdown1 {
+      bottom: 55px;
+      left: 20px;
+    }
+
+    #dropdown2 {
+      bottom: 55px;
+      right: 1cm;
+    }
+
+    /* ===== HERO IMAGE ===== */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ===== RESPONSIVE FIXES ===== */
+    @media (max-width: 768px) {
+      .logo {
+        font-size: 1.5rem;
+      }
+      .search-bar input {
+        width: 150px;
+      }
+    }
+    /* ===== HERO IMAGE FULL (No Crop) ===== */
+.hero-section {
+  width: 100%;
+  height: auto; /* let it adjust to image height */
+  max-height: 100vh; /* optional: limit max height */
+  overflow: hidden;
+}
+
+.hero {
+  width: 100%;
+  height: auto; /* keeps aspect ratio */
+  display: block;
+}
+
+  </style>
+</head>
+
+<body>
+  <!-- HERO IMAGE -->
+  <section class="hero-section">
+    <img src="https://images.classic.com/vehicles/63cfc7ca597e47b19a19bc5ed33a4a0a.jpeg?w=1200&amp;h=676&amp;fit=crop" alt="Nissan GT-R Hero" class="hero">
+  </section>
+
+  <!-- HEADER AT BOTTOM -->
+  <header>
+    <div class="menu-left">
+      <div id="menu1" class="menu-toggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="menu-right">
+      <div id="menu2" class="menu-toggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="logo">NISSAN <span>SPORTS</span></div>
+
+    <div id="dropdown1" class="dropdown">
+      <a href="nissan.html">Home</a>
+      <a href="models.html">Models</a>
+      <a href="performance.html">Performance</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div id="dropdown2" class="dropdown">
+      <a href="normal.html">Normal</a>
+      <a href="sports.html">Sports</a>
+      <a href="luxury.html">Luxury</a>
+      <a href="premium.html">Premium</a>
+    </div>
+  </header>
+
+  <!-- JS FUNCTIONALITY -->
+  <script>
+    const menu1 = document.getElementById("menu1");
+    const menu2 = document.getElementById("menu2");
+    const dropdown1 = document.getElementById("dropdown1");
+    const dropdown2 = document.getElementById("dropdown2");
+
+    // Toggle left dropdown
+    menu1.addEventListener("click", () => {
+      menu1.classList.toggle("open");
+      dropdown1.classList.toggle("active");
+      dropdown2.classList.remove("active");
+      menu2.classList.remove("open");
+    });
+
+    // Toggle right dropdown
+    menu2.addEventListener("click", () => {
+      menu2.classList.toggle("open");
+      dropdown2.classList.toggle("active");
+      dropdown1.classList.remove("active");
+      menu1.classList.remove("open");
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!menu1.contains(e.target) && !dropdown1.contains(e.target) &&
+          !menu2.contains(e.target) && !dropdown2.contains(e.target)) {
+        dropdown1.classList.remove("active");
+        dropdown2.classList.remove("active");
+        menu1.classList.remove("open");
+        menu2.classList.remove("open");
+      }
+    });
+  </script>
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan 240SX</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 40px;
+      background-color: #fff;
+      margin: 40px auto; /* <-- adds spacing between sections */
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      width: 90%;
+      max-width: 1100px;
+    }
+
+    .text {
+      flex: 1;
+      min-width: 280px;
+      margin-right: 20px;
+    }
+
+    .text h2 {
+      font-weight: bold;
+      font-size: 26px;
+      color: #111;
+      margin-bottom: 10px;
+    }
+
+    .text p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .image {
+      flex: 1;
+      min-width: 280px;
+      text-align: right;
+    }
+
+    .image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Adjust image alignment for second section */
+    .left-image {
+      text-align: left;
+    }
+
+    /* Responsive layout for mobile */
+    @media (max-width: 768px) {
+      .section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .text {
+        margin-right: 0;
+        margin-left: 0;
+        margin-top: 20px;
+      }
+
+      .image {
+        text-align: center !important;
+      }
+    }
+  </style>
+
+
+
+  <!-- SECTION 1: Nissan 240SX Overview -->
+  <section class="section">
+    <div class="text">
+      <h2><strong>Nissan 240SX</strong></h2>
+      <p>
+        The <strong>Nissan 240SX</strong> is a legendary sports coupe that became an icon in the world of drifting and 
+        car customization. Produced between 1989 and 1998, it was known for its balanced rear-wheel-drive layout, 
+        lightweight chassis, and responsive handling. Its KA24 engine delivered solid torque, while its 
+        tunability made it a favorite among enthusiasts for engine swaps, suspension upgrades, and track builds.
+      </p>
+    </div>
+
+    <div class="image">
+      <img src="https://images.classic.com/vehicles/927c07a4d3ad2283ac8065df1fb14dae.jpeg?ar=3:2&amp;w=300&amp;fit=crop" alt="Nissan 240SX sports car">
+    </div>
+  </section>
+
+  <!-- SECTION 2: Interior -->
+  <section class="section">
+    <div class="image left-image">
+      <img src="https://images.classic.com/vehicles/22249c7f803ae2a77f34fada69a9c669.jpeg?w=1000" alt="Nissan 240SX Interior">
+    </div>
+
+    <div class="text">
+      <h2><strong>Interior Comfort and Design</strong></h2>
+      <p>
+        The <strong>Nissan 240SX</strong> interior perfectly blends driver-focused design with simplicity. 
+        Its cockpit-style layout wraps around the driver, featuring supportive bucket seats and an intuitive 
+        dashboard. The minimalist interior emphasizes visibility and comfort, while materials and layout 
+        reflect Nissan’s commitment to performance and functionality. Even decades later, the 240SX interior 
+        remains a favorite among car enthusiasts for its timeless, ergonomic appeal.
+      </p>
+    </div>
+  </section>
+
+
+
+
+<section>
+  <div class="gallery-container">
+    <div class="gallery" id="gallery">
+      <!-- 12 IMAGES -->
+      <img src="https://images.classic.com/vehicles/63cfc7ca597e47b19a19bc5ed33a4a0a.jpeg?w=1000" alt="GT-R NISMO">
+      <img src="https://images.classic.com/vehicles/d8dda6279f77a18d7dfc1f3de95eef8f.jpeg?w=1000" alt="Nissan NISMO GT-R">
+      <img src="https://images.classic.com/vehicles/8c110ccb16e3a26bef0ac00181be4d72.jpeg?w=1000" alt="2024 Nissan GT-R T-Spec">
+      <img src="https://images.classic.com/vehicles/b71ac294342001bd7e3b32e290bb48e8.jpeg?w=1000" alt="2024 GT-R Nismo exterior">
+      <img src="https://images.classic.com/vehicles/22249c7f803ae2a77f34fada69a9c669.jpeg?w=1000" alt="GT-R Interior view">
+      <img src="https://images.classic.com/vehicles/82f61ecd563dd39611dc56d31be8c758.jpeg?w=1000" alt="2026 Nissan Z Nismo Sports white front view">
+      <img src="https://images.classic.com/vehicles/52c9d8d4f7ac19367feabf515bdffea5.jpeg?w=1000" alt="2026 Nissan Z Nismo Sports white rear view">
+      <img src="https://images.classic.com/vehicles/f1184242f3c0cd48607d579256da60c0.jpeg?w=1000" alt="2024 Nissan Z Nismo Red Front">
+      <img src="https://images.classic.com/vehicles/11ef2e7d1ba99999c44c7e1ce765ee59.jpeg?w=1000" alt="Nissan Z Yellow Side Profile">
+      <img src="https://images.classic.com/vehicles/d1c436b5d052b70d4022563e7b2849b9.jpeg?w=1000" alt="Nissan Z Interior Cockpit">
+      <img src="https://images.classic.com/vehicles/2fbefd2931fe535ed15791d76062ca91.jpeg?w=1000" alt="2026 Nissan Z Nismo black side view">
+      <img src="https://images.classic.com/vehicles/fe2b9e055e83a93bb7cc24e6b25f35a4.jpeg?w=1000" alt="2026 Nissan Z Nismo front angle">
+    </div>
+  </div>
+
+  <div class="scroll-buttons">
+
+
+  </div>
+</section>
+
+<style>
+/* === GALLERY SECTION === */
+.gallery-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 20px 0;
+  background: whitesmoke; /* black background for premium car look */
+}
+
+.gallery {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* hide scrollbar (Firefox) */
+}
+
+.gallery::-webkit-scrollbar {
+  display: none; /* hide scrollbar (Chrome, Safari) */
+}
+
+.gallery img {
+  flex: 0 0 auto;
+  width: 350px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* === SCROLL BUTTONS === */
+.scroll-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.scroll-btn {
+  background-color: #e60000; /* Nissan red */
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.scroll-btn:hover {
+  background-color: #b80000;
+  transform: scale(1.05);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .gallery img {
+    width: 260px;
+    height: 160px;
+  }
+  .scroll-btn {
+    padding: 8px 18px;
+  }
+}
+</style>
+<!-- 2001 NISSAN GT-R FEATURE SECTION -->
+<section class="leaf-feature">
+  <div class="image-overlay">
+    <img src="https://images.classic.com/vehicles/e23f2f3f-9119-435c-984e-8bb008106f74.jpg?w=1200&amp;h=676&amp;fit=crop" alt="2001 Nissan GT-R in blue driving up a curved ramp with pillars on both sides">
+    <div class="text-content">
+      <p class="play"><strong>1997 Nissan 240SX</strong></p>
+      <h2>1997 <span>NISSAN 240SX</span></h2>
+      <p class="tagline">All-petrol, all-new<br>A bold car for a brave new world.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== LEAF FEATURE SECTION ===== */
+.leaf-feature {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: black;
+  margin-top: 40px; /* spacing above section */
+}
+
+.leaf-feature img {
+  width: 100%;
+  height: 100%;
+  max-height: 650px;
+  object-fit: cover;
+  filter: brightness(0.75);
+  display: block;
+}
+
+.image-overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.text-content {
+  position: absolute;
+  top: 10%;
+  right: 8%;
+  color: black;
+  text-align: right;
+  text-shadow: 0 2px 8px whitesmoke;
+}
+
+.text-content .play {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  background:whitesmoke;
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  backdrop-filter: blur(3px);
+}
+
+.text-content h2 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 10px 0;
+}
+
+.text-content .tagline {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Responsive text adjustments */
+@media (max-width: 1024px) {
+  .text-content h2 {
+    font-size: 2.2rem;
+  }
+  .text-content .tagline {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .text-content {
+    right: 5%;
+    top: 8%;
+  }
+  .text-content h2 {
+    font-size: 1.8rem;
+  }
+  .text-content .tagline {
+    font-size: 1rem;
+  }
+  .text-content .play {
+    font-size: 1rem;
+    padding: 5px 10px;
+  }
+}
+</style>
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan 240SX — Wheel &amp; Engine</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px; /* Adds space between left and right sections */
+      padding: 40px;
+    }
+
+    .section-box {
+      flex: 1 1 45%;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .section-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .section-box img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    .section-box h2 {
+      font-size: 1.6rem;
+      color: #222;
+    }
+
+    .section-box p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .section-box {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+
+
+
+  <div class="container">
+    <!-- LEFT: Wheel Section -->
+    <div class="section-box">
+      <h2><strong>Precision Nissan Wheels</strong></h2>
+      <p>
+        Nissan’s wheel design ensures perfect balance, durability, and grip.
+        Each alloy wheel is engineered to deliver stability at high speeds and
+        superior handling performance on every road surface.
+      </p>
+      <img src="https://images.openai.com/static-rsc-1/45R0P6m_nGXqeRL8Ye6dqY4xMwwr16mEbRniGUC-e3xmup5Aza3CAQY6U1l5VWkvngJ1fVVeLk_DGwRqxmae4hictiBDx2PDkj4QoCd49JGpTAOdo2dR04wzS840UPdE_cmhMFtTOxaA33fXiupxTA" alt="Nissan 240SX interior showing wheel design">
+    </div>
+
+    <!-- RIGHT: Engine Section -->
+    <div class="section-box">
+      <h2><strong>Powerful Nissan 240SX Engine</strong></h2>
+      <p>
+        The 1997 Nissan 240SX engine combines precision and performance. 
+        Its lightweight build delivers smooth power delivery, impressive torque, 
+        and outstanding reliability — making it a favorite among car enthusiasts 
+        and tuners alike.
+      </p>
+      <img src="https://www.180sx.club/wp-content/uploads/2021/11/240sx-engine-guide.jpg" alt="Nissan 240SX 1997 engine bay">
+    </div>
+  </div>
+
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan 240SX Drift</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    .drift-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 40px;
+      background-color: #fff;
+    }
+
+    .drift-text {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .drift-text h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .drift-text p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    .drift-image {
+      flex: 1;
+      text-align: right;
+      padding: 20px;
+    }
+
+    .drift-image img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 768px) {
+      .drift-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .drift-image {
+        text-align: center;
+      }
+
+      .drift-image img {
+        max-width: 90%;
+      }
+    }
+  </style>
+
+
+
+  <section class="drift-section">
+    <div class="drift-text">
+      <h2><strong>Nissan 240SX Drift Performance</strong></h2>
+      <p>
+        The Nissan 240SX has earned its reputation as one of the most iconic drift cars ever built. 
+        With its rear-wheel-drive setup, lightweight chassis, and balanced weight distribution, 
+        the 240SX provides the perfect platform for controlled slides and precise cornering. 
+        Enthusiasts love its easy-to-modify nature, allowing for upgraded suspension, turbocharged engines, 
+        and custom body kits that enhance both style and performance on the drift track.
+      </p>
+    </div>
+
+    <div class="drift-image">
+      <img src="https://i.pinimg.com/1200x/f8/13/05/f81305c8c3b5cafefe80921ca073f6ea.jpg" alt="Nissan 240SX drifting through a corner with smoke from the rear tires">
+    </div>
+  </section>
+
+
+
+<footer class="footer-real">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand-chat">
+        <a href="/" class="footer-logo" aria-label="Homepage">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png" alt="Brand Logo">
+        </a>
+        <button class="footer-live-chat" aria-label="Live Chat">Live Chat</button>
+      </div>
+
+      <nav class="footer-nav">
+        <div class="footer-column">
+          <h4>ABOUT</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/about.html">About Nissan</a></li>
+            <li><a href="https://www.nissanusa.com/about/culture.html">Culture</a></li>
+            <li><a href="https://usa.nissannews.com/en-US/">News &amp; Events</a></li>
+            <li><a href="https://www.nissanusa.com/business-fleet.html">Business &amp; Fleet</a></li>
+            <li><a href="https://www.nissanusa.com/accessibility.html">Accessibility</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>SHOP</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/vehicles/new.html">All Vehicles</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/search-inventory">Search Inventory</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-brochure.html">View a Brochure</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/build-price">Build &amp; Price</a></li>
+            <li><a href="https://www.nissanusa.com/dealer-locator.html">Locate a Dealer</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OWNERS</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/owners.html">Owner Portal</a></li>
+            <li><a href="https://www.nissanusa.com/parts-service">Schedule Service</a></li>
+            <li><a href="https://www.nissanusa.com/owners/manuals-guides.html">Manuals &amp; Guides</a></li>
+            <li><a href="https://www.nissanusa.com/connect.html">Connected Services</a></li>
+            <li><a href="https://www.nissanusa.com/maintenance-schedules/">Maintenance Schedules</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OFFERS &amp; FINANCING</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/shopping-tools/deals-incentives-offers.html">Deals &amp; Offers</a></li>
+            <li><a href="https://www.nissanfinance.com/s/login/?language=en_US">Financing Options</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/lease-finance-payment-calculator">Estimate Payments</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/pre-approval.html">Get Pre-Approved</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-internet-quote.html">Internet Quote</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-middle">
+      <div class="footer-social">
+        <a href="https://www.tiktok.com/@nissanusa?lang=en" aria-label="TikTok">TikTok</a>
+        <a href="https://www.instagram.com/nissanusa/" aria-label="Instagram">Instagram</a>
+        <a href="https://www.youtube.com/user/nissanusa/featured" aria-label="YouTube">YouTube</a>
+        <a href="https://twitter.com/NissanUSA" aria-label="Twitter">Twitter</a>
+        <a href="https://www.facebook.com/nissanusa/" aria-label="Facebook">Facebook</a>
+        <a href="https://www.pinterest.com/nissanusa/" aria-label="Pinterest">Pinterest</a>
+      </div>
+
+      <div class="footer-extras">
+        <div class="footer-language">
+          <label for="lang-select" class="sr-only">Select Language</label>
+          <select id="lang-select" aria-label="Language selection">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+        <div class="footer-links-small">
+          <a href="https://www.nissanusa.com/sitemap.html">Site Map</a>
+          <a href="https://www.nissanusa.com/contact-us.html">Contact Us</a>
+          <a href="https://www.nissanusa.com/data-privacy.html">Do Not Sell or Share My Personal Information</a>
+          <a href="https://www.nissanusa.com/legal-terms.html">Terms of Use</a>
+          <a href="https://www.nissanusa.com/privacy.html">Privacy Notice</a>
+          <a href="https://www.nissanusa.com/recalls-vin">Recall Information</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="current-year">2025</span> Nissan. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* ✅ Prevent horizontal overflow */
+  }
+
+  .footer-real {
+    background-color: whitesmoke;
+    color: darkred;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 40px 20px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .footer-brand-chat {
+    flex: 1 1 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo img {
+    height: 110px;
+    max-width: 100%;
+    filter: brightness(0.95) contrast(1);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .footer-logo img:hover {
+    filter: brightness(1) contrast(1.05);
+    transform: scale(1.05);
+  }
+
+  .footer-live-chat {
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid darkred;
+    color: black;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .footer-live-chat:hover {
+    border-color: darkred;
+    background-color: whitesmoke;
+  }
+
+  .footer-nav {
+    flex: 3 1 600px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+  }
+
+  .footer-column h4 {
+    color: black;
+    font-size: 13px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-column li {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .footer-column li a {
+    color: darkred;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  .footer-column li a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-middle {
+    border-top: 1px solid darkred;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-social a {
+    color: darkred;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover {
+    color: black;
+  }
+
+  .footer-extras {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .footer-language select {
+    background-color: transparent;
+    color: black;
+    border: 1px solid darkred;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .footer-links-small {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links-small a {
+    color: black;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .footer-links-small a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid darkred;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: darkred;
+  }
+
+  /* ✅ Responsive Fixes */
+  @media (max-width: 900px) {
+    .footer-nav {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+    }
+    .footer-nav {
+      grid-template-columns: 1fr;
+    }
+    .footer-middle {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .footer-extras {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .footer-links-small {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+</body></html>

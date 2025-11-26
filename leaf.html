@@ -1,0 +1,1432 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan leaf</title>
+  <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png">
+  <style>
+    /* ===== RESET ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: whitesmoke;
+      color: #333;
+      overflow-x: hidden; /* ✅ Prevent horizontal overflow */
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: transparent;
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 20px;
+      z-index: 1000;
+    }
+
+    .menu-left {
+      position: absolute;
+      left: 20px;
+      top: 10px;
+    }
+
+
+    .menu-right {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+    }
+
+    .menu-toggle {
+      width: 28px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 100%;
+      background: black;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: white;
+      text-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .logo span {
+      color: #e60000;
+    }
+
+    /* ===== DROPDOWN ===== */
+    .dropdown {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
+      min-width: 200px;
+      z-index: 1200;
+      overflow: hidden;
+    }
+
+    .dropdown.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transform: translateX(-40px);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    .dropdown.active a {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .dropdown a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    #dropdown1 {
+      top: 45px;
+      left: 20px;
+    }
+
+    #dropdown2 {
+      top: 45px;
+      right: 20px;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero-section {
+      width: 100%;
+      margin-top: 90px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-section img {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    @media (min-width: 1025px) {
+      .hero-section {
+        height: calc(100vh - 90px);
+      }
+      .hero-section img {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    /* ===== LEAF SECTION ===== */
+    .container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      background-color: #fff;
+      padding: 60px 10%;
+      margin: 60px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      gap: 40px;
+      max-width: 1200px;
+    }
+
+    .left {
+      flex: 1;
+      min-width: 250px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #222;
+      line-height: 1.5;
+    }
+
+    .right {
+      flex: 2;
+      min-width: 300px;
+      font-size: 17px;
+      font-weight: 500;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 40px 6%;
+      }
+      .left, .right {
+        width: 100%;
+        font-size: 18px;
+      }
+    }
+
+    /* ===== UNDER 30K SECTION ===== */
+    .under30k {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 40px;
+      background: white;
+      max-width: 1200px;
+      margin: 40px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .under30k img {
+      width: 100%;
+      max-width: 450px;
+      border-radius: 10px;
+    }
+
+    .under30k .text-section {
+      flex: 1;
+      padding: 20px 40px;
+      min-width: 280px;
+    }
+
+    .under30k h2 {
+      font-size: 26px;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 10px;
+    }
+
+    .under30k p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .under30k {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .under30k .text-section {
+        padding: 20px 0;
+      }
+    }
+
+    /* ===== AWARDS SECTION ===== */
+    .section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 10%;
+      gap: 40px;
+      flex-wrap: wrap;
+      background: #fff;
+      border-radius: 12px;
+      margin: 40px auto;
+      max-width: 1200px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .section img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 10px;
+    }
+
+    .section .text {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .section .text h2 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .section .text p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    .reverse {
+      flex-direction: row-reverse;
+    }
+
+    @media (max-width: 768px) {
+      .section, .reverse {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+      }
+      .section .text h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="menu-left">
+      <div id="menu1" class="menu-toggle"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="menu-right">
+      <div id="menu2" class="menu-toggle"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="logo">NISSAN <span>NORMAL</span></div>
+
+    <div id="dropdown1" class="dropdown">
+      <a href="nissan.html">Home</a>
+      <a href="models.html">Models</a>
+      <a href="performance.html">Performance</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div id="dropdown2" class="dropdown">
+      <a href="normal.html">Normal</a>
+      <a href="sports.html">Sports</a>
+      <a href="luxury.html">Luxury</a>
+      <a href="premium.html">Premium</a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/leaf/2026/overview/pfa/2026-nissan-leaf-all-electric-suv.jpg" alt="Nissan Leaf Hero">
+  </section>
+
+  <!-- LEAF INTRO SECTION -->
+  <section class="container">
+    <div class="left">
+      Easier. Smarter. And Way Cooler.<br><br>
+      Starting At<br><br>
+      <strong>$29,990</strong>
+    </div>
+
+    <div class="right">
+      Introducing the third-generation Nissan LEAF. Built on time-tested EV technology with over 18 billion miles driven worldwide, the new LEAF raises the bar for electric vehicles with a striking new crossover design, advanced connected features, and access to a fast-growing charging network you can trust.
+    </div>
+  </section>
+
+  <!-- UNDER 30K SECTION -->
+  <section class="under30k">
+    <img src="https://www.nissanusa.com/content/dam/Nissan/us/smart-digital/six-under-thirty/assets/vlp/six-under-thirty-desktop.jpg" alt="Nissan Vehicles Under 30k">
+    <div class="text-section">
+      <h2>Get More for Less</h2>
+      <p><strong>6 Nissan Vehicles with Starting MSRP Under 30k</strong><br><br>
+      Looking for a sedan, crossover, or electric vehicle with a starting MSRP under $30,000? Discover class-leading features on the 2025 Nissan Sentra, Versa, Altima, LEAF, Rogue, and the all-new, reimagined Kicks. Drive a Nissan today.</p>
+    </div>
+  </section>
+
+  <!-- AWARDS SECTION -->
+  <section class="section">
+    <div class="text">
+      <h2>2026 Nissan LEAF — Award-Winning Innovation</h2>
+      <p>
+        2026 Nissan LEAF driving through a forest, featuring the prestigious 
+        <strong>Wards 10 Best Engines &amp; Propulsion Systems Award</strong>.  
+        The LEAF continues to redefine electric mobility with exceptional performance, 
+        efficiency, and eco-friendly technology.
+      </p>
+      <p><strong>Wards Auto 10 Best Engines &amp; Propulsion Systems List Winner</strong></p>
+      <p><strong>J.D. POWER:</strong> Nissan ranked #1 for new-vehicle quality among mainstream brands.</p>
+    </div>
+    <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/leaf/2026/banner/2026-nissan-leaf-electric-suv-wards-award.jpeg" alt="2026 Nissan LEAF with Wards Award">
+  </section>
+
+  <section class="section reverse">
+    <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/leaf/2026/banner/2025-nissan-jd-power-highest-initial-quality-mass-market-brand-award.jpg" alt="2025 JD Power Award with Nissan Kicks, LEAF, and Frontier">
+    <div class="text">
+      <h2>2025 J.D. Power Award — Highest Initial Quality</h2>
+      <p>
+        The <strong>2025 J.D. Power Award</strong> for Highest Initial Quality Mass Market Brand  
+        is proudly displayed alongside the Nissan Kicks, LEAF, and Frontier,  
+        celebrating exceptional reliability and craftsmanship.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    const menu1 = document.getElementById("menu1");
+    const menu2 = document.getElementById("menu2");
+    const dropdown1 = document.getElementById("dropdown1");
+    const dropdown2 = document.getElementById("dropdown2");
+
+    function toggleDropdown(menu, dropdown, otherMenu, otherDropdown) {
+      menu.classList.toggle("open");
+      dropdown.classList.toggle("active");
+      otherMenu.classList.remove("open");
+      otherDropdown.classList.remove("active");
+
+      const links = dropdown.querySelectorAll("a");
+      links.forEach((link, i) => {
+        link.style.transitionDelay = dropdown.classList.contains("active")
+          ? `${i * 0.08}s`
+          : "0s";
+      });
+    }
+
+    menu1.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleDropdown(menu1, dropdown1, menu2, dropdown2);
+    });
+
+    menu2.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleDropdown(menu2, dropdown2, menu1, dropdown1);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (
+        !menu1.contains(e.target) &&
+        !menu2.contains(e.target) &&
+        !dropdown1.contains(e.target) &&
+        !dropdown2.contains(e.target)
+      ) {
+        [menu1, menu2].forEach((m) => m.classList.remove("open"));
+        [dropdown1, dropdown2].forEach((d) => d.classList.remove("active"));
+      }
+    });
+  </script>
+
+
+
+<section class="leaf-feature">
+  <div class="image-overlay">
+    <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/leaf/2026/overview/2026-nissan-leaf-capabilities-video-thumbnail.jpg" alt="2026 Nissan LEAF in blue driving up a curved ramp with pillars on both sides">
+    <div class="text-content">
+      <p class="play"> <strong>2026 Nissan LEAF</strong></p>
+      <h2>2026 <span>NISSAN LEAF</span></h2>
+      <p class="tagline">All-electric, all-new<br>A bold new EV for a brave new electric world.</p>
+    </div>
+  </div>
+</section>
+<style>
+    /* ===== LEAF FEATURE SECTION ===== */
+.leaf-feature {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: black;
+}
+
+.leaf-feature img {
+  width: 100%;
+  height: 100%;
+  max-height: 650px;
+  object-fit: cover;
+  filter: brightness(0.75);
+  display: block;
+}
+
+.image-overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.text-content {
+  position: absolute;
+  bottom: 10%;
+  left: 8%;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+.text-content .play {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  background: rgba(255,255,255,0.1);
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  backdrop-filter: blur(3px);
+}
+
+.text-content h2 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 10px 0;
+}
+
+.text-content h2 span {
+  color: #00a2e8; /* Electric blue accent */
+}
+
+.text-content .tagline {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Responsive design for tablet and mobile */
+@media (max-width: 1024px) {
+  .text-content h2 {
+    font-size: 2.2rem;
+  }
+  .text-content .tagline {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .text-content {
+    left: 5%;
+    bottom: 8%;
+    text-align: left;
+  }
+  .text-content h2 {
+    font-size: 1.8rem;
+  }
+  .text-content .tagline {
+    font-size: 1rem;
+  }
+  .text-content .play {
+    font-size: 1rem;
+    padding: 5px 10px;
+  }
+}
+
+</style>
+<section class="gtr-features">
+  <div class="feature-content">
+    <h2>KEY FEATURES</h2>
+    <h1>Elevated, energized, evolved</h1>
+
+    <!-- Buttons -->
+    <div class="feature-buttons">
+      <button class="tab-btn active" data-target="aero">Performance by design</button>
+      <button class="tab-btn" data-target="engine">Tailored to you</button>
+      <button class="tab-btn" data-target="handling">Driver Assist Technologies</button>
+    </div>
+  </div>
+
+  <!-- Feature Sections -->
+  <div class="feature-sections">
+    <div class="feature-item active" id="aero">
+      <div class="feature-container">
+        <div class="feature-text">
+          <p>
+         The all-new LEAF EV features a sleek, aerodynamic design engineered for efficiency and performance. Innovation meets power in every detail of this all-electric vehicle.
+          </p>
+        </div>
+        <div class="feature-image">
+          <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/leaf/2026/overview/tabs/2026-nissan-leaf-elevated-design.jpg" alt="Aerodynamics">
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-item" id="engine">
+      <div class="feature-container">
+        <div class="feature-text">
+          <p>
+            Step inside LEAF and feel instantly connected to your surroundings. With premium materials, Zero Gravity Seats, and space for up to five, its lounge-like cabin is crafted for comfort that lasts.
+          </p>
+        </div>
+        <div class="feature-image">
+          <img src="https://media.drivingelectric.com/image/private/s--RdwyxjuZ--/f_auto%2Ct_primary-image-mobile%401/v1597759794/drivingelectric/2018-09/nissan-leaf-ev-03.jpg" alt="Twin Turbo V6 Engine">
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-item" id="handling">
+      <div class="feature-container">
+        <div class="feature-text">
+          <p>
+      LEAF levels up your protection and confidence with standard Nissan Safety Shield® 360, while ProPILOT Assist helps ease the workload on long trips with confident, foot-free highway driving.
+          </p>
+        </div>
+        <div class="feature-image">
+          <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/leaf/2026/overview/tabs/2026-nissan-leaf-driver-assist-technologies.jpg" alt="Dynamic Handling">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== BASE ===== */
+.gtr-features {
+  background: whitesmoke;
+  color: black;
+  font-family: 'Poppins', sans-serif;
+  padding: 80px 10%;
+  text-align: left;
+}
+
+/* ===== HEADINGS ===== */
+.gtr-features h2 {
+  color: black;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.gtr-features h1 {
+  font-size: 38px;
+  margin-bottom: 25px;
+}
+
+/* ===== BUTTONS ===== */
+.feature-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.feature-buttons button {
+  background: transparent;
+  border: 2px solid whitesmoke;
+  color:black;
+  padding: 10px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.feature-buttons button.active,
+.feature-buttons button:hover {
+  background: lightblue;
+  color: black;
+}
+
+/* ===== FEATURE SECTIONS ===== */
+.feature-sections {
+  position: relative;
+}
+
+.feature-item {
+  display: none;
+  animation: fadeIn 0.6s ease;
+}
+
+.feature-item.active {
+  display: block;
+}
+
+/* ===== FEATURE CONTAINER ===== */
+.feature-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.feature-image img {
+  width: 550px;
+  border-radius: 20px;
+  transition: transform 0.6s ease;
+}
+
+.feature-image img:hover {
+  transform: scale(1.03);
+}
+
+.feature-text {
+  flex: 1;
+  font-size: 17px;
+  line-height: 1.7;
+  color:black;
+  font-weight: 600; /* <-- Bold text */
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .feature-container {
+    flex-direction: column;
+  }
+
+  .feature-image img {
+    width: 100%;
+  }
+
+  .gtr-features h1 {
+    font-size: 28px;
+  }
+}
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .feature-container {
+    flex-direction: column-reverse; /* ✅ text above image */
+    text-align: center; /* ✅ better visual balance */
+  }
+
+  .feature-text {
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .feature-image img {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .gtr-features h1 {
+    font-size: 30px;
+  }
+
+  .feature-buttons {
+    justify-content: center;
+  }
+}
+
+</style>
+
+<script>
+const buttons = document.querySelectorAll('.tab-btn');
+const items = document.querySelectorAll('.feature-item');
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Activate button
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Show corresponding section
+    items.forEach(item => item.classList.remove('active'));
+    document.getElementById(btn.dataset.target).classList.add('active');
+  });
+});
+</script>
+<!-- NISSAN LEAF IMAGE GRID SECTION -->
+<section class="leaf-gallery">
+  <div class="leaf-row">
+    <div class="leaf-col">
+      <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/leaf/2026/overview/mosaic/2026-nissan-leaf-badge.jpg" alt="2026 Nissan LEAF front view">
+    </div>
+    <div class="leaf-col">
+      <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/leaf/2026/overview/mosaic/2026-nissan-leaf-rear-view.jpg" alt="2026 Nissan LEAF side view">
+    </div>
+  </div>
+
+  <div class="leaf-big">
+    <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/leaf/2026/overview/mosaic/2026-nissan-leaf-taillights-v3.jpg" alt="2026 Nissan LEAF on rooftop charging station">
+  </div>
+</section>
+<style>
+    /* ===== LEAF GALLERY SECTION ===== */
+.leaf-gallery {
+  width: 100%;
+  background: #fff;
+  padding: 50px 5%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.leaf-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.leaf-col {
+  flex: 1 1 45%;
+}
+
+.leaf-col img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.leaf-col img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.leaf-big {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.leaf-big img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+
+.leaf-big img:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive design */
+@media (max-width: 900px) {
+  .leaf-row {
+    flex-direction: column;
+    gap: 25px;
+  }
+  .leaf-col {
+    flex: 1 1 100%;
+  }
+}
+
+</style>
+<!-- CHARGE AT YOUR CONVENIENCE SECTION -->
+<section class="charge-section">
+  <div class="charge-text">
+    <h2>CHARGE AT YOUR CONVENIENCE</h2>
+    <p>
+      <strong>NISSAN ENERGY Charge Network</strong><br><br>
+      Set up your NISSAN ENERGY Charge Network account and enjoy safe, secure automatic payments with Plug &amp; Charge. 
+      LEAF drivers have access to over <strong>20,000 Tesla® Superchargers</strong> — no adapter required!
+    </p>
+  </div>
+
+  <div class="charge-image">
+    <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/leaf/2026/overview/nissan-ev-charging-network-xl.jpg" alt="2026 Nissan LEAF charging at Tesla Supercharger station">
+  </div>
+</section>
+<style>
+    /* ===== CHARGE AT YOUR CONVENIENCE SECTION ===== */
+.charge-section {
+  width: 100%;
+  background: #fff;
+  padding: 60px 6%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.charge-text {
+  max-width: 900px;
+}
+
+.charge-text h2 {
+  font-size: 2.2rem;
+  color: #111;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+.charge-text p {
+  font-size: 1.1rem;
+  color: #444;
+  line-height: 1.8;
+}
+
+.charge-image {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.charge-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.charge-image img:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .charge-text h2 {
+    font-size: 1.8rem;
+  }
+  .charge-text p {
+    font-size: 1rem;
+  }
+  .charge-section {
+    padding: 40px 5%;
+    gap: 30px;
+  }
+}
+
+</style>
+<!-- SHOP@HOME SECTION -->
+<section class="shop-home">
+  <div class="shop-container">
+    <div class="shop-text">
+      <h2>SHOP@HOME</h2>
+      <h3>Shop, drive &amp; buy online</h3>
+      <p>
+        Pick a trim, color, package, and accessories to create your ideal LEAF.
+        Then, connect with a local dealer or even buy online at participating
+        Buy@Home dealers.
+      </p>
+  
+    </div>
+    <div class="shop-image">
+      <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/leaf/2026/common-assets/2026-nissan-leaf-shop-at-home-option.jpg" alt="2026 Nissan LEAF Shop@Home">
+    </div>
+  </div>
+</section>
+<style>
+    /* ===== SHOP@HOME SECTION ===== */
+.shop-home {
+  background-color: #f8f8f8;
+  padding: 60px 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shop-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  gap: 40px;
+}
+
+.shop-text {
+  flex: 1 1 45%;
+  color: #111;
+}
+
+.shop-text h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.shop-text h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.shop-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+.shop-btn {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #e60012; /* Nissan red accent */
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.shop-btn:hover {
+  background-color: #c3000f;
+}
+
+.shop-image {
+  flex: 1 1 45%;
+  text-align: center;
+}
+
+.shop-image img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .shop-container {
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .shop-text, .shop-image {
+    flex: 1 1 100%;
+  }
+
+  .shop-text h2 {
+    font-size: 2rem;
+  }
+
+  .shop-text h3 {
+    font-size: 1.2rem;
+  }
+
+  .shop-text p {
+    font-size: 1rem;
+  }
+}
+
+</style>
+
+<!-- CHARGING CAPABILITIES SECTION -->
+<section class="charging-feature">
+  <div class="charging-overlay">
+    <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/leaf/2026/overview/2026-nissan-leaf-charging.jpg" alt="2026 Nissan LEAF in blue parked at rooftop charging stations">
+    <div class="charging-text">
+      <p class="play"> <strong>Charging Capabilities</strong></p>
+      <h2>CHARGING CAPABILITIES</h2>
+      <p class="tagline">Freedom to go</p>
+    </div>
+  </div>
+</section>
+<style>
+    /* ===== CHARGING CAPABILITIES SECTION ===== */
+.charging-feature {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+.charging-feature img {
+  width: 100%;
+  height: 100%;
+  max-height: 650px;
+  object-fit: cover;
+  filter: brightness(0.75);
+  display: block;
+}
+
+.charging-overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.charging-text {
+  position: absolute;
+  bottom: 10%;
+  left: 8%;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.charging-text .play {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  backdrop-filter: blur(3px);
+}
+
+.charging-text h2 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 10px 0;
+  letter-spacing: 1px;
+}
+
+.charging-text .tagline {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #00a2e8; /* Nissan electric blue accent */
+}
+
+/* Responsive for tablets */
+@media (max-width: 1024px) {
+  .charging-text h2 {
+    font-size: 2.3rem;
+  }
+  .charging-text .tagline {
+    font-size: 1.2rem;
+  }
+}
+
+/* Responsive for mobile */
+@media (max-width: 600px) {
+  .charging-text {
+    left: 5%;
+    bottom: 8%;
+  }
+  .charging-text .play {
+    font-size: 0.95rem;
+    padding: 5px 10px;
+  }
+  .charging-text h2 {
+    font-size: 1.8rem;
+  }
+  .charging-text .tagline {
+    font-size: 1rem;
+  }
+}
+
+</style>
+<footer class="footer-real">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand-chat">
+        <a href="/" class="footer-logo" aria-label="Homepage">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png" alt="Brand Logo">
+        </a>
+        <button class="footer-live-chat" aria-label="Live Chat">Live Chat</button>
+      </div>
+
+      <nav class="footer-nav">
+        <div class="footer-column">
+          <h4>ABOUT</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/about.html">About Nissan</a></li>
+            <li><a href="https://www.nissanusa.com/about/culture.html">Culture</a></li>
+            <li><a href="https://usa.nissannews.com/en-US/">News &amp; Events</a></li>
+            <li><a href="https://www.nissanusa.com/business-fleet.html">Business &amp; Fleet</a></li>
+            <li><a href="https://www.nissanusa.com/accessibility.html">Accessibility</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>SHOP</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/vehicles/new.html">All Vehicles</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/search-inventory">Search Inventory</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-brochure.html">View a Brochure</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/build-price">Build &amp; Price</a></li>
+            <li><a href="https://www.nissanusa.com/dealer-locator.html">Locate a Dealer</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OWNERS</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/owners.html">Owner Portal</a></li>
+            <li><a href="https://www.nissanusa.com/parts-service">Schedule Service</a></li>
+            <li><a href="https://www.nissanusa.com/owners/manuals-guides.html">Manuals &amp; Guides</a></li>
+            <li><a href="https://www.nissanusa.com/connect.html">Connected Services</a></li>
+            <li><a href="https://www.nissanusa.com/maintenance-schedules/">Maintenance Schedules</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OFFERS &amp; FINANCING</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/shopping-tools/deals-incentives-offers.html">Deals &amp; Offers</a></li>
+            <li><a href="https://www.nissanfinance.com/s/login/?language=en_US">Financing Options</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/lease-finance-payment-calculator">Estimate Payments</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/pre-approval.html">Get Pre-Approved</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-internet-quote.html">Internet Quote</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-middle">
+      <div class="footer-social">
+        <a href="https://www.tiktok.com/@nissanusa?lang=en" aria-label="TikTok">TikTok</a>
+        <a href="https://www.instagram.com/nissanusa/" aria-label="Instagram">Instagram</a>
+        <a href="https://www.youtube.com/user/nissanusa/featured" aria-label="YouTube">YouTube</a>
+        <a href="https://twitter.com/NissanUSA" aria-label="Twitter">Twitter</a>
+        <a href="https://www.facebook.com/nissanusa/" aria-label="Facebook">Facebook</a>
+        <a href="https://www.pinterest.com/nissanusa/" aria-label="Pinterest">Pinterest</a>
+      </div>
+
+      <div class="footer-extras">
+        <div class="footer-language">
+          <label for="lang-select" class="sr-only">Select Language</label>
+          <select id="lang-select" aria-label="Language selection">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+        <div class="footer-links-small">
+          <a href="https://www.nissanusa.com/sitemap.html">Site Map</a>
+          <a href="https://www.nissanusa.com/contact-us.html">Contact Us</a>
+          <a href="https://www.nissanusa.com/data-privacy.html">Do Not Sell or Share My Personal Information</a>
+          <a href="https://www.nissanusa.com/legal-terms.html">Terms of Use</a>
+          <a href="https://www.nissanusa.com/privacy.html">Privacy Notice</a>
+          <a href="https://www.nissanusa.com/recalls-vin">Recall Information</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="current-year">2025</span> Nissan. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* ✅ Prevent horizontal overflow */
+  }
+
+  .footer-real {
+    background-color: whitesmoke;
+    color: darkred;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 40px 20px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .footer-brand-chat {
+    flex: 1 1 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo img {
+    height: 110px;
+    max-width: 100%;
+    filter: brightness(0.95) contrast(1);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .footer-logo img:hover {
+    filter: brightness(1) contrast(1.05);
+    transform: scale(1.05);
+  }
+
+  .footer-live-chat {
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid darkred;
+    color: black;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .footer-live-chat:hover {
+    border-color: darkred;
+    background-color: whitesmoke;
+  }
+
+  .footer-nav {
+    flex: 3 1 600px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+  }
+
+  .footer-column h4 {
+    color: black;
+    font-size: 13px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-column li {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .footer-column li a {
+    color: darkred;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  .footer-column li a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-middle {
+    border-top: 1px solid darkred;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-social a {
+    color: darkred;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover {
+    color: black;
+  }
+
+  .footer-extras {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .footer-language select {
+    background-color: transparent;
+    color: black;
+    border: 1px solid darkred;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .footer-links-small {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links-small a {
+    color: black;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .footer-links-small a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid darkred;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: darkred;
+  }
+
+  /* ✅ Responsive Fixes */
+  @media (max-width: 900px) {
+    .footer-nav {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+    }
+    .footer-nav {
+      grid-template-columns: 1fr;
+    }
+    .footer-middle {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .footer-extras {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .footer-links-small {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+</body></html>

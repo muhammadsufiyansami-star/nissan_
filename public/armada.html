@@ -1,0 +1,1551 @@
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nissan Armada</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&amp;display=swap" rel="stylesheet">
+
+<style>
+/* ======================================================== */
+/* UNIVERSAL FIXES — Prevent Horizontal Overflow */
+/* ======================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ======================================================== */
+/* HERO SECTION */
+/* ======================================================== */
+
+.hero-section {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .hero-section {
+    height: auto;
+  }
+  .hero-section img {
+    height: auto;
+  }
+}
+
+/* ======================================================== */
+/* HEADER */
+/* ======================================================== */
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 10px 20px;
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: white;
+  text-shadow: 0px 0px 8px rgba(0,0,0,0.8);
+}
+
+.logo span {
+  color: #e60000;
+}
+
+/* MENU BUTTONS */
+.menu-toggle {
+  width: 28px;
+  height: 22px;
+  position: absolute;
+  top: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.menu-left { left: 20px; }
+.menu-right { right: 20px; }
+
+.menu-toggle span {
+  height: 3px;
+  background: black;
+  border-radius: 3px;
+  transition: .3s;
+}
+
+/* OPEN MENU ANIMATION */
+.menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px,6px); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
+
+/* DROPDOWNS */
+.dropdown {
+  position: absolute;
+  background: rgba(0,0,0,0.9);
+  border-radius: 10px;
+  padding: 0;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: .3s;
+  z-index: 2000;
+}
+
+.dropdown.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.dropdown a {
+  color: white;
+  text-decoration: none;
+  padding: 12px 20px;
+}
+
+.dropdown a:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.left-dropdown { left: 20px; top: 60px; }
+.right-dropdown { right: 20px; top: 60px; }
+
+/* SEARCH BAR */
+.search-bar {
+  position: absolute;
+  top: 70px;
+}
+
+.search-bar input {
+  width: 250px;
+  padding: 8px 14px;
+  border-radius: 25px;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(0,0,0,0.6);
+  color: white;
+}
+
+/* ======================================================== */
+/* FINAL SECTION */
+/* ======================================================== */
+
+.gtr-final {
+  background: whitesmoke;
+  padding: 80px 7%;
+}
+
+.final-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.final-left h1 {
+  font-size: 45px;
+  font-weight: 800;
+}
+
+.final-left p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.final-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.final-buttons button {
+  padding: 12px 25px;
+  border: 2px solid orange;
+  color: orange;
+  background: white;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.final-buttons button:hover {
+  background: orange;
+  color: white;
+}
+
+.final-right h2 {
+  font-size: 45px;
+  color: orange;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .gtr-final {
+    text-align: center;
+  }
+  .final-container {
+    flex-direction: column;
+  }
+  .final-buttons button {
+    width: 100%;
+    max-width: 260px;
+  }
+}
+
+/* ======================================================== */
+/* ARMADA 2025 */
+/* ======================================================== */
+
+.armada-2025 {
+  padding: 80px 7%;
+  background: white;
+}
+
+.armada-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.armada-text h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+}
+
+.armada-text h3 {
+  font-size: 1.4rem;
+  color: #555;
+}
+
+.armada-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.armada-buttons button {
+  padding: 12px 22px;
+  border: 2px solid orange;
+  color: orange;
+  background: white;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.armada-buttons button:hover {
+  background: orange;
+  color: white;
+}
+
+.armada-image img {
+  border-radius: 15px;
+}
+
+@media (max-width: 900px) {
+  .armada-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .armada-buttons button {
+    width: 100%;
+    max-width: 260px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero-section">
+  <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/armada/2026/gallery/exterior/lightbox/2026-nissan-armada-forest-green-pro4x-off-road-front-view.jpg">
+</section>
+
+<!-- HEADER -->
+<header>
+  <div id="menuLeft" class="menu-toggle menu-left"><span></span><span></span><span></span></div>
+  <div id="menuRight" class="menu-toggle menu-right"><span></span><span></span><span></span></div>
+  <div class="logo">NISSAN <span>PREMIUM</span></div>
+
+ 
+
+  <div id="dropdownLeft" class="dropdown left-dropdown">
+    <a href="nissan.html">Home</a>
+    <a href="models.html">Models</a>
+    <a href="performance.html">Performance</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <div id="dropdownRight" class="dropdown right-dropdown">
+    <a href="normal.html">Normal</a>
+    <a href="sports.html">Sports</a>
+    <a href="luxury.html">Luxury</a>
+    <a href="premium.html">Premium</a>
+  </div>
+</header>
+
+<script>
+const menuLeft = document.getElementById("menuLeft");
+const menuRight = document.getElementById("menuRight");
+const dropdownLeft = document.getElementById("dropdownLeft");
+const dropdownRight = document.getElementById("dropdownRight");
+
+function toggle(menu, dropdown, otherMenu, otherDropdown) {
+  menu.classList.toggle("open");
+  dropdown.classList.toggle("active");
+  otherMenu.classList.remove("open");
+  otherDropdown.classList.remove("active");
+}
+
+menuLeft.addEventListener("click", e => {
+  e.stopPropagation();
+  toggle(menuLeft, dropdownLeft, menuRight, dropdownRight);
+});
+menuRight.addEventListener("click", e => {
+  e.stopPropagation();
+  toggle(menuRight, dropdownRight, menuLeft, dropdownLeft);
+});
+document.addEventListener("click", () => {
+  menuLeft.classList.remove("open");
+  menuRight.classList.remove("open");
+  dropdownLeft.classList.remove("active");
+  dropdownRight.classList.remove("active");
+});
+</script>
+
+<!-- FINAL SECTION -->
+<section class="gtr-final">
+  <div class="final-container">
+    <div class="final-left">
+      <h1>Full-size<br>confidence,<br>on-road and off</h1>
+      <p>Starting At <strong>$58,840</strong></p>
+      <p>This incredibly capable and durable full-size SUV brings with it a history of over 70 years of off-road experience.</p>
+
+      <div class="final-buttons">
+        <button onclick="window.location.href='https://www.nissanusa.com/shopping-tools/build-price?models=armada&amp;modelYear=current-year'">Search Inventory</button>
+        <button onclick="window.location.href='https://www.nissanusa.com/vehicles/crossovers-suvs/armada.html#offers'">View Offers</button>
+      </div>
+    </div>
+
+    <div class="final-right">
+      <h2>$58,840</h2>
+    </div>
+  </div>
+</section>
+
+<!-- ARMADA 2025 SECTION -->
+<section class="armada-2025">
+  <div class="armada-container">
+
+    <div class="armada-text">
+      <h1>2025 Armada</h1>
+      <h3>Even last year's model owns the road</h3>
+      <p>The previous model year Nissan Armada is still available.</p>
+
+      <div class="armada-buttons">
+        <button onclick="window.location.href='https://www.nissanusa.com/vehicles/crossovers-suvs/2025-armada.html'">Explore 2025 Armada</button>
+        <button onclick="window.location.href='https://www.nissanusa.com/vehicles/crossovers-suvs/armada/deals-incentives-offers/2025.html'">View Offers</button>
+        <button onclick="window.location.href='https://www.nissanusa.com/shopping-tools/build-price?models=armada&amp;modelYear=previous-year'">Build &amp; Price</button>
+      </div>
+    </div>
+
+    <div class="armada-image">
+      <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/armada/2026/overview/mys-2025/MY25_Armada_D.jpg">
+    </div>
+
+  </div>
+</section>
+
+
+
+<section class="jd-power">
+  <div class="jd-container">
+    <div class="jd-image">
+      <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/gtr/2024/overview/banner/2025-nissan-jd-power-highest-initial-quality-mass-market-brand-award.jpg" alt="2025 Kicks, LEAF and Frontier">
+    </div>
+    <div class="jd-content">
+      <h2>J.D. POWER</h2>
+      <h3>#1 for New-Vehicle Quality among Mainstream Brands</h3>
+      <p>2025 JD Power Award for Highest Initial Quality Mass Market Brand shown alongside a 2025 Kicks, LEAF and Frontier.</p>
+
+      <a href="https://www.nissanusa.com/shopping-tools/search-inventory?models=gt-r" class="inventory-btn">View Inventory</a>
+<style>.inventory-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: linear-gradient(90deg, #e60000, #ff4d4d);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(230, 0, 0, 0.3);
+  transition: 0.3s ease;
+}
+
+/* Hover Effect */
+.inventory-btn:hover {
+  background: linear-gradient(90deg, #ff1a1a, #ff6666);
+  box-shadow: 0 6px 18px rgba(230, 0, 0, 0.45);
+  transform: translateY(-2px);
+}
+
+/* Click Effect */
+.inventory-btn:active {
+  transform: scale(0.97);
+}
+</style>
+
+
+        <p></p>
+      </div>
+    </div>
+  
+</section>
+
+
+<style>
+.jd-power {
+  padding: 60px 10%;
+  background-color: #f8f8f8;
+  font-family: 'Poppins', sans-serif;
+}
+
+.jd-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.jd-image {
+  flex: 1 1 45%;
+  text-align: center;
+}
+
+.jd-image img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.jd-content {
+  flex: 1 1 45%;
+  position: relative;
+  text-align: left;
+}
+
+.jd-content h2 {
+  font-size: 2rem;
+  color: #111;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.jd-content h3 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.jd-content p {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.jd-btn {
+  background: orange;
+  color: whitesmoke;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.jd-btn:hover {
+  background: orange;
+  transform: translateY(-2px);
+}
+
+/* ===== Popup styling ===== */
+.jd-popup {
+  position: absolute;
+  left: 0;
+  top: 110%;
+  background: black;
+  color:whitesmoke;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 400px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  z-index: 10;
+}
+
+.jd-popup a {
+  color: red;
+  text-decoration: none;
+}
+
+.jd-popup a:hover {
+  text-decoration: underline;
+}
+
+/* Hover effect for desktops */
+.jd-content:hover .jd-popup {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .jd-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .jd-content {
+    text-align: center;
+  }
+
+  .jd-content h2 {
+    font-size: 1.8rem;
+  }
+
+  .jd-content h3 {
+    font-size: 1.2rem;
+  }
+
+  .jd-btn {
+    width: 80%;
+  }
+
+  /* Center popup on mobile */
+  .jd-popup {
+    left: 50%;
+    transform: translate(-50%, 10px);
+    width: 95%;
+  }
+}
+
+</style>
+<section class="jd-power">
+  <div class="jd-container">
+    <!-- Text Section -->
+    <div class="jd-content">
+      <h2>Consumer Guide® Automotive</h2>
+      <h3>Nissan Armada – 2026 Best Buy Award</h3>
+      <a href="https://www.nissanusa.com/shopping-tools/build-price?models=armada&amp;modelYear=current-year" class="inventory-btn">Build &amp; Price</a>
+    </div>
+
+    <!-- Image Section -->
+    <div class="jd-image">
+      <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/leaf/2026/banner/2026-armada-best-buy-award.jpg" alt="Nissan Armada 2026 Best Buy">
+    </div>
+  </div>
+</section>
+
+<style>
+.jd-power {
+  padding: 60px 10%;
+  background-color: #f8f8f8;
+  font-family: 'Poppins', sans-serif;
+}
+
+.jd-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* Image Section */
+.jd-image {
+  flex: 1 1 45%;
+  text-align: center;
+}
+
+.jd-image img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  object-fit: cover;
+}
+
+/* Text Section */
+.jd-content {
+  flex: 1 1 45%;
+  text-align: left;
+}
+
+.jd-content h2 {
+  font-size: 2rem;
+  color: #111;
+  margin-bottom: 10px;
+}
+
+.jd-content h3 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 25px;
+}
+
+/* Button */
+.inventory-btn {
+  display: inline-block;
+  padding: 15px 30px;
+  background-color: #0078d7;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.inventory-btn:hover {
+  background-color: #005ea6;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .jd-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .jd-content {
+    text-align: center;
+  }
+
+  .jd-content h2 {
+    font-size: 1.8rem;
+  }
+
+  .jd-content h3 {
+    font-size: 1.4rem;
+  }
+
+  .inventory-btn {
+    width: 80%;
+  }
+}
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INFINITI QX80 Interior</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #222;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+      gap: 0;
+    }
+
+    .top-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    /* Left large image */
+    .left-large {
+      width: 65%;
+    }
+
+    .left-large img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Right smaller image with para below */
+    .right-small {
+      width: 33%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .right-small img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .description {
+      background-color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 15px;
+      text-align: justify;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Big bottom image touching edges */
+    .bottom-image {
+      width: 100%;
+      max-width: 1200px;
+      margin-top: 20px;
+    }
+
+    .bottom-image img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      margin-bottom: 0;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .top-row {
+        flex-direction: column;
+      }
+      .left-large, .right-small {
+        width: 100%;
+      }
+      .left-large img {
+        height: auto;
+      }
+      .right-small img {
+        height: auto;
+      }
+      .bottom-image img {
+        height: auto;
+      }
+    }
+  </style>
+
+
+  <section class="container">
+    <div class="top-row">
+      <!-- Left large image -->
+      <div class="left-large">
+        <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/armada/2026/overview/mosaic/2026-nissan-armada-flat-fold-cargo-space-premium-black-interior.jpg" alt="QX80 Interior Left View">
+      </div>
+
+      <!-- Right smaller image + small paragraph -->
+      <div class="right-small">
+        <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/armada/2026/overview/mosaic/2026-nissan-armada-slate-gray-rear-three-quarter-driveway-stance.jpg" alt="QX80 Interior Detail">
+        <div class="description">
+          <h3>Make every day epic</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Big image below both with no gap -->
+    <div class="bottom-image">
+      <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/armada/2026/overview/mosaic/2026-nissan-armada-premium-brown-dashboard-infotainment-cockpit-layout-v2.jpg" alt="QX80 Interior Full View">
+    </div>
+  </section>
+
+
+
+<section class="gtr-features">
+  <div class="feature-content">
+    <h2>FEATURES</h2>
+    <h1>Brawn meets brains </h1>
+
+    <!-- Buttons -->
+    <div class="feature-buttons">
+      <button class="tab-btn active" data-target="aero">Turbo V6</button>
+      <button class="tab-btn" data-target="engine">invisible hood</button>
+      <button class="tab-btn" data-target="handling">Air suspension</button>
+    </div>
+  </div>
+
+  <!-- Feature Sections -->
+  <div class="feature-sections">
+    <div class="feature-item active" id="aero">
+      <div class="feature-container">
+        <div class="feature-text">
+          <p>
+        This is the most powerful Armada ever, with an advanced 3.5L twin-turbo V6 engine, a 9‑speed transmission, 425 horsepower, and 516 lb-ft of torque
+          </p>
+        </div>
+        <div class="feature-image">
+          <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/armada/2026/overview/mosaic/2026-nissan-armada-black-leather-second-row-captains-view-cabin.jpg" alt="Aerodynamics">
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-item" id="engine">
+      <div class="feature-container">
+        <div class="feature-text">
+          <p>This camera system provides an unobstructed view of what’s under you to help you navigate obstacles, whether you’re on- or off-roading. It’s like X-ray vision, but it’s real.
+          </p>
+        </div>
+        <div class="feature-image">
+          <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/armada/2026/overview/2026-nissan-armada-driver-command-view-steering-wheel-premium-cockpit.jpg" alt="Twin Turbo V6 Engine">
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-item" id="handling">
+      <div class="feature-container">
+        <div class="feature-text">
+          <p>This advanced suspension system can be raised to allow for increased ground clearance in various driving conditions or lowered at high speeds to help provide smooth and responsive handling. It also helps make accessibility and loading easier when parked.
+          </p>
+        </div>
+        <div class="feature-image">
+          <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/armada/2026/overview/mosaic/2026-nissan-armada-radiant-red-city-drive-front-three-quarter.jpg" alt="Dynamic Handling">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== BASE ===== */
+.gtr-features {
+  background: whitesmoke;
+  color: black;
+  font-family: 'Poppins', sans-serif;
+  padding: 80px 10%;
+  text-align: left;
+}
+
+/* ===== HEADINGS ===== */
+.gtr-features h2 {
+  color: black;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.gtr-features h1 {
+  font-size: 38px;
+  margin-bottom: 25px;
+}
+
+/* ===== BUTTONS ===== */
+.feature-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.feature-buttons button {
+  background: transparent;
+  border: 2px solid whitesmoke;
+  color:black;
+  padding: 10px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.feature-buttons button.active,
+.feature-buttons button:hover {
+  background: orange;
+  color: black;
+}
+
+/* ===== FEATURE SECTIONS ===== */
+.feature-sections {
+  position: relative;
+}
+
+.feature-item {
+  display: none;
+  animation: fadeIn 0.6s ease;
+}
+
+.feature-item.active {
+  display: block;
+}
+
+/* ===== FEATURE CONTAINER ===== */
+.feature-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.feature-image img {
+  width: 550px;
+  border-radius: 20px;
+  transition: transform 0.6s ease;
+}
+
+.feature-image img:hover {
+  transform: scale(1.03);
+}
+
+.feature-text {
+  flex: 1;
+  font-size: 17px;
+  line-height: 1.7;
+  color:black;
+  font-weight: 600; /* <-- Bold text */
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .feature-container {
+    flex-direction: column;
+  }
+
+  .feature-image img {
+    width: 100%;
+  }
+
+  .gtr-features h1 {
+    font-size: 28px;
+  }
+}
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .feature-container {
+    flex-direction: column-reverse; /* ✅ text above image */
+    text-align: center; /* ✅ better visual balance */
+  }
+
+  .feature-text {
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .feature-image img {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .gtr-features h1 {
+    font-size: 30px;
+  }
+
+  .feature-buttons {
+    justify-content: center;
+  }
+}
+
+</style>
+
+<script>
+const buttons = document.querySelectorAll('.tab-btn');
+const items = document.querySelectorAll('.feature-item');
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Activate button
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Show corresponding section
+    items.forEach(item => item.classList.remove('active'));
+    document.getElementById(btn.dataset.target).classList.add('active');
+  });
+});
+</script>
+
+<section class="pro4x">
+  <div class="container">
+    <!-- Text Section -->
+    <div class="text-section">
+      <h2>2026 ARMADA PRO-4X®</h2>
+      <h3>Go forth and conquer</h3>
+      <p>Drawing inspiration from generations of off-road prowess, Armada brings you the first-ever PRO-4X, equipped with some of Nissan's most advanced and dependable off-road technology.</p>
+      <a href="https://www.nissanusa.com/vehicles/crossovers-suvs/armada/pro-4x.html" class="btn">Explore PRO-4X</a>
+    </div>
+
+    <!-- Video Section -->
+    <div class="video-section">
+      <video id="pro4xVideo" muted="" playsinline="" loop="" poster="https://via.placeholder.com/600x400">
+        <source src="https://s3-helios-use1nisprod-videooutput.s3.amazonaws.com/nissan/en-US/videos/2026-nissan-armada-forest-green-pro-4x-desert-front-three-quarter.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</section>
+
+<style>
+.pro4x {
+  padding: 60px 10%;
+  background-color: #f5f5f5;
+  font-family: 'Poppins', sans-serif;
+}
+
+.pro4x .container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+}
+
+/* Text Section */
+.pro4x .text-section {
+  flex: 1 1 40%; /* Reduced width to give more space to video */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pro4x .text-section h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.pro4x .text-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.pro4x .text-section p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.pro4x .btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #0078d7;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.pro4x .btn:hover {
+  background-color: #005ea6;
+  transform: translateY(-2px);
+}
+
+/* Video Section */
+.pro4x .video-section {
+  flex: 1 1 60%; /* Increased width for larger video */
+}
+
+.pro4x .video-section video {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  object-fit: cover;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pro4x .container {
+    flex-direction: column;
+  }
+
+  .pro4x .text-section,
+  .pro4x .video-section {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+
+  .pro4x .text-section p {
+    margin-bottom: 20px;
+  }
+}
+</style>
+
+<script>
+// Play/pause video when it enters/leaves viewport
+const video = document.getElementById('pro4xVideo');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      video.play().catch(e => console.log(e));
+    } else {
+      video.pause();
+    }
+  });
+}, { threshold: 0.5 });
+
+observer.observe(video);
+</script>
+<section class="shop-at-home">
+  <div class="container">
+    <!-- Text Section -->
+    <div class="text-section">
+      <h2>SHOP@HOME</h2>
+      <h3>Start your adventure from your couch</h3>
+      <p>Pick a trim, color, package, and accessories to create your ideal Armada. Then, connect with a local dealer or even buy online, when available, at participating Buy@Home dealers.</p>
+      <a href="https://www.nissanusa.com/shopping-tools/build-price?models=armada&amp;modelYear=current-year" class="btn">Build &amp; Price</a>
+    </div>
+
+    <!-- Image Section -->
+    <div class="image-section">
+      <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/armada/2026/common-assets/2026-nissan-armada-shop-at-home-online-buying-lifestyle-scene.jpg" alt="Nissan Armada Shop@Home">
+    </div>
+  </div>
+</section>
+
+<style>
+.shop-at-home {
+  padding: 60px 10%;
+  background-color: #f8f8f8;
+  font-family: 'Poppins', sans-serif;
+}
+
+.shop-at-home .container {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+/* Text Section */
+.shop-at-home .text-section {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left; /* Ensure left alignment */
+}
+
+.shop-at-home .text-section h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.shop-at-home .text-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.shop-at-home .text-section p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.shop-at-home .btn {
+  display: inline-block;
+  padding: 8px 20px; /* smaller button */
+  background-color: #0078d7;
+  color: #fff;
+  font-size: 1rem; /* slightly smaller font */
+  font-weight: 600;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.shop-at-home .btn:hover {
+  background-color: #005ea6;
+  transform: translateY(-2px);
+}
+
+/* Image Section */
+.shop-at-home .image-section {
+  flex: 1 1 55%;
+  text-align: center;
+}
+
+.shop-at-home .image-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .shop-at-home .container {
+    flex-direction: column;
+  }
+
+  .shop-at-home .text-section,
+  .shop-at-home .image-section {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+
+  .shop-at-home .text-section p {
+    margin-bottom: 20px;
+  }
+}
+</style>
+<footer class="footer-real">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand-chat">
+        <a href="/" class="footer-logo" aria-label="Homepage">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png" alt="Brand Logo">
+        </a>
+        <button class="footer-live-chat" aria-label="Live Chat">Live Chat</button>
+      </div>
+
+      <nav class="footer-nav">
+        <div class="footer-column">
+          <h4>ABOUT</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/about.html">About Nissan</a></li>
+            <li><a href="https://www.nissanusa.com/about/culture.html">Culture</a></li>
+            <li><a href="https://usa.nissannews.com/en-US/">News &amp; Events</a></li>
+            <li><a href="https://www.nissanusa.com/business-fleet.html">Business &amp; Fleet</a></li>
+            <li><a href="https://www.nissanusa.com/accessibility.html">Accessibility</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>SHOP</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/vehicles/new.html">All Vehicles</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/search-inventory">Search Inventory</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-brochure.html">View a Brochure</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/build-price">Build &amp; Price</a></li>
+            <li><a href="https://www.nissanusa.com/dealer-locator.html">Locate a Dealer</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OWNERS</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/owners.html">Owner Portal</a></li>
+            <li><a href="https://www.nissanusa.com/parts-service">Schedule Service</a></li>
+            <li><a href="https://www.nissanusa.com/owners/manuals-guides.html">Manuals &amp; Guides</a></li>
+            <li><a href="https://www.nissanusa.com/connect.html">Connected Services</a></li>
+            <li><a href="https://www.nissanusa.com/maintenance-schedules/">Maintenance Schedules</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OFFERS &amp; FINANCING</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/shopping-tools/deals-incentives-offers.html">Deals &amp; Offers</a></li>
+            <li><a href="https://www.nissanfinance.com/s/login/?language=en_US">Financing Options</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/lease-finance-payment-calculator">Estimate Payments</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/pre-approval.html">Get Pre-Approved</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-internet-quote.html">Internet Quote</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-middle">
+      <div class="footer-social">
+        <a href="https://www.tiktok.com/@nissanusa?lang=en" aria-label="TikTok">TikTok</a>
+        <a href="https://www.instagram.com/nissanusa/" aria-label="Instagram">Instagram</a>
+        <a href="https://www.youtube.com/user/nissanusa/featured" aria-label="YouTube">YouTube</a>
+        <a href="https://twitter.com/NissanUSA" aria-label="Twitter">Twitter</a>
+        <a href="https://www.facebook.com/nissanusa/" aria-label="Facebook">Facebook</a>
+        <a href="https://www.pinterest.com/nissanusa/" aria-label="Pinterest">Pinterest</a>
+      </div>
+
+      <div class="footer-extras">
+        <div class="footer-language">
+          <label for="lang-select" class="sr-only">Select Language</label>
+          <select id="lang-select" aria-label="Language selection">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+        <div class="footer-links-small">
+          <a href="https://www.nissanusa.com/sitemap.html">Site Map</a>
+          <a href="https://www.nissanusa.com/contact-us.html">Contact Us</a>
+          <a href="https://www.nissanusa.com/data-privacy.html">Do Not Sell or Share My Personal Information</a>
+          <a href="https://www.nissanusa.com/legal-terms.html">Terms of Use</a>
+          <a href="https://www.nissanusa.com/privacy.html">Privacy Notice</a>
+          <a href="https://www.nissanusa.com/recalls-vin">Recall Information</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="current-year">2025</span> Nissan. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* ✅ Prevent horizontal overflow */
+  }
+
+  .footer-real {
+    background-color: whitesmoke;
+    color: darkred;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 40px 20px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .footer-brand-chat {
+    flex: 1 1 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo img {
+    height: 110px;
+    max-width: 100%;
+    filter: brightness(0.95) contrast(1);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .footer-logo img:hover {
+    filter: brightness(1) contrast(1.05);
+    transform: scale(1.05);
+  }
+
+  .footer-live-chat {
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid darkred;
+    color: black;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .footer-live-chat:hover {
+    border-color: darkred;
+    background-color: whitesmoke;
+  }
+
+  .footer-nav {
+    flex: 3 1 600px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+  }
+
+  .footer-column h4 {
+    color: black;
+    font-size: 13px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-column li {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .footer-column li a {
+    color: darkred;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  .footer-column li a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-middle {
+    border-top: 1px solid darkred;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-social a {
+    color: darkred;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover {
+    color: black;
+  }
+
+  .footer-extras {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .footer-language select {
+    background-color: transparent;
+    color: black;
+    border: 1px solid darkred;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .footer-links-small {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links-small a {
+    color: black;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .footer-links-small a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid darkred;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: darkred;
+  }
+
+  /* ✅ Responsive Fixes */
+  @media (max-width: 900px) {
+    .footer-nav {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+    }
+    .footer-nav {
+      grid-template-columns: 1fr;
+    }
+    .footer-middle {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .footer-extras {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .footer-links-small {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+</body></html>

@@ -1,0 +1,760 @@
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Nissan Luxury</title>
+
+<link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&amp;display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: whitesmoke;
+    overflow-x: hidden;
+  }
+
+  /* HERO SECTION */
+  .hero-section {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .hero-section img.hero {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-section {
+      height: auto;
+    }
+    .hero-section img.hero {
+      height: auto;
+      object-fit: contain;
+    }
+  }
+
+  /* HEADER */
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 10px 20px;
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* LOGO */
+  .logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 0 12px rgba(0,0,0,0.8);
+  }
+  .logo span {
+    color: #e60000;
+  }
+
+  /* SEARCH BAR */
+  .search-bar {
+    position: absolute;
+    top: 65px;
+  }
+
+  .search-bar input {
+    width: 260px;
+    padding: 8px 14px;
+    border-radius: 25px;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+  }
+
+  /* HAMBURGERS */
+  .menu-toggle {
+    width: 28px;
+    height: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1200;
+  }
+
+  .menu-left { left: 20px; top: 10px; }
+  .menu-right { right: 20px; top: 10px; }
+
+  .menu-toggle span {
+    height: 3px;
+    background: black;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; }
+  .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  /* DROPDOWNS */
+  .dropdown {
+    position: absolute;
+    background: rgba(0,0,0,0.9);
+    border-radius: 10px;
+    padding: 0;
+    min-width: 200px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 2000;
+
+    /* FIX: force vertical layout */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .dropdown.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .dropdown a {
+    display: block !important;
+    width: 100%;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: white;
+    transition: 0.25s ease;
+  }
+
+  .dropdown a:hover {
+    background: rgba(255,255,255,0.1);
+  }
+
+  .left-dropdown { left: 20px; top: 60px; }
+  .right-dropdown { right: 20px; top: 60px; }
+
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero-section">
+  <img class="hero" src="https://www.autonews.com/resizer/v2/LBZT7TJ2LJGYFKOAH6WAC34B5I.jpg?smart=true&amp;auth=aca6621e8eaade2d8fe96ccd942ea7bec7917932a67d6d67823ffa77cb7f1bc5&amp;width=1600&amp;height=899">
+  </section>
+
+<!-- HEADER -->
+<header>
+
+  <!-- LEFT MENU -->
+  <div id="menuLeft" class="menu-toggle menu-left">
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- RIGHT MENU -->
+  <div id="menuRight" class="menu-toggle menu-right">
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- LOGO -->
+  <div class="logo">NISSAN <span>LUXURY</span></div>
+
+  
+
+  <!-- LEFT DROPDOWN -->
+  <div id="dropdownLeft" class="dropdown left-dropdown">
+    <a href="nissan.html">Home</a>
+    <a href="models.html">Models</a>
+    <a href="performance.html">Performance</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- RIGHT DROPDOWN -->
+  <div id="dropdownRight" class="dropdown right-dropdown">
+    <a href="normal.html">Normal</a>
+    <a href="sports.html">Sports</a>
+    <a href="luxury.html">Luxury</a>
+    <a href="premium.html">Premium</a>
+  </div>
+
+</header>
+
+<script>
+  const menuLeft = document.getElementById("menuLeft");
+  const menuRight = document.getElementById("menuRight");
+  const dropdownLeft = document.getElementById("dropdownLeft");
+  const dropdownRight = document.getElementById("dropdownRight");
+
+  function toggle(menu, dropdown, otherMenu, otherDropdown) {
+    menu.classList.toggle("open");
+    dropdown.classList.toggle("active");
+
+    otherMenu.classList.remove("open");
+    otherDropdown.classList.remove("active");
+  }
+
+  menuLeft.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggle(menuLeft, dropdownLeft, menuRight, dropdownRight);
+  });
+
+  menuRight.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggle(menuRight, dropdownRight, menuLeft, dropdownLeft);
+  });
+
+  document.addEventListener("click", () => {
+    menuLeft.classList.remove("open");
+    menuRight.classList.remove("open");
+    dropdownLeft.classList.remove("active");
+    dropdownRight.classList.remove("active");
+  });
+</script>
+
+
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electric Vehicles Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      justify-items: center;
+      padding: 10px;
+    }
+
+    .gallery-item {
+      position: relative;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid #eee;
+    }
+
+    .gallery-item p {
+      margin: 10px;
+      font-size: 0.95em;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    /* Pop-up name overlay */
+    .popup-name {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 1.1em;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      z-index: 5;
+      white-space: nowrap;
+    }
+
+    .gallery-item:hover .popup-name {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    @media (max-width: 600px) {
+      .gallery-item img {
+        aspect-ratio: 4 / 3;
+      }
+    }
+  </style>
+
+
+  <h1><b>LUXURY Vehicles</b></h1>
+
+  <div class="gallery">
+    <div class="gallery-item" data-name="Infiniti Q50">
+      <a href="q50.html">
+        <img src="https://images.hgmsites.net/med/2017-infiniti-q50-2-0t-rwd-front-exterior-view_100582021_m.jpg" alt="Nissan Q50">
+      </a>
+      <div class="popup-name">Infiniti Q50</div>
+      <p>The Infiniti Q50 blends sporty performance with luxury design, featuring a turbocharged engine and dynamic handling for a thrilling drive.</p>
+    </div>
+
+    <div class="gallery-item" data-name="Infiniti Q60">
+      <a href="q60.html">
+        <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/discontinued/q60/gallery/Discontinued_Model_Gallery_Tall_2.jpg.ximg.l_12_m.smart.jpg" alt="Nissan Q60">
+      </a>
+      <div class="popup-name">Infiniti Q60</div>
+      <p>A bold coupe with stunning curves, the Q60 offers twin-turbo power and a luxurious interior built for both comfort and excitement.</p>
+    </div>
+
+    <div class="gallery-item" data-name="Infiniti QX55">
+      <a href="qx55.html">
+        <img src="https://wieck-infiniti-production.s3.amazonaws.com/photos/7eab50baacd56fd3b8a8ee4220697facfa93e11d/preview-928x522.jpg" alt="Nissan QX55">
+      </a>
+      <div class="popup-name">Infiniti QX55</div>
+      <p>The QX55 redefines crossover style with a coupe-inspired roofline and a powerful turbocharged engine for a modern driving experience.</p>
+    </div>
+
+    <div class="gallery-item" data-name="Infiniti QX50">
+      <a href="qx50.html">
+        <img src="https://www.greenwichinfiniti.com/blogs/3512/wp-content/uploads/2023/10/2023-INFINITI-QX50.jpg" alt="Nissan QX50">
+      </a>
+      <div class="popup-name">Infiniti QX50</div>
+      <p>Equipped with advanced technology and a spacious cabin, the QX50 is a compact luxury SUV that delivers elegance and innovation.</p>
+    </div>
+
+    <div class="gallery-item" data-name="Infiniti QX60">
+      <a href="qx60.html">
+        <img src="https://static.foxdealer.com/586/2025/02/Infiniti_2025-Infiniti-QX60_Ext_05.png" alt="Nissan QX60">
+      </a>
+      <div class="popup-name">Infiniti QX60</div>
+      <p>The QX60 offers refined comfort for families, combining premium materials with strong V6 performance and smooth design lines.</p>
+    </div>
+
+    <div class="gallery-item" data-name="Infiniti QX80">
+      <a href="qx80.html">
+        <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/QX80/my26/features/exterior/pfa/2026-infiniti-qx80-radiant-white-2-tone-black-color-m.jpg" alt="Nissan QX80">
+      </a>
+      <div class="popup-name">Infiniti QX80</div>
+      <p>The flagship luxury SUV, QX80 delivers commanding presence, power, and comfort for those who demand the best in every journey.</p>
+    </div>
+
+    <div class="gallery-item" data-name="Infiniti Q70">
+      <a href="q70.html">
+        <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/discontinued/q70/2019-q70-infiniti-specs-trims-luxury-sedan-exterior.jpg.ximg.l_6_m.smart.jpg" alt="Nissan Q70">
+      </a>
+      <div class="popup-name">Infiniti Q70</div>
+      <p>The Q70 sedan embodies timeless elegance, offering smooth performance and craftsmanship that elevate every drive.</p>
+    </div>
+
+    <div class="gallery-item" data-name="Infiniti Q70L">
+      <a href="q70l.html">
+        <img src="https://www.infinitiusa.com/content/dam/Infiniti/US/vehicles/discontinued/q70l/2019-infiniti-q70l-sedan-exterior-d.jpg" alt="Nissan Q70L">
+      </a>
+      <div class="popup-name">Infiniti Q70L</div>
+      <p>Featuring an extended wheelbase for added comfort, the Q70L provides a premium experience with powerful performance and sophistication.</p>
+    </div>
+  </div>
+
+  <script>
+    // Optional JS enhancement for touch devices: tap to show/hide name popup
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('touchstart', () => {
+        const popup = item.querySelector('.popup-name');
+        popup.style.opacity = '1';
+        popup.style.transform = 'translate(-50%, -50%) scale(1)';
+        setTimeout(() => {
+          popup.style.opacity = '0';
+          popup.style.transform = 'translate(-50%, -50%) scale(0.9)';
+        }, 1500);
+      });
+    });
+  </script>
+
+
+
+
+
+  <script>
+    function toggleDropdown(menu, dropdown, otherMenu, otherDropdown) {
+      menu.classList.toggle("open");
+      dropdown.classList.toggle("active");
+      otherMenu.classList.remove("open");
+      otherDropdown.classList.remove("active");
+
+      const links = dropdown.querySelectorAll("a");
+      links.forEach((link, i) => {
+        link.style.transitionDelay = dropdown.classList.contains("active")
+          ? `${i * 0.08}s`
+          : "0s";
+      });
+    }
+
+    if (menu1 && menu2 && dropdown1 && dropdown2) {
+      menu1.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleDropdown(menu1, dropdown1, menu2, dropdown2);
+      });
+
+      menu2.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleDropdown(menu2, dropdown2, menu1, dropdown1);
+      });
+
+      document.addEventListener("click", (e) => {
+        if (
+          !menu1.contains(e.target) &&
+          !menu2.contains(e.target) &&
+          !dropdown1.contains(e.target) &&
+          !dropdown2.contains(e.target)
+        ) {
+          [menu1, menu2].forEach((m) => m.classList.remove("open"));
+          [dropdown1, dropdown2].forEach((d) => d.classList.remove("active"));
+        }
+      });
+    }
+  </script>
+
+
+
+<footer class="footer-real">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand-chat">
+        <a href="/" class="footer-logo" aria-label="Homepage">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png" alt="Brand Logo">
+        </a>
+        <button class="footer-live-chat" aria-label="Live Chat">Live Chat</button>
+      </div>
+
+      <nav class="footer-nav">
+        <div class="footer-column">
+          <h4>ABOUT</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/about.html">About Nissan</a></li>
+            <li><a href="https://www.nissanusa.com/about/culture.html">Culture</a></li>
+            <li><a href="https://usa.nissannews.com/en-US/">News &amp; Events</a></li>
+            <li><a href="https://www.nissanusa.com/business-fleet.html">Business &amp; Fleet</a></li>
+            <li><a href="https://www.nissanusa.com/accessibility.html">Accessibility</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>SHOP</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/vehicles/new.html">All Vehicles</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/search-inventory">Search Inventory</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-brochure.html">View a Brochure</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/build-price">Build &amp; Price</a></li>
+            <li><a href="https://www.nissanusa.com/dealer-locator.html">Locate a Dealer</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OWNERS</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/owners.html">Owner Portal</a></li>
+            <li><a href="https://www.nissanusa.com/parts-service">Schedule Service</a></li>
+            <li><a href="https://www.nissanusa.com/owners/manuals-guides.html">Manuals &amp; Guides</a></li>
+            <li><a href="https://www.nissanusa.com/connect.html">Connected Services</a></li>
+            <li><a href="https://www.nissanusa.com/maintenance-schedules/">Maintenance Schedules</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OFFERS &amp; FINANCING</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/shopping-tools/deals-incentives-offers.html">Deals &amp; Offers</a></li>
+            <li><a href="https://www.nissanfinance.com/s/login/?language=en_US">Financing Options</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/lease-finance-payment-calculator">Estimate Payments</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/pre-approval.html">Get Pre-Approved</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-internet-quote.html">Internet Quote</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-middle">
+      <div class="footer-social">
+        <a href="https://www.tiktok.com/@nissanusa?lang=en" aria-label="TikTok">TikTok</a>
+        <a href="https://www.instagram.com/nissanusa/" aria-label="Instagram">Instagram</a>
+        <a href="https://www.youtube.com/user/nissanusa/featured" aria-label="YouTube">YouTube</a>
+        <a href="https://twitter.com/NissanUSA" aria-label="Twitter">Twitter</a>
+        <a href="https://www.facebook.com/nissanusa/" aria-label="Facebook">Facebook</a>
+        <a href="https://www.pinterest.com/nissanusa/" aria-label="Pinterest">Pinterest</a>
+      </div>
+
+      <div class="footer-extras">
+        <div class="footer-language">
+          <label for="lang-select" class="sr-only">Select Language</label>
+          <select id="lang-select" aria-label="Language selection">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+        <div class="footer-links-small">
+          <a href="https://www.nissanusa.com/sitemap.html">Site Map</a>
+          <a href="https://www.nissanusa.com/contact-us.html">Contact Us</a>
+          <a href="https://www.nissanusa.com/data-privacy.html">Do Not Sell or Share My Personal Information</a>
+          <a href="https://www.nissanusa.com/legal-terms.html">Terms of Use</a>
+          <a href="https://www.nissanusa.com/privacy.html">Privacy Notice</a>
+          <a href="https://www.nissanusa.com/recalls-vin">Recall Information</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="current-year">2025</span> Nissan. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  * {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* ✅ Prevent horizontal overflow */
+}
+
+.footer-real {
+  background-color: whitesmoke;
+  color: darkred;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  padding: 40px 20px; /* Default desktop padding */
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.footer-brand-chat {
+  flex: 1 1 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-logo img {
+  height: 110px;
+  max-width: 100%;
+  filter: brightness(0.95) contrast(1);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.footer-logo img:hover {
+  filter: brightness(1) contrast(1.05);
+  transform: scale(1.05);
+}
+
+.footer-live-chat {
+  padding: 10px 16px;
+  background: transparent;
+  border: 1px solid darkred;
+  color: black;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.footer-live-chat:hover {
+  border-color: darkred;
+  background-color: whitesmoke;
+}
+
+.footer-nav {
+  flex: 3 1 600px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  width: 100%;
+}
+
+.footer-column h4 {
+  color: black;
+  font-size: 13px;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column li {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.footer-column li a {
+  color: darkred;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.footer-column li a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+.footer-middle {
+  border-top: 1px solid darkred;
+  padding-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-social a {
+  color: darkred;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-social a:hover {
+  color: black;
+}
+
+.footer-extras {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.footer-language select {
+  background-color: transparent;
+  color: black;
+  border: 1px solid darkred;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.footer-links-small {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-links-small a {
+  color: black;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.footer-links-small a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  border-top: 1px solid darkred;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: darkred;
+}
+
+/* ✅ Responsive Fixes */
+@media (max-width: 900px) {
+  .footer-real {
+    padding: 30px 20px; /* Reduced for tablets */
+  }
+  .footer-nav {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-real {
+    padding: 25px 15px; /* Compact and balanced for mobile */
+  }
+  .footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+  }
+  .footer-nav {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .footer-middle {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding-top: 20px;
+  }
+  .footer-extras {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .footer-links-small {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+</style>
+
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+</body></html>

@@ -1,0 +1,1089 @@
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nissan Models</title>
+
+<link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&amp;display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: whitesmoke;
+    overflow-x: hidden;
+  }
+
+  /* HERO SECTION */
+  .hero-section {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .hero-section img.hero {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-section {
+      height: auto;
+    }
+    .hero-section img.hero {
+      height: auto;
+      object-fit: contain;
+    }
+  }
+
+  /* HEADER */
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 10px 20px;
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* LOGO */
+  .logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 0 12px rgba(0,0,0,0.8);
+  }
+  .logo span {
+    color: #e60000;
+  }
+
+  /* SEARCH BAR */
+  .search-bar {
+    position: absolute;
+    top: 65px;
+  }
+
+  .search-bar input {
+    width: 260px;
+    padding: 8px 14px;
+    border-radius: 25px;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+  }
+
+  /* HAMBURGERS */
+  .menu-toggle {
+    width: 28px;
+    height: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1200;
+  }
+
+  .menu-left { left: 20px; top: 10px; }
+  .menu-right { right: 20px; top: 10px; }
+
+  .menu-toggle span {
+    height: 3px;
+    background: black;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; }
+  .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  /* DROPDOWNS */
+  .dropdown {
+    position: absolute;
+    background: rgba(0,0,0,0.9);
+    border-radius: 10px;
+    padding: 0;
+    min-width: 200px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 2000;
+
+    /* FIX: force vertical layout */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .dropdown.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .dropdown a {
+    display: block !important;
+    width: 100%;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: white;
+    transition: 0.25s ease;
+  }
+
+  .dropdown a:hover {
+    background: rgba(255,255,255,0.1);
+  }
+
+  .left-dropdown { left: 20px; top: 60px; }
+  .right-dropdown { right: 20px; top: 60px; }
+
+</style>
+</head>
+
+<body>
+
+
+
+<!-- HEADER -->
+<header>
+
+  <!-- LEFT MENU -->
+  <div id="menuLeft" class="menu-toggle menu-left">
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- RIGHT MENU -->
+  <div id="menuRight" class="menu-toggle menu-right">
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- LOGO -->
+  <div class="logo">NISSAN <span>MODELS</span></div>
+
+  
+
+  <!-- LEFT DROPDOWN -->
+  <div id="dropdownLeft" class="dropdown left-dropdown">
+    <a href="nissan.html">Home</a>
+    <a href="models.html">Models</a>
+    <a href="performance.html">Performance</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- RIGHT DROPDOWN -->
+  <div id="dropdownRight" class="dropdown right-dropdown">
+    <a href="normal.html">Normal</a>
+    <a href="sports.html">Sports</a>
+    <a href="luxury.html">Luxury</a>
+    <a href="premium.html">Premium</a>
+  </div>
+
+</header>
+
+<script>
+  const menuLeft = document.getElementById("menuLeft");
+  const menuRight = document.getElementById("menuRight");
+  const dropdownLeft = document.getElementById("dropdownLeft");
+  const dropdownRight = document.getElementById("dropdownRight");
+
+  function toggle(menu, dropdown, otherMenu, otherDropdown) {
+    menu.classList.toggle("open");
+    dropdown.classList.toggle("active");
+
+    otherMenu.classList.remove("open");
+    otherDropdown.classList.remove("active");
+  }
+
+  menuLeft.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggle(menuLeft, dropdownLeft, menuRight, dropdownRight);
+  });
+
+  menuRight.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggle(menuRight, dropdownRight, menuLeft, dropdownLeft);
+  });
+
+  document.addEventListener("click", () => {
+    menuLeft.classList.remove("open");
+    menuRight.classList.remove("open");
+    dropdownLeft.classList.remove("active");
+    dropdownRight.classList.remove("active");
+  });
+</script>
+
+
+
+
+
+
+<section class="hero-section">
+  <div class="slideshow-container">
+    <img src="https://www.topgear.com/sites/default/files/2023/09/Nissan%2020%2023_2.JPG.jpg" class="hero-slide fade" alt="Nissan Concept 1">
+    <img src="https://www.motortrend.com/files/68d1d8b5da533e0002ee9a1f/003-2026-nissan-sentra.jpg?format=webp&amp;q=75&amp;w=768&amp;width=768" class="hero-slide fade active" alt="Ariya Nismo">
+    <img src="https://wieck-nissanao-production.s3.us-west-1.amazonaws.com/releaseInlineImages/1d4bf6f21564a9b6c66575055736ae30b7982ab8" class="hero-slide fade" alt="Nissan Era Concept">
+    <img src="https://i.ytimg.com/vi/HNLX6u4pICA/hq720.jpg?rs=AOn4CLA8__T9z1cHdtLJuwDwsGv74uj4UA&amp;sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD" class="hero-slide fade" alt="Nissan Z Performance">
+    <img src="https://s1.cdn.autoevolution.com/images/news/nissan-teases-new-navara-and-announces-its-unveiling-date-259215_1.jpg" class="hero-slide fade" alt="GT-R T-Spec">
+  </div>
+</section>
+
+<style>
+/* ===== FULLSCREEN HERO SLIDESHOW ===== */
+.hero-section {
+  width: 100%;
+  height: 100vh; /* full screen height */
+  overflow: hidden;
+  position: relative;
+  background-color: #000; /* keeps black background for premium look */
+}
+
+.slideshow-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.hero-slide {
+  width: 100%;
+  height: 100%;
+  position: absolute;  /* keep slides overlapping for animation */
+  top: 0;
+  left: 0;
+  object-fit: cover;   /* default: cinematic fill */
+  object-position: center;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+/* Show active slide */
+.hero-slide.active {
+  opacity: 1;
+}
+
+/* ===== TABLET: show full image clearly ===== */
+@media (max-width: 1024px) {
+  .hero-section {
+    height: 100vh; /* maintain fullscreen */
+  }
+
+  .hero-slide {
+    object-fit: contain;       /* show full image */
+    background-color: #000;    /* black borders if needed */
+  }
+}
+
+/* ===== MOBILE: same slideshow, full image visible ===== */
+@media (max-width: 600px) {
+  .hero-section {
+    height: 100vh;
+    margin-top: 0;
+  }
+
+  .hero-slide {
+    object-fit: contain;       /* no cropping */
+    background-color: #000;    /* smooth black edges */
+  }
+}
+
+
+</style>
+
+<script>
+let slideIndex = 0;
+const slides = document.querySelectorAll('.hero-slide');
+
+function showSlides() {
+  slides.forEach(slide => slide.classList.remove('active'));
+  slideIndex = (slideIndex + 1) > slides.length ? 1 : slideIndex + 1;
+  slides[slideIndex - 1].classList.add('active');
+  setTimeout(showSlides, 4000); // 4 seconds per slide
+}
+
+// Initialize slideshow
+if (slides.length > 0) {
+  slides[0].classList.add('active');
+  setTimeout(showSlides, 4000);
+}
+</script>
+
+
+<!-- ===== ABOUT NISSAN CONCEPT CARS ===== -->
+<section class="about-nissan">
+  <div class="about-content">
+    <div class="about-text">
+      <h1>About Nissan Concept Cars</h1>
+      <p>
+        Nissan’s concept cars represent more than design — they express a vision for the future of mobility. 
+        From electrification to autonomous technology, each concept showcases bold creativity and cutting-edge innovation. 
+        These designs embody Nissan’s commitment to pushing boundaries, creating vehicles that blend emotion, performance, and sustainability.
+      </p>
+      <p>
+        Every concept model — from the Hyper series to the timeless Z and GT-R — captures Nissan’s philosophy of 
+        “Timeless Japanese Futurism.” With a focus on advanced electric platforms and driver-centric experiences, 
+        Nissan continues to redefine what the future of driving feels like.
+      </p>
+
+      <button class="learn-more">Learn More</button>
+    </div>
+
+    <div class="about-image">
+  <div class="about-slideshow">
+    <img src="https://www.nissan-global.com/JP/COMPANY/EVENTS/JMS_2023/ASSETS/IMG/img_hyper-force_02.jpg" alt="Nissan Concept Car 1" class="about-slide">
+    <img src="https://global.nissannews.com/page-MVGhb/attachment/c27e25fa635f5bb8158611a911054c8354d38868" alt="Nissan Concept Car 2" class="about-slide active">
+    <img src="https://batteriesnews.com/wp-content/uploads/2023/02/nissan-solid-state-batteries.png" alt="Nissan Concept Car 3" class="about-slide">
+  </div>
+</div>
+
+<style>
+/* ===== ABOUT IMAGE SLIDESHOW ===== */
+.about-image {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 20px;
+  position: relative;
+}
+
+.about-slideshow {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.about-slide {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 20px;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+/* Show active image */
+.about-slide.active {
+  opacity: 1;
+  position: relative;
+}
+
+/* Responsive fix for smaller screens */
+@media (max-width: 768px) {
+  .about-image {
+    border-radius: 10px;
+  }
+
+  .about-slide {
+    object-fit: contain;
+  }
+}
+</style>
+
+<script>
+let aboutIndex = 0;
+const aboutSlides = document.querySelectorAll('.about-slide');
+
+function showAboutSlides() {
+  aboutSlides.forEach(slide => slide.classList.remove('active'));
+  aboutIndex = (aboutIndex + 1) > aboutSlides.length ? 1 : aboutIndex + 1;
+  aboutSlides[aboutIndex - 1].classList.add('active');
+  setTimeout(showAboutSlides, 4000); // 4s per slide
+}
+
+// Initialize slideshow
+if (aboutSlides.length > 0) {
+  aboutSlides[0].classList.add('active');
+  setTimeout(showAboutSlides, 4000);
+}
+</script>
+
+</div></section>
+
+<style>
+/* ===== ABOUT SECTION ===== */
+.about-nissan {
+  background: linear-gradient(135deg, black 0%, black 100%);
+  padding: 80px 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.about-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  max-width: 1200px;
+  flex-wrap: wrap;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.about-text h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #c3002f;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.about-text p {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+.learn-more {
+  background-color: #c3002f;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.learn-more:hover {
+  background-color: #a00025;
+  transform: scale(1.05);
+}
+
+.about-image {
+  flex: 1;
+  min-width: 320px;
+  text-align: center;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease;
+}
+
+.about-image img:hover {
+  transform: scale(1.05);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .about-content {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .about-text h1 {
+    font-size: 2rem;
+  }
+
+  .about-text p {
+    font-size: 0.95rem;
+  }
+
+  .about-nissan {
+    padding: 60px 6%;
+  }
+}
+</style>
+
+
+  <script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    const searchBox = document.getElementById("searchBox");
+    const searchIcon = document.getElementById("searchIcon");
+
+    menuToggle.addEventListener("click", () => {
+      menuToggle.classList.toggle("open");
+      dropdownMenu.classList.toggle("active");
+    });
+
+    searchIcon.addEventListener("click", () => {
+      searchBox.classList.toggle("active");
+      const input = searchBox.querySelector("input");
+      if (searchBox.classList.contains("active")) input.focus();
+    });
+
+    window.addEventListener("click", (e) => {
+      if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+        dropdownMenu.classList.remove("active");
+        menuToggle.classList.remove("open");
+      }
+    });
+  </script>
+
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan Design Showcase</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f6f6f6;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+
+    .design-showcase {
+      max-width: 1250px;
+      margin: 60px auto;
+      padding: 20px;
+    }
+
+    .design-showcase h1 {
+      text-align: center;
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 45px;
+      color: #111;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .design-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .design-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .design-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .design-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .design-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .design-info {
+      padding: 20px;
+    }
+
+    .category {
+      display: inline-block;
+      background-color: #c3002f;
+      color: white;
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    .design-card h2 {
+      font-size: 1.3rem;
+      color: #c3002f;
+      margin: 5px 0 10px;
+      font-weight: 700;
+    }
+
+    .design-card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 3px 0;
+    }
+
+    @media (max-width: 600px) {
+      .design-showcase h1 {
+        font-size: 1.9rem;
+      }
+    }
+  </style>
+
+
+
+  <section class="design-showcase">
+    <h1>Global Nissan Design Showcase</h1>
+
+    <div class="design-grid">
+
+      <!-- 1 -->
+      <div class="design-card">
+        <img src="https://www.nissan-global.com/JP/INNOVATION/DESIGN/DESIGNWORKS/THE-ARC/ASSETS/IMG/The-Arc_01.jpg" alt="Global Nissan Design Center Presentation Hall">
+        <div class="design-info">
+          <div class="category">Space Design</div>
+          <h2>Global Nissan Design Center Presentation Hall</h2>
+          <p><strong>Award:</strong> 2025 iF Design Award (Germany)</p>
+          <p><strong>Year:</strong> 2023</p>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="design-card">
+        <img src="https://www.nissan-global.com/JP/INNOVATION/DESIGN/DESIGNWORKS/SALON-DE-NISSAN-VIZ/ASSETS/IMG/Nissan_Era_Concept_03.jpg" alt="Nissan Era Concept">
+        <div class="design-info">
+          <div class="category">Concept Car</div>
+          <h2>NISSAN Era Concept</h2>
+          <p><strong>Type:</strong> Car Design</p>
+          <p><strong>Brand:</strong> Nissan</p>
+          <p><strong>Year:</strong> 2024</p>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="design-card">
+        <img src="https://www.nissan-global.com/JP/INNOVATION/DESIGN/DESIGNWORKS/SALON-DE-NISSAN-VIZ/ASSETS/IMG/Nissan_Epic_Concept_01.jpg" alt="Nissan Epic Concept">
+        <div class="design-info">
+          <div class="category">Concept Car</div>
+          <h2>NISSAN Epic Concept</h2>
+          <p><strong>Type:</strong> Car Design</p>
+          <p><strong>Brand:</strong> Nissan</p>
+          <p><strong>Year:</strong> 2024</p>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="design-card">
+        <img src="https://www.nissan-global.com/JP/INNOVATION/DESIGN/DESIGNWORKS/SALON-DE-NISSAN-VIZ/ASSETS/IMG/Nissan_Evo_Concept_04.jpg" alt="Nissan Evo Concept">
+        <div class="design-info">
+          <div class="category">Concept Car</div>
+          <h2>NISSAN Evo Concept</h2>
+          <p><strong>Type:</strong> Car Design</p>
+          <p><strong>Brand:</strong> Nissan</p>
+          <p><strong>Year:</strong> 2024</p>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="design-card">
+        <img src="https://www.nissan-global.com/JP/INNOVATION/DESIGN/DESIGNWORKS/SALON-DE-NISSAN-VIZ/ASSETS/IMG/Ariya_Nismo_01.jpg" alt="Ariya NISMO">
+        <div class="design-info">
+          <div class="category">Production Car</div>
+          <h2>ARIYA NISMO</h2>
+          <p><strong>Type:</strong> Car Design</p>
+          <p><strong>Brand:</strong> Nissan</p>
+          <p><strong>Year:</strong> 2024</p>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="design-card">
+        <img src="https://www.nissan-global.com/JP/INNOVATION/DESIGN/DESIGNWORKS/SALON-DE-NISSAN-VIZ/ASSETS/IMG/Skyline_Nismo_01.jpg" alt="Nissan Z NISMO">
+        <div class="design-info">
+          <div class="category">Production Car</div>
+          <h2>NISSAN Z NISMO</h2>
+          <p><strong>Type:</strong> Sports Coupe</p>
+          <p><strong>Brand:</strong> Nissan</p>
+          <p><strong>Year:</strong> 2024</p>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="design-card">
+        <img src="https://www.nissan-global.com/JP/INNOVATION/DESIGN/DESIGNWORKS/INFINITI-VISION-QE/ASSETS/IMG/Infiniti_Vision_Qe_02.jpg" alt="GT-R T-Spec">
+        <div class="design-info">
+          <div class="category">Performance Car</div>
+          <h2>INFINITI-VISION-QE</h2>
+          <p><strong>Type:</strong> High-Performance Vehicle</p>
+          <p><strong>Brand:</strong> Nissan</p>
+          <p><strong>Year:</strong> 2023</p>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="design-card">
+        <img src="https://www.nissan-global.com/JP/INNOVATION/DESIGN/DESIGNWORKS/HYPER-ADVENTURE/ASSETS/IMG/Hyper_Adventure_07.jpg " alt="Nissan Hyper Urban">
+        <div class="design-info">
+          <div class="category">Concept Car</div>
+          <h2>NISSAN HYPER-ADVENTURE</h2>
+          <p><strong>Type:</strong> EV Concept</p>
+          <p><strong>Brand:</strong> Nissan</p>
+          <p><strong>Year:</strong> 2023</p>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="design-card">
+        <img src="https://www.nissan-global.com/JP/INNOVATION/DESIGN/DESIGNWORKS/HYPER-FORCE/ASSETS/IMG/Hyper_Force_07.jpg" alt="Nissan Hyper Adventure">
+        <div class="design-info">
+          <div class="category">Concept Car</div>
+          <h2>NISSAN hyper-force-concept</h2>
+          <p><strong>Type:</strong> EV SUV Concept</p>
+          <p><strong>Brand:</strong> Nissan</p>
+          <p><strong>Year:</strong> 2023</p>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="design-card">
+        <img src="https://www.nissan-global.com/JP/INNOVATION/DESIGN/DESIGNWORKS/HYPER-TOURER/ASSETS/IMG/Hyper_Tourer_08.jpg" alt="Nissan Hyper Punk">
+        <div class="design-info">
+          <div class="category">Concept Car</div>
+          <h2>NISSAN Hyper Tourer</h2>
+          <p><strong>Type:</strong> Futuristic Compact EV</p>
+          <p><strong>Brand:</strong> Nissan</p>
+          <p><strong>Year:</strong> 2023</p>
+        </div>
+      </div>
+
+      <!-- 11 -->
+      <div class="design-card">
+        <img src="https://www.nissan-global.com/JP/INNOVATION/DESIGN/DESIGNWORKS/HYPER-PUNK/ASSETS/IMG/Hyper_Punk_05.jpg" alt="Nissan Hyper Force">
+        <div class="design-info">
+          <div class="category">Concept Car</div>
+          <h2>NISSAN Hyper Punk</h2>
+          <p><strong>Type:</strong> EV Supercar</p>
+          <p><strong>Brand:</strong> Nissan</p>
+          <p><strong>Year:</strong> 2023</p>
+        </div>
+      </div>
+
+      <!-- 12 -->
+      <div class="design-card">
+        <img src="https://www.nissan-global.com/JP/INNOVATION/DESIGN/DESIGNWORKS/HYPER-URBAN/ASSETS/IMG/Hyper_Urban_05.jpg" alt="Nissan Hyper Tourer">
+        <div class="design-info">
+          <div class="category">Concept Van</div>
+          <h2>NISSAN Hyper urbun</h2>
+          <p><strong>Type:</strong> Luxury EV MPV</p>
+          <p><strong>Brand:</strong> Nissan</p>
+          <p><strong>Year:</strong> 2023</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+<footer class="footer-real">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand-chat">
+        <a href="/" class="footer-logo" aria-label="Homepage">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png" alt="Brand Logo">
+        </a>
+        <button class="footer-live-chat" aria-label="Live Chat">Live Chat</button>
+      </div>
+
+      <nav class="footer-nav">
+        <div class="footer-column">
+          <h4>ABOUT</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/about.html">About Nissan</a></li>
+            <li><a href="https://www.nissanusa.com/about/culture.html">Culture</a></li>
+            <li><a href="https://usa.nissannews.com/en-US/">News &amp; Events</a></li>
+            <li><a href="https://www.nissanusa.com/business-fleet.html">Business &amp; Fleet</a></li>
+            <li><a href="https://www.nissanusa.com/accessibility.html">Accessibility</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>SHOP</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/vehicles/new.html">All Vehicles</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/search-inventory">Search Inventory</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-brochure.html">View a Brochure</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/build-price">Build &amp; Price</a></li>
+            <li><a href="https://www.nissanusa.com/dealer-locator.html">Locate a Dealer</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OWNERS</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/owners.html">Owner Portal</a></li>
+            <li><a href="https://www.nissanusa.com/parts-service">Schedule Service</a></li>
+            <li><a href="https://www.nissanusa.com/owners/manuals-guides.html">Manuals &amp; Guides</a></li>
+            <li><a href="https://www.nissanusa.com/connect.html">Connected Services</a></li>
+            <li><a href="https://www.nissanusa.com/maintenance-schedules/">Maintenance Schedules</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OFFERS &amp; FINANCING</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/shopping-tools/deals-incentives-offers.html">Deals &amp; Offers</a></li>
+            <li><a href="https://www.nissanfinance.com/s/login/?language=en_US">Financing Options</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/lease-finance-payment-calculator">Estimate Payments</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/pre-approval.html">Get Pre-Approved</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-internet-quote.html">Internet Quote</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-middle">
+      <div class="footer-social">
+        <a href="https://www.tiktok.com/@nissanusa?lang=en" aria-label="TikTok">TikTok</a>
+        <a href="https://www.instagram.com/nissanusa/" aria-label="Instagram">Instagram</a>
+        <a href="https://www.youtube.com/user/nissanusa/featured" aria-label="YouTube">YouTube</a>
+        <a href="https://twitter.com/NissanUSA" aria-label="Twitter">Twitter</a>
+        <a href="https://www.facebook.com/nissanusa/" aria-label="Facebook">Facebook</a>
+        <a href="https://www.pinterest.com/nissanusa/" aria-label="Pinterest">Pinterest</a>
+      </div>
+
+      <div class="footer-extras">
+        <div class="footer-language">
+          <label for="lang-select" class="sr-only">Select Language</label>
+          <select id="lang-select" aria-label="Language selection">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+        <div class="footer-links-small">
+          <a href="https://www.nissanusa.com/sitemap.html">Site Map</a>
+          <a href="https://www.nissanusa.com/contact-us.html">Contact Us</a>
+          <a href="https://www.nissanusa.com/data-privacy.html">Do Not Sell or Share My Personal Information</a>
+          <a href="https://www.nissanusa.com/legal-terms.html">Terms of Use</a>
+          <a href="https://www.nissanusa.com/privacy.html">Privacy Notice</a>
+          <a href="https://www.nissanusa.com/recalls-vin">Recall Information</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="current-year">2025</span> Nissan. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* ✅ Prevent horizontal overflow */
+  }
+
+  .footer-real {
+    background-color: whitesmoke;
+    color: darkred;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 40px 20px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .footer-brand-chat {
+    flex: 1 1 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo img {
+    height: 110px;
+    max-width: 100%;
+    filter: brightness(0.95) contrast(1);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .footer-logo img:hover {
+    filter: brightness(1) contrast(1.05);
+    transform: scale(1.05);
+  }
+
+  .footer-live-chat {
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid darkred;
+    color: black;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .footer-live-chat:hover {
+    border-color: darkred;
+    background-color: whitesmoke;
+  }
+
+  .footer-nav {
+    flex: 3 1 600px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+  }
+
+  .footer-column h4 {
+    color: black;
+    font-size: 13px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-column li {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .footer-column li a {
+    color: darkred;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  .footer-column li a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-middle {
+    border-top: 1px solid darkred;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-social a {
+    color: darkred;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover {
+    color: black;
+  }
+
+  .footer-extras {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .footer-language select {
+    background-color: transparent;
+    color: black;
+    border: 1px solid darkred;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .footer-links-small {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links-small a {
+    color: black;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .footer-links-small a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid darkred;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: darkred;
+  }
+
+  /* ✅ Responsive Fixes */
+  @media (max-width: 900px) {
+    .footer-nav {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+    }
+    .footer-nav {
+      grid-template-columns: 1fr;
+    }
+    .footer-middle {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .footer-extras {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .footer-links-small {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+</body></html>

@@ -1,0 +1,1389 @@
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nissan TITAN</title>
+
+<link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&amp;display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: whitesmoke;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 10px 20px;
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+  }
+
+  .logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 0 12px rgba(0,0,0,0.8);
+    z-index: 1000;
+  }
+  .logo span {
+    color: #e60000;
+  }
+
+  /* HAMBURGER MENU */
+  .menu-toggle {
+    width: 28px;
+    height: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1001;
+  }
+  .menu-left { left: 20px; top: 10px; }
+  .menu-right { right: 20px; top: 10px; }
+  .menu-toggle span {
+    height: 3px;
+    background: black;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+  .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; }
+  .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  /* DROPDOWN MENUS */
+  .dropdown {
+    position: absolute;
+    background: rgba(0,0,0,0.9);
+    border-radius: 10px;
+    padding: 0;
+    min-width: 200px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 2000;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .dropdown.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .dropdown a {
+    display: block !important;
+    width: 100%;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: white;
+    transition: 0.25s ease;
+  }
+  .dropdown a:hover { background: rgba(255,255,255,0.1); }
+
+  .left-dropdown { left: 20px; top: 60px; }
+  .right-dropdown { right: 20px; top: 60px; }
+
+  /* HERO SECTION */
+  .hero-section {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    margin-top: 0;
+  }
+  .hero-section img.hero {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media (max-width: 1024px) {
+    .hero-section { height: 60vh; }
+  }
+  @media (max-width: 480px) {
+    .hero-section { height: 50vh; }
+  }
+
+  /* Two-column layout */
+  .two-col-wrap {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    padding: 100px 40px 60px; /* top padding accounts for fixed header */
+    flex-wrap: wrap;
+  }
+  .left-col, .right-col { flex: 1; min-width: 300px; }
+  .left-col { font-weight: bold; }
+  .left-col h2 { margin-top: 0; font-size: 28px; margin-bottom: 15px; }
+  .left-col p, .right-col p { font-size: 18px; line-height: 1.6; }
+  .right-col { font-weight: normal; }
+  .next-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 6px;
+    transition: 0.3s;
+  }
+  .next-btn:hover { background-color: #444; transform: translateX(5px); }
+
+  @media(max-width: 768px) {
+    .two-col-wrap { flex-direction: column; padding: 80px 20px 40px; gap: 30px; }
+    .left-col h2 { font-size: 24px; }
+    .left-col p, .right-col p { font-size: 16px; }
+    .next-btn { font-size: 16px; padding: 10px 20px; }
+  }
+
+  /* TITAN Comparison Section */
+  .compare-section { width: 100%; padding: 60px 40px; }
+  .compare-title { text-align: center; font-weight: bold; font-size: 36px; margin-bottom: 10px; }
+  .compare-sub { text-align: center; font-size: 18px; margin-bottom: 40px; color: #444; }
+
+  /* Styled comparison table */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 18px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.15);
+  }
+  .compare-table thead { background: #000; color: #fff; }
+  .compare-table th { padding: 16px; font-size: 20px; letter-spacing: .5px; }
+  .compare-table td { padding: 16px; border-bottom: 1px solid #ddd; background: #fff; transition: background .3s; }
+  .compare-table tbody tr:hover td { background: #f2f2f2; }
+  .compare-table tbody tr:last-child td { border-bottom: none; }
+
+  @media(max-width: 768px) {
+    .compare-section { padding: 40px 20px; }
+    .compare-title { font-size: 28px; }
+    .compare-sub { font-size: 16px; }
+    .compare-table th, .compare-table td { padding: 12px; font-size: 16px; }
+    .compare-table { display: block; overflow-x: auto; white-space: nowrap; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <!-- LEFT MENU -->
+  <div id="menuLeft" class="menu-toggle menu-left">
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- RIGHT MENU -->
+  <div id="menuRight" class="menu-toggle menu-right">
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- LOGO -->
+  <div class="logo">NISSAN <span>Premium</span></div>
+
+  <!-- LEFT DROPDOWN -->
+  <div id="dropdownLeft" class="dropdown left-dropdown">
+    <a href="nissan.html">Home</a>
+    <a href="models.html">Models</a>
+    <a href="performance.html">Performance</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- RIGHT DROPDOWN -->
+  <div id="dropdownRight" class="dropdown right-dropdown">
+    <a href="normal.html">Normal</a>
+    <a href="sports.html">Sports</a>
+    <a href="luxury.html">Luxury</a>
+    <a href="premium.html">Premium</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero-section">
+  <img class="hero" src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/discontinuedvehicles/titan/exterior/lightbox/nissan-titan-led-headlights.jpg" alt="Nissan TITAN">
+</section>
+
+<!-- Two-Column Section -->
+<div class="two-col-wrap">
+  <div class="left-col">
+    <h2>Certified Pre-Owned TITAN</h2>
+    <p>No Longer in Production<br>
+    The legendary Nissan TITAN and TITAN XD. With 2024 marking their final year of production, these incredible trucks delivered powerful towing capacity, off-road dominance, and the heart-pounding performance of a durable V8 engine.</p>
+  </div>
+
+  <div class="right-col">
+    <p>But the adventure doesn’t end here — discover new trails with the award-winning Nissan Frontier.</p>
+    <a href="https://cpo.nissanusa.com/en/nissan/titan" class="next-btn">Explore Your Order →</a>
+  </div>
+</div>
+
+<!-- TITAN Comparison Section -->
+<div class="compare-section">
+  <h2 class="compare-title">What's the difference between TITAN and TITAN XD?</h2>
+  <p class="compare-sub">Compare chassis, towing capacity, and other key features of the TITAN lineup.</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>2024 TITAN</th>
+        <th>2024 TITAN XD</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Engine</td>
+        <td>5.6-liter DOHC 32-valve V8 engine</td>
+        <td>5.6-liter DOHC 32-valve V8 engine</td>
+      </tr>
+      <tr>
+        <td>Transmission</td>
+        <td>9-speed automatic transmission</td>
+        <td>9-speed automatic transmission</td>
+      </tr>
+      <tr>
+        <td>Towing Capacity</td>
+        <td>Up to 9,290 lbs.</td>
+        <td>Up to 11,050 lbs.</td>
+      </tr>
+      <tr>
+        <td>Payload Capacity</td>
+        <td>Up to 1,600 lbs.</td>
+        <td>Up to 2,360 lbs.</td>
+      </tr>
+      <tr>
+        <td>Horsepower</td>
+        <td>400 hp @ 5,800 rpm</td>
+        <td>400 hp @ 5,800 rpm</td>
+      </tr>
+      <tr>
+        <td>Drivetrain</td>
+        <td>RWD or 4x4</td>
+        <td>4x4 only</td>
+      </tr>
+      <tr>
+        <td>Vehicle Type</td>
+        <td>Full-Size Pickup</td>
+        <td>Heavy Duty Pickup</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  const menuLeft = document.getElementById("menuLeft");
+  const menuRight = document.getElementById("menuRight");
+  const dropdownLeft = document.getElementById("dropdownLeft");
+  const dropdownRight = document.getElementById("dropdownRight");
+
+  function toggle(menu, dropdown, otherMenu, otherDropdown) {
+    menu.classList.toggle("open");
+    dropdown.classList.toggle("active");
+    otherMenu.classList.remove("open");
+    otherDropdown.classList.remove("active");
+  }
+
+  menuLeft.addEventListener("click", e => { e.stopPropagation(); toggle(menuLeft, dropdownLeft, menuRight, dropdownRight); });
+  menuRight.addEventListener("click", e => { e.stopPropagation(); toggle(menuRight, dropdownRight, menuLeft, dropdownLeft); });
+
+  document.addEventListener("click", () => {
+    menuLeft.classList.remove("open");
+    menuRight.classList.remove("open");
+    dropdownLeft.classList.remove("active");
+    dropdownRight.classList.remove("active");
+  });
+</script>
+
+
+
+
+ 
+
+
+  
+
+
+<section class="gtr-features">
+  <div class="feature-content">
+    <h1>TITAN Key Features</h1>
+
+    <!-- Buttons -->
+    <div class="feature-buttons">
+      <button class="tab-btn active" data-target="aero">Towing &amp; Payload</button>
+      <button class="tab-btn" data-target="engine">Off-Road Capability</button>
+      <button class="tab-btn" data-target="handling">Engine Performance</button>
+    </div>
+  </div>
+
+  <!-- Feature Sections -->
+  <div class="feature-sections">
+    <!-- Towing & Payload -->
+    <div class="feature-item active" id="aero">
+      <div class="feature-container">
+        <div class="feature-text">
+          <p>
+            The 2024 TITAN lineup redefined towing, delivering impressive strength and capability with a gooseneck hitch rating of up to 11,050 lbs, handling a wide range of payloads. TITAN XD Crew Cab 4X4 Shown.
+          </p>
+        </div>
+        <div class="feature-image">
+          <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/discontinuedvehicles/titan/nissan-titan-towing-payload.jpg" alt="Towing &amp; Payload">
+        </div>
+      </div>
+    </div>
+
+    <!-- Off-Road Capability -->
+    <div class="feature-item" id="engine">
+      <div class="feature-container">
+        <div class="feature-text">
+          <p>
+            The PRO-4X had a locking rear differential for enhanced traction, burly tires for extra grip, and skid plates for armor underneath. PRO-4X was a serious off-road package with the off-road gauge and hill descent control.
+          </p>
+        </div>
+        <div class="feature-image">
+          <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/discontinuedvehicles/titan/nissan-titan-pro-4x-off-road.jpg" alt="Off-Road Capability">
+        </div>
+      </div>
+    </div>
+
+    <!-- Engine Performance -->
+    <div class="feature-item" id="handling">
+      <div class="feature-container">
+        <div class="feature-text">
+          <p>
+            The TITAN Lineup featured the acclaimed Endurance V8, with 400 @ 5,800 rpm Horsepower and 413 Lb-ft of Torque which offered more than enough power to tackle tough terrain or big jobs.
+          </p>
+        </div>
+        <div class="feature-image">
+          <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/discontinuedvehicles/titan/nissan-titan-v8-engine.jpg" alt="Engine Performance">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== BASE ===== */
+.gtr-features {
+  background: whitesmoke;
+  color: black;
+  font-family: 'Poppins', sans-serif;
+  padding: 80px 10%;
+  text-align: left;
+}
+
+.gtr-features h1 {
+  font-size: 38px;
+  margin-bottom: 25px;
+}
+
+/* ===== BUTTONS ===== */
+.feature-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 40px;
+  justify-content: flex-start;
+}
+
+.feature-buttons button {
+  background: transparent;
+  border: 2px solid black;
+  color: black;
+  padding: 10px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.feature-buttons button.active,
+.feature-buttons button:hover {
+  background: orange;
+  color: black;
+  border-color: orange;
+}
+
+/* ===== FEATURE SECTIONS ===== */
+.feature-sections { position: relative; }
+
+.feature-item { display: none; animation: fadeIn 0.6s ease; }
+.feature-item.active { display: block; }
+
+/* ===== FEATURE CONTAINER ===== */
+.feature-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.feature-image img {
+  width: 550px;
+  border-radius: 20px;
+  transition: transform 0.6s ease;
+}
+
+.feature-image img:hover { transform: scale(1.03); }
+
+.feature-text {
+  flex: 1;
+  font-size: 17px;
+  line-height: 1.7;
+  color: black;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .feature-container {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .feature-text { text-align: center; font-size: 16px; }
+  .feature-image img { width: 100%; max-width: 600px; }
+  .feature-buttons { justify-content: center; }
+  .gtr-features h1 { font-size: 30px; }
+}
+
+@media (max-width: 900px) {
+  .feature-container { flex-direction: column; }
+  .feature-image img { width: 100%; }
+  .gtr-features h1 { font-size: 28px; }
+}
+</style>
+
+<script>
+const buttons = document.querySelectorAll('.tab-btn');
+const items = document.querySelectorAll('.feature-item');
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Activate button
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Show corresponding section
+    items.forEach(item => item.classList.remove('active'));
+    document.getElementById(btn.dataset.target).classList.add('active');
+  });
+});
+</script>
+
+<section class="titan-gallery">
+  <h1>TITAN Exterior Gallery</h1>
+
+  <!-- Big Featured Image -->
+  <div class="featured-image">
+    <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/discontinuedvehicles/titan/exterior/lightbox/nissan-titan-truck-bed.jpg" alt="Spacious truck bed">
+    <div class="overlay">
+      <p>Spacious truck bed of the Nissan TITAN</p>
+    </div>
+  </div>
+
+  <!-- Three Slightly Bigger Images -->
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/discontinuedvehicles/titan/exterior/lightbox/nissan-titan-aluminum-alloy-wheels.jpg" alt="20'' Aluminum-Alloy Wheels">
+      <div class="overlay">
+        <p>20'' Aluminum-Alloy Wheels</p>
+      </div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/discontinuedvehicles/titan/exterior/lightbox/nissan-titan-led-headlights.jpg" alt="Signature LED Headlights">
+      <div class="overlay">
+        <p>Signature LED Headlights</p>
+      </div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/discontinuedvehicles/titan/exterior/lightbox/nissan-titan-off-road-technology.jpg" alt="Off-road Technology">
+      <div class="overlay">
+        <p>Off-road Technology</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.titan-gallery {
+  padding: 80px 10%;
+  background: whitesmoke;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+.titan-gallery h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+/* Featured Big Image */
+.featured-image {
+  position: relative;
+  margin-bottom: 50px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.featured-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s;
+}
+
+.featured-image .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.5s;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.featured-image:hover img {
+  transform: scale(1.05);
+}
+
+.featured-image:hover .overlay {
+  opacity: 1;
+}
+
+/* Gallery Grid */
+.gallery-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.gallery-item {
+  flex: 1;
+  min-width: 280px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background: #fff;
+  text-align: center;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.gallery-item .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 15px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-item:hover .overlay {
+  opacity: 1;
+}
+
+/* Responsive */
+@media(max-width: 900px) {
+  .titan-gallery h1 {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  .gallery-grid {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+</style>
+<section class="titan-gallery">
+  <h1>TITAN Interior Gallery </h1>
+
+  <!-- Big Featured Image -->
+  <div class="featured-image">
+    <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/discontinuedvehicles/titan/interior/lightbox/Interior%20Gallery%20Dashboard%20Lightbox%20D.jpg" alt="Spacious truck bed">
+    <div class="overlay">
+      <p>Crew Cab Interior</p>
+    </div>
+  </div>
+
+  <!-- Three Slightly Bigger Images -->
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/discontinuedvehicles/titan/interior/lightbox/nissan-titan-interior-seats-v2.jpg" alt="20'' Aluminum-Alloy Wheels">
+      <div class="overlay">
+        <p>King Cab Interior
+ </p>
+      </div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/discontinuedvehicles/titan/interior/lightbox/nissan-titan-panoramic-moonroof-v2.jpg" alt="Signature LED Headlights">
+      <div class="overlay">
+        <p>Dual Cab Interior</p>
+      </div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/discontinuedvehicles/titan/interior/lightbox/nissan-titan-4x4-controls-v2.jpg" alt="Off-road Technology">
+      <div class="overlay">
+        <p>4x4 Controls</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.titan-gallery {
+  padding: 80px 10%;
+  background: whitesmoke;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+.titan-gallery h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+/* Featured Big Image */
+.featured-image {
+  position: relative;
+  margin-bottom: 50px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.featured-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s;
+}
+
+.featured-image .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.5s;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.featured-image:hover img {
+  transform: scale(1.05);
+}
+
+.featured-image:hover .overlay {
+  opacity: 1;
+}
+
+/* Gallery Grid */
+.gallery-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.gallery-item {
+  flex: 1;
+  min-width: 280px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background: #fff;
+  text-align: center;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.gallery-item .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 15px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-item:hover .overlay {
+  opacity: 1;
+}
+
+/* Responsive */
+@media(max-width: 900px) {
+  .titan-gallery h1 {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  .gallery-grid {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+</style>
+<section class="faq-section">
+  <h1>Frequently Asked Questions</h1>
+
+  <!-- FAQ 1 -->
+  <div class="faq-item">
+    <div class="faq-label">Towing Capacity</div>
+    <div class="faq-question" onclick="toggleAnswer(this)">How much did the 2024 Nissan TITAN and TITAN XD Lineup tow?</div>
+    <div class="faq-answer">The 2024 TITAN Lineup towed up to 11,050 lbs.</div>
+  </div>
+
+  <!-- FAQ 2 -->
+  <div class="faq-item">
+    <div class="faq-label">Vehicle Differences</div>
+    <div class="faq-question" onclick="toggleAnswer(this)">What is the difference between the 2024 Nissan TITAN and TITAN XD?</div>
+    <div class="faq-answer">The TITAN is a full-size pickup, while the TITAN XD is a heavy-duty pickup with higher towing and payload capacities. The XD offers enhanced off-road capability and more rugged features for demanding work and adventure.</div>
+  </div>
+</section>
+
+<style>
+.faq-section {
+  padding: 80px 10%;
+  font-family: 'Poppins', sans-serif;
+  background: whitesmoke;
+  color: #111;
+}
+
+.faq-section h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+/* FAQ Items */
+.faq-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  flex-wrap: wrap;
+}
+
+.faq-label {
+  flex: 0 0 200px; /* fixed width for left label */
+  font-weight: 700;
+  font-size: 18px;
+  color: #000;
+}
+
+.faq-question {
+  flex: 1;
+  font-size: 18px;
+  color: #333;
+}
+
+.faq-answer {
+  width: 100%;
+  padding: 10px 0 0 200px; /* align under question, leave space for label */
+  font-size: 17px;
+  line-height: 1.6;
+  color: #555;
+  display: none;
+}
+
+/* Active answer */
+.faq-item.active .faq-answer {
+  display: block;
+}
+
+/* Responsive */
+@media(max-width: 700px) {
+  .faq-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .faq-answer {
+    padding: 5px 0 0 0;
+  }
+  .faq-label {
+    width: 100%;
+  }
+}
+</style>
+
+<script>
+function toggleAnswer(el) {
+  const item = el.parentElement;
+  const allItems = document.querySelectorAll('.faq-item');
+
+  // Close all other answers
+  allItems.forEach(i => {
+    if(i !== item) i.classList.remove('active');
+  });
+
+  // Toggle current
+  item.classList.toggle('active');
+}
+</script>
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan Titan®</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f4f4f4;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .left-column, .right-column {
+      width: 48%;
+    }
+
+    .large-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .interior-image img, .exterior-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .interior-text, .exterior-text {
+      margin-top: 15px;
+      font-size: 1rem;
+    }
+
+    .right-column {
+      padding-left: 20px;
+    }
+
+    /* Big image at the bottom */
+    .bottom-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-top: 40px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .bottom-image-description {
+      font-size: 1rem;
+      font-weight: 400;
+      margin-top: 15px;
+      color: #333;
+      text-align: center;
+    }
+
+    /* Footer styling */
+    footer {
+      background-color: whitesmoke;
+      color: darkred;
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      padding: 40px 20px;
+      margin-top: 60px;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-nav {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .footer-column h4 {
+      color: black;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column li {
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    .footer-column li a {
+      color: darkred;
+      text-decoration: none;
+    }
+
+    .footer-column li a:hover {
+      color: black;
+      text-decoration: underline;
+    }
+
+    .footer-middle {
+      border-top: 1px solid darkred;
+      padding-top: 30px;
+      margin-bottom: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-social a {
+      color: darkred;
+      margin-right: 15px;
+      text-decoration: none;
+    }
+
+    .footer-social a:hover {
+      color: black;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid darkred;
+      padding-top: 20px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .left-column, .right-column {
+        width: 100%;
+        margin-bottom: 20px;
+        padding-left: 0;
+      }
+
+      .footer-nav {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .footer-middle {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+
+
+
+  <div class="container">
+    <!-- Left Column (Interior) -->
+    <div class="left-column">
+      <div class="interior-image">
+        <img src="https://www.nissan.ca/content/dam/Nissan/Canada/Vehicles/discontinued/titan/TITAN_XD-design-interior.jpg" alt="Nissan Titan® Interior">
+        <p class="interior-text">
+          The Titan® line-up elevated premium comfort with an interior that seamlessly blends spaciousness and practicality. With a smart layout, it offers ample room to stretch out while keeping essential items within easy reach. Quality materials and finishes are incorporated throughout, ensuring a luxurious feel, yet the durable design remains true to the truck’s work-oriented nature. Whether you’re on a long haul or navigating city streets, the Titan®’s interior is crafted to meet the demands of both comfort and functionality.
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Column (Exterior) -->
+    <div class="right-column">
+      <div class="exterior-image">
+        <img src="https://www.nissan.ca/content/dam/Nissan/Canada/Vehicles/discontinued/titan/TITAN_XD-design-exterior.jpg" alt="Nissan Titan® Exterior">
+        <p class="exterior-text">
+          The Nissan Titan® is built to make a statement, with a design that merges ruggedness with sophistication. From its bold front grille to the sleek, muscular profile, the Titan® is ready for any challenge. Whether you're hauling heavy loads or cruising down the highway, the Titan®'s exterior design reflects its strength, capability, and durability, while also offering a refined, modern look that stands out on the road.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Big Image -->
+  <img src="https://www.nissan.ca/content/dam/Nissan/Canada/Vehicles/discontinued/titan/TITAN_XD-design.jpg" alt="Nissan Titan® Bottom View" class="bottom-image">
+  <p class="bottom-image-description">
+    The Nissan Titan® design is a perfect balance of form and function. Its commanding presence on the road is complemented by an aerodynamic yet robust build. Designed for those who require strength without compromising on style, the Titan® offers a rugged exterior that's built to handle tough challenges, while exuding a modern, aggressive look that turns heads at every corner. Whether you're hauling heavy equipment or embarking on a weekend adventure, the Titan® is designed to be as versatile as it is bold.
+  </p>
+
+  <footer class="footer-real">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand-chat">
+        <a href="/" class="footer-logo" aria-label="Homepage">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png" alt="Brand Logo">
+        </a>
+        <button class="footer-live-chat" aria-label="Live Chat">Live Chat</button>
+      </div>
+
+      <nav class="footer-nav">
+        <div class="footer-column">
+          <h4>ABOUT</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/about.html">About Nissan</a></li>
+            <li><a href="https://www.nissanusa.com/about/culture.html">Culture</a></li>
+            <li><a href="https://usa.nissannews.com/en-US/">News &amp; Events</a></li>
+            <li><a href="https://www.nissanusa.com/business-fleet.html">Business &amp; Fleet</a></li>
+            <li><a href="https://www.nissanusa.com/accessibility.html">Accessibility</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>SHOP</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/vehicles/new.html">All Vehicles</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/search-inventory">Search Inventory</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-brochure.html">View a Brochure</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/build-price">Build &amp; Price</a></li>
+            <li><a href="https://www.nissanusa.com/dealer-locator.html">Locate a Dealer</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OWNERS</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/owners.html">Owner Portal</a></li>
+            <li><a href="https://www.nissanusa.com/parts-service">Schedule Service</a></li>
+            <li><a href="https://www.nissanusa.com/owners/manuals-guides.html">Manuals &amp; Guides</a></li>
+            <li><a href="https://www.nissanusa.com/connect.html">Connected Services</a></li>
+            <li><a href="https://www.nissanusa.com/maintenance-schedules/">Maintenance Schedules</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OFFERS &amp; FINANCING</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/shopping-tools/deals-incentives-offers.html">Deals &amp; Offers</a></li>
+            <li><a href="https://www.nissanfinance.com/s/login/?language=en_US">Financing Options</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/lease-finance-payment-calculator">Estimate Payments</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/pre-approval.html">Get Pre-Approved</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-internet-quote.html">Internet Quote</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-middle">
+      <div class="footer-social">
+        <a href="https://www.tiktok.com/@nissanusa?lang=en" aria-label="TikTok">TikTok</a>
+        <a href="https://www.instagram.com/nissanusa/" aria-label="Instagram">Instagram</a>
+        <a href="https://www.youtube.com/user/nissanusa/featured" aria-label="YouTube">YouTube</a>
+        <a href="https://twitter.com/NissanUSA" aria-label="Twitter">Twitter</a>
+        <a href="https://www.facebook.com/nissanusa/" aria-label="Facebook">Facebook</a>
+        <a href="https://www.pinterest.com/nissanusa/" aria-label="Pinterest">Pinterest</a>
+      </div>
+
+      <div class="footer-extras">
+        <div class="footer-language">
+          <label for="lang-select" class="sr-only">Select Language</label>
+          <select id="lang-select" aria-label="Language selection">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+        <div class="footer-links-small">
+          <a href="https://www.nissanusa.com/sitemap.html">Site Map</a>
+          <a href="https://www.nissanusa.com/contact-us.html">Contact Us</a>
+          <a href="https://www.nissanusa.com/data-privacy.html">Do Not Sell or Share My Personal Information</a>
+          <a href="https://www.nissanusa.com/legal-terms.html">Terms of Use</a>
+          <a href="https://www.nissanusa.com/privacy.html">Privacy Notice</a>
+          <a href="https://www.nissanusa.com/recalls-vin">Recall Information</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="current-year">2025</span> Nissan. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* ✅ Prevent horizontal overflow */
+  }
+
+  .footer-real {
+    background-color: whitesmoke;
+    color: darkred;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 40px 20px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .footer-brand-chat {
+    flex: 1 1 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo img {
+    height: 110px;
+    max-width: 100%;
+    filter: brightness(0.95) contrast(1);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .footer-logo img:hover {
+    filter: brightness(1) contrast(1.05);
+    transform: scale(1.05);
+  }
+
+  .footer-live-chat {
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid darkred;
+    color: black;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .footer-live-chat:hover {
+    border-color: darkred;
+    background-color: whitesmoke;
+  }
+
+  .footer-nav {
+    flex: 3 1 600px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+  }
+
+  .footer-column h4 {
+    color: black;
+    font-size: 13px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-column li {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .footer-column li a {
+    color: darkred;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  .footer-column li a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-middle {
+    border-top: 1px solid darkred;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-social a {
+    color: darkred;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover {
+    color: black;
+  }
+
+  .footer-extras {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .footer-language select {
+    background-color: transparent;
+    color: black;
+    border: 1px solid darkred;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .footer-links-small {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links-small a {
+    color: black;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .footer-links-small a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid darkred;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: darkred;
+  }
+
+  /* ✅ Responsive Fixes */
+  @media (max-width: 900px) {
+    .footer-nav {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+    }
+    .footer-nav {
+      grid-template-columns: 1fr;
+    }
+    .footer-middle {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .footer-extras {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .footer-links-small {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+</body></html>

@@ -1,0 +1,1607 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan Frontier</title>
+
+  <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&amp;display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: whitesmoke;
+      overflow-x: hidden;
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero-section img.hero {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-section {
+        height: auto;
+      }
+      .hero-section img.hero {
+        height: auto;
+        object-fit: contain;
+      }
+    }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 10px 20px;
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* LOGO */
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: white;
+      text-shadow: 0 0 12px rgba(0,0,0,0.8);
+    }
+
+    .logo span {
+      color: #e60000;
+    }
+
+    /* SEARCH BAR */
+    .search-bar {
+      position: absolute;
+      top: 65px;
+    }
+
+    .search-bar input {
+      width: 260px;
+      padding: 8px 14px;
+      border-radius: 25px;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+    }
+
+    /* HAMBURGER MENU */
+    .menu-toggle {
+      width: 28px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      position: absolute;
+      z-index: 1200;
+    }
+
+    .menu-left { left: 20px; top: 10px; }
+    .menu-right { right: 20px; top: 10px; }
+
+    .menu-toggle span {
+      height: 3px;
+      background: black;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* DROPDOWN MENUS */
+    .dropdown {
+      position: absolute;
+      background: rgba(0,0,0,0.9);
+      border-radius: 10px;
+      padding: 0;
+      min-width: 200px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 2000;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+    }
+
+    .dropdown.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      display: block !important;
+      width: 100%;
+      padding: 12px 20px;
+      text-decoration: none;
+      color: white;
+      transition: 0.25s ease;
+    }
+
+    .dropdown a:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .left-dropdown { left: 20px; top: 60px; }
+    .right-dropdown { right: 20px; top: 60px; }
+
+    /* CLIMB WITH CONFIDENCE SECTION */
+    .confidence-section {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      width: 100%;
+      margin: 20px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .content {
+      flex: 1;
+      padding-right: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .bold-heading {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .image-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .confidence-section {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .content {
+        padding-right: 0;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .image-container {
+        width: 100%;
+      }
+
+      .image {
+        max-width: 80%;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <img class="hero" src="https://www.nissan.ca/content/dam/Nissan/Canada/Vehicles/frontier/2025/pro-4x/lightbox/2025-nissan-frontier-pro-4x-electronic-locking-rear-differential.jpg">
+  </section>
+
+  <!-- HEADER -->
+  <header>
+    <!-- LEFT MENU -->
+    <div id="menuLeft" class="menu-toggle menu-left">
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- RIGHT MENU -->
+    <div id="menuRight" class="menu-toggle menu-right">
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- LOGO -->
+    <div class="logo">NISSAN <span>PREMIUM</span></div>
+
+  
+
+    <!-- LEFT DROPDOWN -->
+    <div id="dropdownLeft" class="dropdown left-dropdown">
+      <a href="nissan.html">Home</a>
+      <a href="models.html">Models</a>
+      <a href="performance.html">Performance</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- RIGHT DROPDOWN -->
+    <div id="dropdownRight" class="dropdown right-dropdown">
+      <a href="normal.html">Normal</a>
+      <a href="sports.html">Sports</a>
+      <a href="luxury.html">Luxury</a>
+      <a href="premium.html">Premium</a>
+    </div>
+  </header>
+
+  <!-- CLIMB WITH CONFIDENCE SECTION -->
+  <section class="confidence-section">
+    <div class="content">
+      <h2 class="bold-heading">Climb With Confidence</h2>
+      <p>Confidently navigate tricky terrain. On steep hills, <strong>Hill Start Assist</strong> helps keep you from rolling backward. On the way down, <strong>Hill Descent Control</strong> automatically maintains speed and brake pressure to help provide a controlled descent.</p>
+    </div>
+    <div class="image-container">
+      <img src="https://www.nissan.ca/content/dam/Nissan/Canada/Vehicles/frontier/2025/pro-4x/2025-nissan-frontier-hill-start-assist.jpg" alt="Vehicle driving on a hill" class="image">
+    </div>
+  </section>
+
+  <script>
+    const menuLeft = document.getElementById("menuLeft");
+    const menuRight = document.getElementById("menuRight");
+    const dropdownLeft = document.getElementById("dropdownLeft");
+    const dropdownRight = document.getElementById("dropdownRight");
+
+    function toggle(menu, dropdown, otherMenu, otherDropdown) {
+      menu.classList.toggle("open");
+      dropdown.classList.toggle("active");
+
+      otherMenu.classList.remove("open");
+      otherDropdown.classList.remove("active");
+    }
+
+    menuLeft.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggle(menuLeft, dropdownLeft, menuRight, dropdownRight);
+    });
+
+    menuRight.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggle(menuRight, dropdownRight, menuLeft, dropdownLeft);
+    });
+
+    document.addEventListener("click", () => {
+      menuLeft.classList.remove("open");
+      menuRight.classList.remove("open");
+      dropdownLeft.classList.remove("active");
+      dropdownRight.classList.remove("active");
+    });
+  </script>
+
+
+
+<section class="gtr-features">
+  <div class="feature-content">
+    <h2>Frontier PRO-4X</h2>
+    <h1>Ready To Work</h1>
+
+    <!-- Buttons -->
+    <div class="feature-buttons">
+      <button class="tab-btn active" data-target="aero">Short wheelbase</button>
+      <button class="tab-btn" data-target="engine">Long wheelbase</button>
+
+    </div>
+  </div>
+
+  <!-- Feature Sections -->
+  <div class="feature-sections">
+    <div class="feature-item active" id="aero">
+      <div class="feature-container">
+        <div class="feature-text">
+          <p>
+           Featuring a 5-foot bed, the short wheelbase offers a sleek and sporty look to Frontier. Its smaller size is easier to maneuver and helps you avoid getting caught on rocks or other off-road hazards.
+          </p>
+        </div>
+        <div class="feature-image">
+          <img src="https://www.nissan.ca/content/dam/Nissan/Canada/Vehicles/frontier/2025/pro-4x/ready-to-work-short-wheel-base-d.jpg" alt="Aerodynamics">
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-item" id="engine">
+      <div class="feature-container">
+        <div class="feature-text">
+          <p>
+           With the added utility of a 6-foot bed, the long wheelbase option is built for do-it-yourselfers. Capable of hauling even more cargo, the larger bed is sure to help you get the job done and look great doing it.
+          </p>
+        </div>
+        <div class="feature-image">
+          <img src="https://www.nissan.ca/content/dam/Nissan/Canada/Vehicles/frontier/2025/pro-4x/ready-to-work-long-wheel-base-d.jpg" alt="Twin Turbo V6 Engine">
+        </div>
+      </div>
+    </div>
+
+
+</div></section>
+
+<style>
+/* ===== BASE ===== */
+.gtr-features {
+  background: whitesmoke;
+  color: black;
+  font-family: 'Poppins', sans-serif;
+  padding: 80px 10%;
+  text-align: left;
+}
+
+/* ===== HEADINGS ===== */
+.gtr-features h2 {
+  color: black;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.gtr-features h1 {
+  font-size: 38px;
+  margin-bottom: 25px;
+}
+
+/* ===== BUTTONS ===== */
+.feature-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.feature-buttons button {
+  background: transparent;
+  border: 2px solid whitesmoke;
+  color:black;
+  padding: 10px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.feature-buttons button.active,
+.feature-buttons button:hover {
+  background: orange;
+  color: black;
+}
+
+/* ===== FEATURE SECTIONS ===== */
+.feature-sections {
+  position: relative;
+}
+
+.feature-item {
+  display: none;
+  animation: fadeIn 0.6s ease;
+}
+
+.feature-item.active {
+  display: block;
+}
+
+/* ===== FEATURE CONTAINER ===== */
+.feature-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.feature-image img {
+  width: 550px;
+  border-radius: 20px;
+  transition: transform 0.6s ease;
+}
+
+.feature-image img:hover {
+  transform: scale(1.03);
+}
+
+.feature-text {
+  flex: 1;
+  font-size: 17px;
+  line-height: 1.7;
+  color:black;
+  font-weight: 600; /* <-- Bold text */
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .feature-container {
+    flex-direction: column;
+  }
+
+  .feature-image img {
+    width: 100%;
+  }
+
+  .gtr-features h1 {
+    font-size: 28px;
+  }
+}
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .feature-container {
+    flex-direction: column-reverse; /* ✅ text above image */
+    text-align: center; /* ✅ better visual balance */
+  }
+
+  .feature-text {
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .feature-image img {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .gtr-features h1 {
+    font-size: 30px;
+  }
+
+  .feature-buttons {
+    justify-content: center;
+  }
+}
+
+</style>
+
+<script>
+const buttons = document.querySelectorAll('.tab-btn');
+const items = document.querySelectorAll('.feature-item');
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Activate button
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Show corresponding section
+    items.forEach(item => item.classList.remove('active'));
+    document.getElementById(btn.dataset.target).classList.add('active');
+  });
+});
+</script>
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontier PRO-4X &amp; Infiniti Q70 Video</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f4;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* Features Section */
+    .features-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding: 50px;
+      background-color: white;
+    }
+
+    .content {
+      flex: 1;
+      max-width: 50%;
+      padding: 20px;
+      text-align: left;
+    }
+
+    .bold-heading {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .build-price {
+      margin-top: 20px;
+      display: inline-block;
+      background-color: #e60000;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .build-price:hover {
+      background-color: #cc0000;
+    }
+
+    .image-container {
+      flex: 1;
+      max-width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .features-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .content, .image-container {
+        max-width: 100%;
+        padding: 10px;
+      }
+
+      .build-price {
+        margin-top: 20px;
+      }
+    }
+
+    /* Fullscreen Video Section */
+    .video-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-section video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .overlay-content {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      color: white;
+      font-family: Arial, sans-serif;
+      z-index: 2;
+      text-align: left;
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: all 1s ease;
+    }
+
+    .overlay-content.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .overlay-content h1 {
+      font-size: 3rem;
+      letter-spacing: 1px;
+    }
+
+    .overlay-content p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .overlay-content {
+        top: 20px;
+        left: 20px;
+      }
+
+      .overlay-content h1 {
+        font-size: 2rem;
+      }
+      .overlay-content p {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .overlay-content {
+        top: 15px;
+        left: 15px;
+      }
+
+      .overlay-content h1 {
+        font-size: 1.6rem;
+      }
+      .overlay-content p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+
+
+<!-- ===== New Car Offers Section ===== -->
+<div class="offers-section">
+  <div class="offers-image">
+    <img src="https://www.nissan.ca/content/dam/Nissan/Canada/Vehicles/frontier/2025/pro-4x/rear-view-of-2025-nissan-frontier-pick-up-truck-offroading.jpg" alt="New Car Offers">
+  </div>
+  <div class="offers-text">
+    <h2>Tackle Tougher Trails</h2>
+    <h3></h3>
+    <p>The Frontier PRO-4X is trail-ready right off the showroom floor. With enough built-in capability to explore radical terrains, it will get you to your favorite spots off the beaten path with ease. Plus, the PRO-4X kicks Frontier up a notch with a 6-foot bed, the latest tech, added styling and more.</p>
+    <a href="https://www.nissan.ca/shopping-tools/build-price?models=frontier&amp;modelYear=current-yea" class="offers-button">Buy Now</a>
+  </div>
+</div>
+
+<style>
+/* New Car Offers Section */
+.offers-section {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 60vh;
+  background-color: #f5f5f5;
+  margin-top: 50px;
+}
+
+.offers-image {
+  flex: 1;
+}
+
+.offers-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.offers-text {
+  flex: 1;
+  padding: 50px;
+  text-align: left;
+}
+
+.offers-text h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.offers-text h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.offers-text p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.offers-button {
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.3s;
+  cursor: pointer;
+}
+
+.offers-button:hover {
+  border-bottom: 2px solid black;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .offers-section {
+    flex-direction: column;
+  }
+
+  .offers-text {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .offers-text h2 {
+    font-size: 28px;
+  }
+
+  .offers-text h3 {
+    font-size: 22px;
+  }
+
+  .offers-text p {
+    font-size: 16px;
+  }
+
+  .offers-button {
+    font-size: 16px;
+  }
+}
+</style>
+  <!-- Fullscreen Video Section -->
+  <section class="video-section">
+    <video id="infinitiVideo" muted="" autoplay="" loop="" playsinline="">
+      <source src="https://s3-helios-use1nisprod-videooutput.s3.amazonaws.com/nissan/en-US/videos/nissan-frontier-extreme-testing-video-bp.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="overlay-content" id="textOverlay">
+      <p>Unleash the power.</p>
+    </div>
+  </section>
+
+  <script>
+    const video = document.getElementById('infinitiVideo');
+    const overlay = document.getElementById('textOverlay');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          video.play().catch(err => console.log('Autoplay blocked:', err));
+          overlay.classList.add('active');
+        } else {
+          video.pause();
+          overlay.classList.remove('active');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(video);
+  </script>
+
+
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontier PRO-4X Features</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Section container */
+    .features-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 50px;
+      background-color: white;
+    }
+
+    /* Container for images */
+    .image-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1200px;
+      margin-top: 40px;
+    }
+
+    .image-box {
+      position: relative;
+      width: 48%;
+      height: 250px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Popup description styling */
+    .popup-description {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 10px;
+      font-size: 1rem;
+      display: none;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .image-box.show-description .popup-description {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Touchscreen Image Section (Make it Larger) */
+    .touchscreen-container {
+      width: 100%;
+      max-width: 1200px;
+      margin-top: 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .touchscreen-container img {
+      width: 100%; /* Make the touchscreen image take the full width */
+      max-width: 1000px; /* Set a max width to keep it large but not oversized */
+      height: 500px; /* Larger height for the touchscreen image */
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    /* Popup for Touchscreen */
+    .touchscreen-container .popup-description {
+      display: none;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 10px;
+      font-size: 1rem;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .touchscreen-container.show-description .popup-description {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .image-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .image-box {
+        width: 100%;
+        height: 300px;
+      }
+
+      .touchscreen-container {
+        width: 100%;
+      }
+
+      .touchscreen-container img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+
+
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <!-- Image container for two images -->
+    <div class="image-container">
+      <!-- Off-Road Gauges Image (Left) -->
+      <div class="image-box" id="gaugesImage">
+        <img src="https://www.nissan.ca/content/dam/Nissan/Canada/Vehicles/frontier/2025/pro-4x/lightbox/2025-nissan-frontier-pro-4x-off-road-gauges.jpg" alt="Off-Road Gauges">
+        <div class="popup-description">
+          <p>Monitor your off-road performance with dedicated gauges designed for rugged terrains and challenging conditions.</p>
+        </div>
+      </div>
+
+      <!-- Monitor with Off-Road View Image (Right) -->
+      <div class="image-box" id="monitorImage">
+        <img src="https://www.nissan.ca/content/dam/Nissan/Canada/Vehicles/frontier/2025/pro-4x/lightbox/2025-nissan-frontier-pro-4x-around-view-monitor.jpg" alt="Monitor with Off-Road View">
+        <div class="popup-description">
+          <p>See the terrain ahead with the off-road view monitor, designed to help navigate tricky paths and obstacles.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Touchscreen Section (Larger Image) -->
+    <div class="touchscreen-container" id="touchscreenImage">
+      <img src="https://www.nissan.ca/content/dam/Nissan/Canada/Vehicles/frontier/2025/pro-4x/lightbox/2025-nissan-frontier-pro-4x-touchscreen.jpg" alt="Touchscreen">
+      <div class="popup-description">
+        <p>The Frontier PRO-4X comes equipped with an advanced touchscreen that seamlessly integrates with your driving experience. Enjoy easy access to navigation, media, and off-road settings with a user-friendly interface that puts everything at your fingertips.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- JavaScript for hover interactions -->
+  <script>
+    // Hover effects to show description for Off-Road Gauges image
+    document.getElementById('gaugesImage').addEventListener('mouseenter', function() {
+      this.classList.add('show-description');
+    });
+    document.getElementById('gaugesImage').addEventListener('mouseleave', function() {
+      this.classList.remove('show-description');
+    });
+
+    // Hover effects to show description for Monitor image
+    document.getElementById('monitorImage').addEventListener('mouseenter', function() {
+      this.classList.add('show-description');
+    });
+    document.getElementById('monitorImage').addEventListener('mouseleave', function() {
+      this.classList.remove('show-description');
+    });
+
+    // Hover effects to show description for Touchscreen image
+    document.getElementById('touchscreenImage').addEventListener('mouseenter', function() {
+      this.classList.add('show-description');
+    });
+    document.getElementById('touchscreenImage').addEventListener('mouseleave', function() {
+      this.classList.remove('show-description');
+    });
+  </script>
+
+
+
+
+
+
+<section class="featured-vehicle">
+  <div class="vehicle-image">
+    <div class="vehicle-overlay">
+      <h2>Featured Vehicles</h2>
+      <h1>2026 Nissan Frontier Crew Cab Pro 4X</h1>
+      <p>Frontier®<br>Starting at $32,150</p>
+      <div class="vehicle-buttons">
+        <a href="https://www.nissanusa.com/vehicles/trucks/frontier.html" class="btn-explore">Explore</a>
+        <a href="https://www.nissanusa.com/shopping-tools/build-price?models=frontier&amp;modelYear=current-year" class="btn-build">Build &amp; Price</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.featured-vehicle {
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.vehicle-image {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background-image: url('https://www.nissanusa.com/content/dam/Nissan/us/vehicles/trucks/Pro4X/frontier-pro-4x-d.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vehicle-overlay {
+  color: white;
+  text-align: center;
+  text-shadow: 0 0 12px rgba(0,0,0,0.6);
+  padding: 20px;
+}
+
+.vehicle-overlay h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.vehicle-overlay h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.vehicle-overlay p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.vehicle-buttons a {
+  display: inline-block;
+  margin: 5px 10px;
+  padding: 12px 28px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-explore {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn-explore:hover {
+  background: white;
+  color: black;
+}
+
+.btn-build {
+  background: #ff4d00;
+  color: white;
+  border: none;
+}
+
+.btn-build:hover {
+  background: #e63b00;
+}
+
+/* Responsive */
+@media(max-width: 1024px){
+  .vehicle-image {
+    height: 500px;
+  }
+  .vehicle-overlay h1 {
+    font-size: 28px;
+  }
+  .vehicle-overlay h2 {
+    font-size: 18px;
+  }
+  .vehicle-overlay p {
+    font-size: 16px;
+  }
+  .vehicle-buttons a {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+@media(max-width: 700px){
+  .vehicle-image {
+    height: 400px;
+  }
+  .vehicle-overlay h1 {
+    font-size: 22px;
+  }
+  .vehicle-overlay h2 {
+    font-size: 16px;
+  }
+  .vehicle-overlay p {
+    font-size: 14px;
+  }
+}
+</style>
+<section class="awards-section">
+  <div class="awards-container">
+    <!-- Left Heading -->
+    <div class="awards-heading">
+      <h2>Awards &amp; Accolades</h2>
+      <h3>A clear winner</h3>
+    </div>
+
+    <!-- Right Award Item -->
+    <div class="award-item">
+      <div class="award-image">
+        <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/trucks/awards/nissan-frontier-consumer-guide-best-buy-2026-badge.png" alt="2026 Consumer Guide Best Buy award badge">
+      </div>
+      <p class="award-desc">
+        Consumer Guide® Automotive <br>
+        Nissan Frontier – 2026 Best Buy Award (2nd year in a Row). 
+        <span class="popup-trigger">(*)</span>
+      </p>
+      <div class="popup-text">
+        Consumer Guide® is a registered trademark of Publications International, Ltd.
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.awards-section {
+  padding: 80px 10%;
+  font-family: 'Poppins', sans-serif;
+  background: whitesmoke;
+}
+
+.awards-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+/* Left Heading */
+.awards-heading {
+  flex: 1;
+  min-width: 200px;
+  text-align: left;
+}
+
+.awards-heading h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.awards-heading h3 {
+  font-size: 20px;
+  font-weight: 500;
+  color: #666;
+}
+
+/* Right Award Item */
+.award-item {
+  flex: 2;
+  max-width: 500px;
+  position: relative;
+}
+
+.award-image img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 15px;
+  display: block;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.award-image img:hover {
+  transform: scale(1.05);
+}
+
+.award-desc {
+  font-size: 16px;
+  color: #333;
+}
+
+.popup-trigger {
+  color: orange;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.popup-text {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.85);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  width: max-content;
+  max-width: 250px;
+  text-align: center;
+  z-index: 10;
+}
+
+/* Show popup on hover (desktop) */
+.award-item:hover .popup-text {
+  display: block;
+}
+
+/* Responsive */
+@media(max-width: 900px) {
+  .awards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .awards-heading {
+    text-align: center;
+  }
+
+  .award-item {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .award-image img {
+    max-width: 250px;
+  }
+}
+</style>
+
+<script>
+const popupTrigger = document.querySelector('.popup-trigger');
+const popupText = document.querySelector('.popup-text');
+
+popupTrigger.addEventListener('click', function(e) {
+  e.stopPropagation();
+  if (popupText.style.display === 'block') {
+    popupText.style.display = 'none';
+  } else {
+    popupText.style.display = 'block';
+  }
+});
+
+// Hide popup when clicking outside
+document.addEventListener('click', () => {
+  popupText.style.display = 'none';
+});
+</script>
+<footer class="footer-real">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand-chat">
+        <a href="/" class="footer-logo" aria-label="Homepage">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png" alt="Brand Logo">
+        </a>
+        <button class="footer-live-chat" aria-label="Live Chat">Live Chat</button>
+      </div>
+
+      <nav class="footer-nav">
+        <div class="footer-column">
+          <h4>ABOUT</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/about.html">About Nissan</a></li>
+            <li><a href="https://www.nissanusa.com/about/culture.html">Culture</a></li>
+            <li><a href="https://usa.nissannews.com/en-US/">News &amp; Events</a></li>
+            <li><a href="https://www.nissanusa.com/business-fleet.html">Business &amp; Fleet</a></li>
+            <li><a href="https://www.nissanusa.com/accessibility.html">Accessibility</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>SHOP</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/vehicles/new.html">All Vehicles</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/search-inventory">Search Inventory</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-brochure.html">View a Brochure</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/build-price">Build &amp; Price</a></li>
+            <li><a href="https://www.nissanusa.com/dealer-locator.html">Locate a Dealer</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OWNERS</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/owners.html">Owner Portal</a></li>
+            <li><a href="https://www.nissanusa.com/parts-service">Schedule Service</a></li>
+            <li><a href="https://www.nissanusa.com/owners/manuals-guides.html">Manuals &amp; Guides</a></li>
+            <li><a href="https://www.nissanusa.com/connect.html">Connected Services</a></li>
+            <li><a href="https://www.nissanusa.com/maintenance-schedules/">Maintenance Schedules</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OFFERS &amp; FINANCING</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/shopping-tools/deals-incentives-offers.html">Deals &amp; Offers</a></li>
+            <li><a href="https://www.nissanfinance.com/s/login/?language=en_US">Financing Options</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/lease-finance-payment-calculator">Estimate Payments</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/pre-approval.html">Get Pre-Approved</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-internet-quote.html">Internet Quote</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-middle">
+      <div class="footer-social">
+        <a href="https://www.tiktok.com/@nissanusa?lang=en" aria-label="TikTok">TikTok</a>
+        <a href="https://www.instagram.com/nissanusa/" aria-label="Instagram">Instagram</a>
+        <a href="https://www.youtube.com/user/nissanusa/featured" aria-label="YouTube">YouTube</a>
+        <a href="https://twitter.com/NissanUSA" aria-label="Twitter">Twitter</a>
+        <a href="https://www.facebook.com/nissanusa/" aria-label="Facebook">Facebook</a>
+        <a href="https://www.pinterest.com/nissanusa/" aria-label="Pinterest">Pinterest</a>
+      </div>
+
+      <div class="footer-extras">
+        <div class="footer-language">
+          <label for="lang-select" class="sr-only">Select Language</label>
+          <select id="lang-select" aria-label="Language selection">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+        <div class="footer-links-small">
+          <a href="https://www.nissanusa.com/sitemap.html">Site Map</a>
+          <a href="https://www.nissanusa.com/contact-us.html">Contact Us</a>
+          <a href="https://www.nissanusa.com/data-privacy.html">Do Not Sell or Share My Personal Information</a>
+          <a href="https://www.nissanusa.com/legal-terms.html">Terms of Use</a>
+          <a href="https://www.nissanusa.com/privacy.html">Privacy Notice</a>
+          <a href="https://www.nissanusa.com/recalls-vin">Recall Information</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="current-year">2025</span> Nissan. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* ✅ Prevent horizontal overflow */
+  }
+
+  .footer-real {
+    background-color: whitesmoke;
+    color: darkred;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 40px 20px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .footer-brand-chat {
+    flex: 1 1 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo img {
+    height: 110px;
+    max-width: 100%;
+    filter: brightness(0.95) contrast(1);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .footer-logo img:hover {
+    filter: brightness(1) contrast(1.05);
+    transform: scale(1.05);
+  }
+
+  .footer-live-chat {
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid darkred;
+    color: black;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .footer-live-chat:hover {
+    border-color: darkred;
+    background-color: whitesmoke;
+  }
+
+  .footer-nav {
+    flex: 3 1 600px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+  }
+
+  .footer-column h4 {
+    color: black;
+    font-size: 13px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-column li {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .footer-column li a {
+    color: darkred;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  .footer-column li a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-middle {
+    border-top: 1px solid darkred;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-social a {
+    color: darkred;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover {
+    color: black;
+  }
+
+  .footer-extras {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .footer-language select {
+    background-color: transparent;
+    color: black;
+    border: 1px solid darkred;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .footer-links-small {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links-small a {
+    color: black;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .footer-links-small a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid darkred;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: darkred;
+  }
+
+  /* ✅ Responsive Fixes */
+  @media (max-width: 900px) {
+    .footer-nav {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+    }
+    .footer-nav {
+      grid-template-columns: 1fr;
+    }
+    .footer-middle {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .footer-extras {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .footer-links-small {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+
+</body></html>

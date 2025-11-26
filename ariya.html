@@ -1,0 +1,1368 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan Ariya</title>
+  <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: whitesmoke;
+      overflow-x: hidden;
+      color: gray;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: transparent;
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 20px;
+      z-index: 1000;
+    }
+
+    /* ===== LEFT MENU ===== */
+    .menu-left {
+      position: absolute;
+      left: 20px;
+      top: 10px;
+    }
+
+
+    /* ===== RIGHT MENU (1 cm inside) ===== */
+    .menu-right {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+    }
+
+    .menu-toggle {
+      width: 28px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 100%;
+      background: black;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* ===== LOGO ===== */
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: white;
+      text-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .logo span {
+      color: #e60000;
+    }
+
+   
+    /* ===== DROPDOWNS ===== */
+    .dropdown {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
+      min-width: 200px;
+      z-index: 1200;
+      overflow: hidden;
+    }
+
+    .dropdown.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transform: translateX(-40px);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    .dropdown.active a {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .dropdown a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    #dropdown1 {
+      top: 45px;
+      left: 20px;
+    }
+
+    #dropdown2 {
+      top: 45px;
+      right: 1cm;
+    }
+
+
+
+    /* ===== GALLERY ===== */
+    h1 {
+      text-align: center;
+      font-family: 'Oxygen', sans-serif;
+      font-weight: 700;
+      font-size: 2.5em;
+      margin: 40px 0 20px;
+      color: #111;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 0 20px 60px;
+      justify-items: center;
+    }
+
+    .gallery a {
+      position: relative;
+      display: block;
+      text-decoration: none;
+      border-radius: 15px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+
+    .gallery a:hover img {
+      transform: scale(1.05);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+    }
+
+    .gallery a::after {
+      content: attr(data-name);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-size: 1.1em;
+      font-weight: 700;
+      opacity: 0;
+      padding: 10px 0;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      transition: opacity 0.4s ease;
+      text-align: center;
+    }
+
+    .gallery a:hover::after {
+      opacity: 1;
+    }
+
+    /* ===== RESPONSIVE FIXES ===== */
+    @media (max-width: 1024px) {
+      .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .gallery img {
+        object-fit: contain;
+      }
+      .gallery a {
+        aspect-ratio: auto;
+        height: auto;
+      }
+      .menu-right {
+        right: 1cm;
+      }
+      .logo {
+        font-size: 1.5rem;
+      }
+      .search-bar input {
+        width: 150px;
+      }
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery img {
+        object-fit: contain;
+      }
+      .gallery a {
+        aspect-ratio: auto;
+        height: auto;
+      }
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+      .menu-right {
+        right: 1cm;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="menu-left">
+      <div id="menu1" class="menu-toggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="menu-right">
+      <div id="menu2" class="menu-toggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="logo">NISSAN <span>NORMAL</span></div>
+
+   
+
+    <div id="dropdown1" class="dropdown">
+      <a href="nissan.html">Home</a>
+      <a href="models.html">Models</a>
+      <a href="performance.html">Performance</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div id="dropdown2" class="dropdown">
+      <a href="normal.html">Normal</a>
+      <a href="sports.html">Sports</a>
+      <a href="luxury.html">Luxury</a>
+      <a href="premium.html">Premium</a>
+    </div>
+  </header>
+<style>
+  /* Reset */
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  /* HERO SECTION */
+  .hero-section {
+    width: 100%;
+    margin-top: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-section img {
+    width: 100%;
+    display: block;
+  }
+
+  /* DESKTOP: fill screen minus header */
+  @media (min-width: 1025px) {
+    .hero-section {
+      height: calc(100vh - 100px); /* subtract header height */
+    }
+    .hero-section img {
+      height: 100%;
+      object-fit: cover; /* desktop can crop slightly for full-screen effect */
+    }
+  }
+
+  /* TABLET / MOBILE: keep full image visible, no crop */
+  @media (max-width: 1024px) {
+    .hero-section {
+      height: auto; /* allow image to scale naturally */
+    }
+    .hero-section img {
+      height: auto;
+      max-height: calc(100vh - 80px); /* limit to remaining viewport */
+      object-fit: contain; /* no crop */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-section img {
+      max-height: calc(100vh - 70px); /* mobile header height */
+      object-fit: contain;
+    }
+  }
+</style>
+
+<section class="hero-section">
+  <img src="https://www.nissanusa.com/content/dam/Nissan/us/vehicles/ariya/2025/overview/mosaic/2025-nissan-ariya-blue-rear-view.jpg" alt="Nissan GT-R Hero">
+</section>
+
+  <script>
+    const menu1 = document.getElementById("menu1");
+    const menu2 = document.getElementById("menu2");
+    const dropdown1 = document.getElementById("dropdown1");
+    const dropdown2 = document.getElementById("dropdown2");
+
+    function toggleDropdown(menu, dropdown, otherMenu, otherDropdown) {
+      menu.classList.toggle("open");
+      dropdown.classList.toggle("active");
+      otherMenu.classList.remove("open");
+      otherDropdown.classList.remove("active");
+
+      const links = dropdown.querySelectorAll("a");
+      links.forEach((link, i) => {
+        link.style.transitionDelay = dropdown.classList.contains("active")
+          ? `${i * 0.08}s`
+          : "0s";
+      });
+    }
+
+    menu1.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleDropdown(menu1, dropdown1, menu2, dropdown2);
+    });
+
+    menu2.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleDropdown(menu2, dropdown2, menu1, dropdown1);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (
+        !menu1.contains(e.target) &&
+        !menu2.contains(e.target) &&
+        !dropdown1.contains(e.target) &&
+        !dropdown2.contains(e.target)
+      ) {
+        [menu1, menu2].forEach((m) => m.classList.remove("open"));
+        [dropdown1, dropdown2].forEach((d) => d.classList.remove("active"));
+      }
+    });
+  </script>
+  
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan ARIYA Future of Thrill</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .thrill-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 50px 10%;
+      background: white;
+      flex-wrap: wrap;
+    }
+
+    .thrill-heading {
+      flex: 1;
+      font-size: 2em;
+      font-weight: bold;
+      color: #222;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .price {
+      font-weight: bold;
+      font-size: 1.3em;
+      margin-top: 10px;
+      color: #c00;
+    }
+
+    .thrill-content {
+      flex: 1;
+      font-size: 1.1em;
+      color: #444;
+      text-align: left; /* ✅ Fixed alignment */
+      line-height: 1.6;
+      padding-left: 40px; /* optional: small space between text blocks */
+    }
+
+    @media (max-width: 768px) {
+      .thrill-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .thrill-heading, .thrill-content {
+        text-align: center;
+        padding-left: 0;
+      }
+    }
+  </style>
+
+
+
+  <section class="thrill-section">
+    <div class="thrill-heading">
+      The future of Thrill
+      <div class="price">
+        Starting At <br> $39,770
+      </div>
+    </div>
+
+    <div class="thrill-content">
+      The 2025 Nissan ARIYA is a thrilling, all-electric crossover SUV. 
+      It’s fierce yet refined, elegant yet exhilarating. 
+      It’s a totally new way to see electric driving.
+    </div>
+  </section>
+
+
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan ARIYA APR Offer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .offer-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: white;
+      flex-wrap: wrap;
+      overflow: hidden;
+    }
+
+    /* ✅ Bigger image, full left side */
+    .offer-image {
+      flex: 1.5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .offer-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0;
+    }
+
+    /* ✅ Text clearly on right side */
+    .offer-text {
+      flex: 1;
+      text-align: left;
+      padding: 60px;
+      background-color: #fff;
+      color: #222;
+    }
+
+    .offer-text h2 {
+      font-size: 3em;
+      font-weight: bold;
+      margin: 0;
+      color: #111;
+    }
+
+    .offer-details {
+      font-size: 1.3em;
+      margin-top: 15px;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    .offer-highlight {
+      font-size: 3em;
+      font-weight: bold;
+      color: #c00;
+    }
+
+    /* ✅ Mobile adjustments */
+    @media (max-width: 900px) {
+      .offer-section {
+        flex-direction: column;
+      }
+
+      .offer-image img {
+        width: 100%;
+        height: auto;
+      }
+
+      .offer-text {
+        padding: 30px;
+        text-align: center;
+      }
+
+      .offer-text h2 {
+        font-size: 2.2em;
+      }
+
+      .offer-highlight {
+        font-size: 2.5em;
+      }
+    }
+  </style>
+
+
+
+  <section class="offer-section">
+    <div class="offer-image">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Nissan_Ariya%2C_rear%2C_Nissan_Gallery_HQ%2C_2021.jpg/2560px-Nissan_Ariya%2C_rear%2C_Nissan_Gallery_HQ%2C_2021.jpg" alt="2025 Nissan ARIYA">
+    </div>
+
+    <div class="offer-text">
+      <h2>APR</h2>
+      <div class="offer-details">
+        <strong>2025 Nissan ARIYA</strong><br>
+        <span class="offer-highlight">0.0%</span><br>
+        APR Financing<br>
+        <strong>72 Months</strong><br>
+        For Well-Qualified Buyers who finance with NMAC
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Six Image Layout with Hover/Click Overlay</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Containers for images */
+  .top-images, .three-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+
+  .bottom-image {
+    margin-bottom: 20px;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  /* Image container */
+  .image-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
+
+  /* Paragraph overlay */
+  .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 15px;
+    font-size: 1rem;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Show overlay on hover or click */
+  .image-container:hover .overlay,
+  .image-container.active .overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Heights for desktop */
+  .top-images .image-container { height: 400px; flex: 1 1 calc(50% - 10px); }
+  .bottom-image .image-container { height: 450px; }
+  .three-images .image-container { height: 350px; flex: 1 1 calc(33.33% - 13.33px); }
+
+  /* Mobile and tablet adjustments */
+  @media (max-width: 768px) {
+    .top-images, .bottom-image, .three-images {
+      gap: 10px; /* reduce spacing */
+      padding: 0 5px;
+      margin-bottom: 15px;
+    }
+
+    .top-images .image-container,
+    .bottom-image .image-container,
+    .three-images .image-container {
+      height: auto;
+    }
+
+    .image-container img {
+      object-fit: contain; /* ensure full image visible */
+      border-radius: 8px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .top-images, .bottom-image, .three-images {
+      gap: 8px;
+      padding: 0 5px;
+      margin-bottom: 10px;
+    }
+  }
+</style>
+
+
+
+<!-- Two big images on top -->
+<div class="top-images">
+  <div class="image-container">
+    <img src="https://di-uploads-pod20.dealerinspire.com/bismarckmotorcompany/uploads/2020/07/Nissan-Ariya-exterior-front_1_light-off-1200x800.jpg" alt="Left Image">
+    <div class="overlay">Nissan Ariya Front View</div>
+  </div>
+  <div class="image-container">
+    <img src="https://static.foxdealer.com/679/2023/01/2023-nissan-ariya-3d-layered-led-taillights-o.png" alt="Right Image">
+    <div class="overlay">Nissan Ariya Taillights</div>
+  </div>
+</div>
+
+<!-- One big image below -->
+<div class="bottom-image">
+  <div class="image-container">
+    <img src="https://topelectricsuv.com/wp-content/uploads/2023/12/Nissan-Ariya-Platinum-e-4orce-side-profile-1.jpg" alt="Bottom Image">
+    <div class="overlay">Nissan Ariya Side Profile</div>
+  </div>
+</div>
+
+<!-- Three images in a row -->
+<div class="three-images">
+  <div class="image-container">
+    <img src="https://www.bpmcdn.com/f/files/oakbay/import/2023-04/32521892_web1_230424-TodaysDrive-Ariya_4.jpg" alt="Left">
+    <div class="overlay">Nissan Ariya power</div>
+  </div>
+  <div class="image-container">
+    <img src="https://i.ebayimg.com/images/g/IjEAAOSwt8Nm7Ip1/s-l1200.jpg" alt="Center">
+    <div class="overlay">Nissan Ariya lights</div>
+  </div>
+  <div class="image-container">
+    <img src="https://pictures.dealer.com/r/ramseynissanuppersaddleriver/0502/ca03e4a1bfffb34fcddda68c8a1a270bx.jpg" alt="Right">
+    <div class="overlay">Nissan Ariya interior</div>
+  </div>
+</div>
+
+<script>
+  // Enable click/tap overlay on mobile/tablet
+  const imageContainers = document.querySelectorAll('.image-container');
+  imageContainers.forEach(container => {
+    container.addEventListener('click', () => {
+      container.classList.toggle('active');
+    });
+  });
+</script>
+
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan Ariya Overview</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+
+    /* ===== MAIN CONTENT (CENTERED IMAGE + PARAGRAPHS) ===== */
+    .container {
+      display: grid;
+      grid-template-areas:
+        "top-left top-right"
+        "center center"
+        "bottom-left bottom-right";
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 20px;
+      max-width: 1000px;
+      width: 90%;
+      margin: 50px auto;
+    }
+
+    .para {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: left;
+      line-height: 1.6;
+    }
+
+    .para h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #222;
+    }
+
+    .top-left { grid-area: top-left; }
+    .top-right { grid-area: top-right; }
+    .bottom-left { grid-area: bottom-left; }
+    .bottom-right { grid-area: bottom-right; }
+
+    .image {
+      grid-area: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* ===== CAR OF THE YEAR SECTION ===== */
+    .section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      background-color: #fff;
+      gap: 20px;
+    }
+
+    .section .text {
+      flex: 1 1 400px;
+      max-width: 600px;
+      padding: 20px;
+    }
+
+    .section .text h2 {
+      font-weight: bold;
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #222;
+    }
+
+    .section .text p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    .section .image {
+      flex: 1 1 300px;
+      max-width: 500px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .section .image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    /* ===== FOOTER ===== */
+    .nissan-footer {
+      background: whitesmoke;
+      color: black;
+      font-family: 'Poppins', sans-serif;
+      margin-top: 40px;
+    }
+
+    .footer-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 50px 10%;
+      gap: 30px;
+    }
+
+    .footer-logo img {
+      width: 160px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .footer-links h3,
+    .footer-social h3,
+    .footer-newsletter h3 {
+      margin-bottom: 15px;
+      color: orange;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links ul li a {
+      color: black;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .footer-links ul li a:hover {
+      color: orange;
+      animation: vibrate 0.3s linear;
+    }
+
+    .footer-social .social-icons {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .footer-social .social-icons a img {
+      width: 25px;
+      height: 25px;
+      transition: transform 0.3s;
+    }
+
+    .footer-social .social-icons a img:hover {
+      transform: scale(1.2);
+    }
+
+    .footer-newsletter p {
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      color: black;
+    }
+
+    .footer-newsletter form {
+      display: flex;
+      gap: 10px;
+    }
+
+    .footer-newsletter input[type="email"] {
+      padding: 8px 12px;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+    }
+
+    .footer-newsletter button {
+      padding: 8px 18px;
+      border-radius: 25px;
+      border: none;
+      background: orange;
+      color: black;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .footer-newsletter button:hover {
+      background: #ff9800;
+    }
+
+    .footer-bottom {
+      width: 100%;
+      text-align: center;
+      padding: 15px 0;
+      background: whitesmoke;
+      font-size: 13px;
+      color: black;
+      border-top: 1px solid #222;
+      box-sizing: border-box;
+      transform: translateX(-100%);
+      opacity: 0;
+      transition: all 1s ease;
+    }
+
+    .footer-bottom.active {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    /* ===== RESPONSIVE DESIGN ===== */
+    @media (max-width: 768px) {
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 20px 10px;
+      }
+
+      .para {
+        width: 100%;
+      }
+
+      .image img {
+        width: 100%;
+      }
+
+      .section {
+        flex-direction: column-reverse;
+        padding: 20px 10px;
+      }
+
+      .section .text h2 {
+        font-size: 24px;
+      }
+
+      .section .text p {
+        font-size: 16px;
+      }
+
+      .footer-top {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .footer-newsletter form {
+        flex-direction: column;
+        gap: 10px;
+        width: 80%;
+      }
+
+      .footer-newsletter input[type="email"],
+      .footer-newsletter button {
+        width: 100%;
+      }
+    }
+
+    /* ===== VIBRATION ANIMATION ===== */
+    @keyframes vibrate {
+      0% { transform: translateX(0); }
+      20% { transform: translateX(-2px); }
+      40% { transform: translateX(2px); }
+      60% { transform: translateX(-2px); }
+      80% { transform: translateX(2px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+
+
+
+
+  <!-- ===== MAIN CONTAINER ===== -->
+  <div class="container">
+    <div class="para top-left">
+      <h3>Design &amp; Performance</h3>
+      The Nissan Ariya is an all-electric crossover SUV that combines futuristic design with advanced technology and performance. It features a "Timeless Japanese Futurism" design, available with two battery options (63 kWh or 87 kWh) and two drivetrain configurations (front-wheel drive or e-4ORCE all-wheel drive).
+    </div>
+
+    <div class="para top-right">
+      <h3>Battery &amp; Charging</h3>
+      The Nissan Ariya is available with two battery options: a 63 kWh (or 67 kWh) and an 87 kWh battery. Both use a liquid-cooled thermal management system for consistent performance in different climates and support fast charging capabilities.
+    </div>
+
+    <div class="image">
+      <img src="https://images.openai.com/thumbnails/url/k9EsIHicu5meUVJSUGylr5-al1xUWVCSmqJbkpRnoJdeXJJYkpmsl5yfq5-Zm5ieWmxfaAuUsXL0S7F0Tw7K888t9QwvSQ0ICgv1CHEOSTQ39sqNMHBJ9wk3czTRTXcMDSipMK0IC6lyVCu2NTQAAAVOJIc" alt="Nissan Ariya">
+    </div>
+
+    <div class="para bottom-left">
+      <h3>Road Grip &amp; Stability</h3>
+      The Nissan Ariya offers excellent road grip, especially with the optional e-4ORCE all-wheel-drive (AWD) system. It uses dual motors to intelligently distribute torque between the front and rear wheels for maximum traction and control.
+    </div>
+
+    <div class="para bottom-right">
+      <h3>Interior Comfort</h3>
+      The Nissan Ariya is designed with comfort in mind, featuring a spacious, lounge-like interior with high-quality materials, a flat floor, and "zero gravity" front seats for superior relaxation during long drives.
+    </div>
+  </div>
+
+  <!-- ===== CAR OF THE YEAR SECTION ===== -->
+  <div class="section">
+    <div class="text">
+      <h2>Car of the Year 2022</h2>
+      <p>The <strong>Nissan Ariya</strong> was named <strong>Auto Express Car of the Year 2022</strong>, praised for its comfortable ride, superb refinement, and agility — particularly impressive for a large car.</p>
+    </div>
+    <div class="image">
+      <img src="https://www.red-dot.org/fileadmin/_processed_/0/f/csm_38-09063-2022PD-14_CO_EV_f5819a84d1.jpg" alt="Nissan Ariya Car of the Year 2022">
+    </div>
+  </div>
+
+  <footer class="footer-real">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand-chat">
+        <a href="/" class="footer-logo" aria-label="Homepage">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png" alt="Brand Logo">
+        </a>
+        <button class="footer-live-chat" aria-label="Live Chat">Live Chat</button>
+      </div>
+
+      <nav class="footer-nav">
+        <div class="footer-column">
+          <h4>ABOUT</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/about.html">About Nissan</a></li>
+            <li><a href="https://www.nissanusa.com/about/culture.html">Culture</a></li>
+            <li><a href="https://usa.nissannews.com/en-US/">News &amp; Events</a></li>
+            <li><a href="https://www.nissanusa.com/business-fleet.html">Business &amp; Fleet</a></li>
+            <li><a href="https://www.nissanusa.com/accessibility.html">Accessibility</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>SHOP</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/vehicles/new.html">All Vehicles</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/search-inventory">Search Inventory</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-brochure.html">View a Brochure</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/build-price">Build &amp; Price</a></li>
+            <li><a href="https://www.nissanusa.com/dealer-locator.html">Locate a Dealer</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OWNERS</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/owners.html">Owner Portal</a></li>
+            <li><a href="https://www.nissanusa.com/parts-service">Schedule Service</a></li>
+            <li><a href="https://www.nissanusa.com/owners/manuals-guides.html">Manuals &amp; Guides</a></li>
+            <li><a href="https://www.nissanusa.com/connect.html">Connected Services</a></li>
+            <li><a href="https://www.nissanusa.com/maintenance-schedules/">Maintenance Schedules</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OFFERS &amp; FINANCING</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/shopping-tools/deals-incentives-offers.html">Deals &amp; Offers</a></li>
+            <li><a href="https://www.nissanfinance.com/s/login/?language=en_US">Financing Options</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/lease-finance-payment-calculator">Estimate Payments</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/pre-approval.html">Get Pre-Approved</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-internet-quote.html">Internet Quote</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-middle">
+      <div class="footer-social">
+        <a href="https://www.tiktok.com/@nissanusa?lang=en" aria-label="TikTok">TikTok</a>
+        <a href="https://www.instagram.com/nissanusa/" aria-label="Instagram">Instagram</a>
+        <a href="https://www.youtube.com/user/nissanusa/featured" aria-label="YouTube">YouTube</a>
+        <a href="https://twitter.com/NissanUSA" aria-label="Twitter">Twitter</a>
+        <a href="https://www.facebook.com/nissanusa/" aria-label="Facebook">Facebook</a>
+        <a href="https://www.pinterest.com/nissanusa/" aria-label="Pinterest">Pinterest</a>
+      </div>
+
+      <div class="footer-extras">
+        <div class="footer-language">
+          <label for="lang-select" class="sr-only">Select Language</label>
+          <select id="lang-select" aria-label="Language selection">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+        <div class="footer-links-small">
+          <a href="https://www.nissanusa.com/sitemap.html">Site Map</a>
+          <a href="https://www.nissanusa.com/contact-us.html">Contact Us</a>
+          <a href="https://www.nissanusa.com/data-privacy.html">Do Not Sell or Share My Personal Information</a>
+          <a href="https://www.nissanusa.com/legal-terms.html">Terms of Use</a>
+          <a href="https://www.nissanusa.com/privacy.html">Privacy Notice</a>
+          <a href="https://www.nissanusa.com/recalls-vin">Recall Information</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="current-year">2025</span> Nissan. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* ✅ Prevent horizontal overflow */
+  }
+
+  .footer-real {
+    background-color: whitesmoke;
+    color: darkred;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 40px 20px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .footer-brand-chat {
+    flex: 1 1 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo img {
+    height: 110px;
+    max-width: 100%;
+    filter: brightness(0.95) contrast(1);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .footer-logo img:hover {
+    filter: brightness(1) contrast(1.05);
+    transform: scale(1.05);
+  }
+
+  .footer-live-chat {
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid darkred;
+    color: black;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .footer-live-chat:hover {
+    border-color: darkred;
+    background-color: whitesmoke;
+  }
+
+  .footer-nav {
+    flex: 3 1 600px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+  }
+
+  .footer-column h4 {
+    color: black;
+    font-size: 13px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-column li {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .footer-column li a {
+    color: darkred;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  .footer-column li a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-middle {
+    border-top: 1px solid darkred;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-social a {
+    color: darkred;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover {
+    color: black;
+  }
+
+  .footer-extras {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .footer-language select {
+    background-color: transparent;
+    color: black;
+    border: 1px solid darkred;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .footer-links-small {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links-small a {
+    color: black;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .footer-links-small a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid darkred;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: darkred;
+  }
+
+  /* ✅ Responsive Fixes */
+  @media (max-width: 900px) {
+    .footer-nav {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+    }
+    .footer-nav {
+      grid-template-columns: 1fr;
+    }
+    .footer-middle {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .footer-extras {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .footer-links-small {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+</body></html>

@@ -1,0 +1,983 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan micra</title>
+  <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png">
+  <style>
+    /* ===== RESET ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: whitesmoke;
+      color: #333;
+      overflow-x: hidden; /* ✅ Prevent horizontal overflow */
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: transparent;
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 20px;
+      z-index: 1000;
+    }
+    .menu-left {
+      position: absolute;
+      left: 20px;
+      top: 10px;
+    }
+
+
+    .menu-right {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+    }
+
+    .menu-toggle {
+      width: 28px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 100%;
+      background: black;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: white;
+      text-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .logo span {
+      color: #e60000;
+    }
+
+    /* ===== DROPDOWN ===== */
+    .dropdown {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
+      min-width: 200px;
+      z-index: 1200;
+      overflow: hidden;
+    }
+
+    .dropdown.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transform: translateX(-40px);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    .dropdown.active a {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .dropdown a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    #dropdown1 {
+      top: 45px;
+      left: 20px;
+    }
+
+    #dropdown2 {
+      top: 45px;
+      right: 20px;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero-section {
+      width: 100%;
+      margin-top: 90px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-section img {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    @media (min-width: 1025px) {
+      .hero-section {
+        height: calc(100vh - 90px);
+      }
+      .hero-section img {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    /* ===== LEAF SECTION ===== */
+    .container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      background-color: #fff;
+      padding: 60px 10%;
+      margin: 60px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      gap: 40px;
+      max-width: 1200px;
+    }
+
+    .left {
+      flex: 1;
+      min-width: 250px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #222;
+      line-height: 1.5;
+    }
+
+    .right {
+      flex: 2;
+      min-width: 300px;
+      font-size: 17px;
+      font-weight: 500;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 40px 6%;
+      }
+      .left, .right {
+        width: 100%;
+        font-size: 18px;
+      }
+    }
+
+    /* ===== UNDER 30K SECTION ===== */
+    .under30k {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 40px;
+      background: white;
+      max-width: 1200px;
+      margin: 40px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .under30k img {
+      width: 100%;
+      max-width: 450px;
+      border-radius: 10px;
+    }
+
+    .under30k .text-section {
+      flex: 1;
+      padding: 20px 40px;
+      min-width: 280px;
+    }
+
+    .under30k h2 {
+      font-size: 26px;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 10px;
+    }
+
+    .under30k p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .under30k {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .under30k .text-section {
+        padding: 20px 0;
+      }
+    }
+
+    /* ===== AWARDS SECTION ===== */
+    .section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 10%;
+      gap: 40px;
+      flex-wrap: wrap;
+      background: #fff;
+      border-radius: 12px;
+      margin: 40px auto;
+      max-width: 1200px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .section img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 10px;
+    }
+
+    .section .text {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .section .text h2 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .section .text p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    .reverse {
+      flex-direction: row-reverse;
+    }
+
+    @media (max-width: 768px) {
+      .section, .reverse {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+      }
+      .section .text h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="menu-left">
+      <div id="menu1" class="menu-toggle"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="menu-right">
+      <div id="menu2" class="menu-toggle"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="logo">NISSAN <span>NORMAL</span></div>
+
+    <div id="dropdown1" class="dropdown">
+      <a href="nissan.html">Home</a>
+      <a href="models.html">Models</a>
+      <a href="performance.html">Performance</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div id="dropdown2" class="dropdown">
+      <a href="normal.html">Normal</a>
+      <a href="sports.html">Sports</a>
+      <a href="luxury.html">Luxury</a>
+      <a href="premium.html">Premium</a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <img src="https://storyblok-assets.prod.nissan.eu/f/298759/1280x638/38f90bce10/micra-made-in.jpg/m/1280x0/filters:quality(80)" alt="Nissan Leaf Hero">
+  </section>
+
+  <script>
+    const menu1 = document.getElementById("menu1");
+    const menu2 = document.getElementById("menu2");
+    const dropdown1 = document.getElementById("dropdown1");
+    const dropdown2 = document.getElementById("dropdown2");
+
+    function toggleDropdown(menu, dropdown, otherMenu, otherDropdown) {
+      menu.classList.toggle("open");
+      dropdown.classList.toggle("active");
+      otherMenu.classList.remove("open");
+      otherDropdown.classList.remove("active");
+
+      const links = dropdown.querySelectorAll("a");
+      links.forEach((link, i) => {
+        link.style.transitionDelay = dropdown.classList.contains("active")
+          ? `${i * 0.08}s`
+          : "0s";
+      });
+    }
+
+    menu1.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleDropdown(menu1, dropdown1, menu2, dropdown2);
+    });
+
+    menu2.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleDropdown(menu2, dropdown2, menu1, dropdown1);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (
+        !menu1.contains(e.target) &&
+        !menu2.contains(e.target) &&
+        !dropdown1.contains(e.target) &&
+        !dropdown2.contains(e.target)
+      ) {
+        [menu1, menu2].forEach((m) => m.classList.remove("open"));
+        [dropdown1, dropdown2].forEach((d) => d.classList.remove("active"));
+      }
+    });
+  </script>
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan EV Charging</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+    }
+
+    .charge-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 40px 20px;
+      background-color: white;
+    }
+
+    .charge-image {
+      flex: 1;
+      min-width: 280px;
+      text-align: center;
+    }
+
+    .charge-image img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .charge-text {
+      flex: 1;
+      min-width: 280px;
+      padding: 20px;
+    }
+
+    .charge-text h2 {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #111;
+      margin-bottom: 15px;
+    }
+
+    .charge-text p {
+      font-size: 1.1em;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .charge-section {
+        flex-direction: column;
+      }
+      .charge-text {
+        text-align: center;
+      }
+    }
+  </style>
+
+
+
+  <section class="charge-section">
+    <div class="charge-image">
+      <img src="https://storyblok-assets.prod.nissan.eu/f/298759/2696x1216/4cc173b1c0/25tdieu_micra_vlp_unveil_021-v2-1.png/m/1280x0/filters:quality(80)" alt="Nissan EV charging at home">
+    </div>
+    <div class="charge-text">
+      <h2>On the Go</h2>
+      <p>
+        Extra fast charging on the go – whether you're at a public charging station or on a quick pit stop, 
+        power up efficiently and keep moving forward with confidence.
+      </p>
+    </div>
+  </section>
+
+  <section class="charge-section" style="background-color:#f0f0f0;">
+    <div class="charge-image">
+      <img src="https://storyblok-assets.prod.nissan.eu/f/298759/1500x1600/0243f87512/l-carousel-slider-charging-01.png/m/1280x1280/filters:quality(80)" alt="Nissan Leaf charging at home">
+    </div>
+    <div class="charge-text">
+      <h2>At Home</h2>
+      <p>
+        Top me up during the day or charge me overnight to wake up and start the morning at 100% battery.
+      </p>
+    </div>
+  </section>
+
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan MICRA Fleet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    .fleet-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 20px;
+      gap: 20px;
+      flex-wrap: wrap;
+      background-color: #ffffff;
+    }
+
+    .fleet-text {
+      flex: 1 1 300px;
+    }
+
+    .fleet-text h2 {
+      font-weight: bold;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .fleet-text p {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #333;
+    }
+
+    .fleet-image {
+      flex: 1 1 300px;
+      text-align: center;
+    }
+
+    .fleet-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .fleet-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .fleet-text h2 {
+        font-size: 1.5rem;
+      }
+
+      .fleet-text p {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+
+
+
+  <section class="fleet-section">
+    <div class="fleet-text">
+      <h2>DISCOVER MORE</h2>
+      <p>Are you a Fleet customer? We have a dedicated Nissan MICRA Fleet hub with all the information you will need.<br><br>
+      So why wait? Click now or use the contact us form if there's anything the Nissan Fleet Team can help with.</p>
+    </div>
+    <div class="fleet-image">
+      <img src="https://storyblok-assets.prod.nissan.eu/f/298759/1280x834/b31b7e1f19/micra-image-1.webp/m/640x0/filters:quality(80)" alt="Nissan MICRA Fleet">
+    </div>
+  </section>
+
+
+
+
+
+<section class="leaf-feature">
+  <div class="image-overlay">
+    <img src="https://storyblok-assets.prod.nissan.eu/f/298759/3000x1600/fc00ef500a/l-drive-with-more-confidence.png/m/2560x1440/filters:quality(80)" alt="2026 Nissan LEAF in blue driving up a curved ramp with pillars on both sides">
+    <div class="text-content">
+      <p class="play"> <strong>2026 Nissan MICA</strong></p>
+      <h2>2026 <span>NISSAN MICA</span></h2>
+      <p class="tagline">All-electric, all-new<br>A bold new EV for a brave new electric world.</p>
+    </div>
+  </div>
+</section>
+<style>
+    /* ===== LEAF FEATURE SECTION ===== */
+.leaf-feature {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: black;
+}
+
+.leaf-feature img {
+  width: 100%;
+  height: 100%;
+  max-height: 650px;
+  object-fit: cover;
+  filter: brightness(0.75);
+  display: block;
+}
+
+.image-overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.text-content {
+  position: absolute;
+  bottom: 10%;
+  left: 8%;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+.text-content .play {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  background: rgba(255,255,255,0.1);
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  backdrop-filter: blur(3px);
+}
+
+.text-content h2 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 10px 0;
+}
+
+.text-content h2 span {
+  color: #00a2e8; /* Electric blue accent */
+}
+
+.text-content .tagline {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Responsive design for tablet and mobile */
+@media (max-width: 1024px) {
+  .text-content h2 {
+    font-size: 2.2rem;
+  }
+  .text-content .tagline {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .text-content {
+    left: 5%;
+    bottom: 8%;
+    text-align: left;
+  }
+  .text-content h2 {
+    font-size: 1.8rem;
+  }
+  .text-content .tagline {
+    font-size: 1rem;
+  }
+  .text-content .play {
+    font-size: 1rem;
+    padding: 5px 10px;
+  }
+}
+
+</style>
+
+   <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Nissan MICRA Models</title> <style> * { box-sizing: border-box; margin: 0; padding: 0; } body { font-family: Arial, sans-serif; padding: 20px; background-color: #f5f5f5; } .micra-container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; } .micra-card { background-color: #fff; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; flex: 1 1 400px; max-width: 500px; } .micra-card img { width: 100%; display: block; } .micra-content { padding: 15px; } .micra-content h2 { font-size: 1.5rem; margin-bottom: 10px; } .micra-content p.price { color: #e60000; font-weight: bold; margin-bottom: 10px; } .micra-content ul { margin-bottom: 15px; padding-left: 20px; } .micra-content ul li { margin-bottom: 8px; } .micra-content .configure-btn { display: inline-block; padding: 10px 20px; background-color: #e60000; color: #fff; text-decoration: none; border-radius: 8px; transition: background-color 0.3s; } .micra-content .configure-btn:hover { background-color: #b30000; } @media (max-width: 768px) { .micra-container { flex-direction: column; align-items: center; } } </style>   <div class="micra-container"> <br><!-- MICRA Engage --> <div class="micra-card"> <img src="https://storyblok-assets.prod.nissan.eu/f/298759/1200x650/e04bce0663/micra_engage_ecg.webp/m/420x0/filters:quality(80)" alt="MICRA Engage Gray Hatchback"> <div class="micra-content"> <h2>MICRA Engage</h2> <p class="price">Prices From £21,495 <br> Including Electric Car Grant of £1,500</p> <ul> <li>18” ACTIVE Wheels</li> <li>7” TFT Combimeter &amp; 10.3” Infotainment Screen</li> <li>Automatic A/C with scheduling Function</li> <li>Heat Pump Cabin Heater</li> <li>11kW On-board AC Charger</li> </ul> </div> </div> <!-- MICRA Advance --> <div class="micra-card"> <img src="https://storyblok-assets.prod.nissan.eu/f/298759/1200x650/d0a61ba149/micra_advance_ecg.webp/m/420x0/filters:quality(80)" alt="MICRA Advance Red Hatchback"> <div class="micra-content"> <h2>MICRA Advance</h2> <p class="price">From £23,495 <br> Including Electric Car Grant of £1,500</p> <ul> <li>18” ICONIC Alloy Wheels</li> <li>Dual 10.3" Displays with Google Built-in and Google Maps</li> <li>Adaptive Cruise Control with Stop &amp; Go</li> <li>e-Pedal with Paddle Shifts</li> <li>Front Parking Sensors, Blind Spot, Rear Cross Traffic Alert &amp; Rear-view Camera</li> </ul> </div> </div> </div>  
+
+<footer class="footer-real">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand-chat">
+        <a href="/" class="footer-logo" aria-label="Homepage">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png" alt="Brand Logo">
+        </a>
+        <button class="footer-live-chat" aria-label="Live Chat">Live Chat</button>
+      </div>
+
+      <nav class="footer-nav">
+        <div class="footer-column">
+          <h4>ABOUT</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/about.html">About Nissan</a></li>
+            <li><a href="https://www.nissanusa.com/about/culture.html">Culture</a></li>
+            <li><a href="https://usa.nissannews.com/en-US/">News &amp; Events</a></li>
+            <li><a href="https://www.nissanusa.com/business-fleet.html">Business &amp; Fleet</a></li>
+            <li><a href="https://www.nissanusa.com/accessibility.html">Accessibility</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>SHOP</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/vehicles/new.html">All Vehicles</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/search-inventory">Search Inventory</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-brochure.html">View a Brochure</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/build-price">Build &amp; Price</a></li>
+            <li><a href="https://www.nissanusa.com/dealer-locator.html">Locate a Dealer</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OWNERS</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/owners.html">Owner Portal</a></li>
+            <li><a href="https://www.nissanusa.com/parts-service">Schedule Service</a></li>
+            <li><a href="https://www.nissanusa.com/owners/manuals-guides.html">Manuals &amp; Guides</a></li>
+            <li><a href="https://www.nissanusa.com/connect.html">Connected Services</a></li>
+            <li><a href="https://www.nissanusa.com/maintenance-schedules/">Maintenance Schedules</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OFFERS &amp; FINANCING</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/shopping-tools/deals-incentives-offers.html">Deals &amp; Offers</a></li>
+            <li><a href="https://www.nissanfinance.com/s/login/?language=en_US">Financing Options</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/lease-finance-payment-calculator">Estimate Payments</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/pre-approval.html">Get Pre-Approved</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-internet-quote.html">Internet Quote</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-middle">
+      <div class="footer-social">
+        <a href="https://www.tiktok.com/@nissanusa?lang=en" aria-label="TikTok">TikTok</a>
+        <a href="https://www.instagram.com/nissanusa/" aria-label="Instagram">Instagram</a>
+        <a href="https://www.youtube.com/user/nissanusa/featured" aria-label="YouTube">YouTube</a>
+        <a href="https://twitter.com/NissanUSA" aria-label="Twitter">Twitter</a>
+        <a href="https://www.facebook.com/nissanusa/" aria-label="Facebook">Facebook</a>
+        <a href="https://www.pinterest.com/nissanusa/" aria-label="Pinterest">Pinterest</a>
+      </div>
+
+      <div class="footer-extras">
+        <div class="footer-language">
+          <label for="lang-select" class="sr-only">Select Language</label>
+          <select id="lang-select" aria-label="Language selection">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+        <div class="footer-links-small">
+          <a href="https://www.nissanusa.com/sitemap.html">Site Map</a>
+          <a href="https://www.nissanusa.com/contact-us.html">Contact Us</a>
+          <a href="https://www.nissanusa.com/data-privacy.html">Do Not Sell or Share My Personal Information</a>
+          <a href="https://www.nissanusa.com/legal-terms.html">Terms of Use</a>
+          <a href="https://www.nissanusa.com/privacy.html">Privacy Notice</a>
+          <a href="https://www.nissanusa.com/recalls-vin">Recall Information</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="current-year">2025</span> Nissan. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* ✅ Prevent horizontal overflow */
+  }
+
+  .footer-real {
+    background-color: whitesmoke;
+    color: darkred;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 40px 20px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .footer-brand-chat {
+    flex: 1 1 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo img {
+    height: 110px;
+    max-width: 100%;
+    filter: brightness(0.95) contrast(1);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .footer-logo img:hover {
+    filter: brightness(1) contrast(1.05);
+    transform: scale(1.05);
+  }
+
+  .footer-live-chat {
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid darkred;
+    color: black;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .footer-live-chat:hover {
+    border-color: darkred;
+    background-color: whitesmoke;
+  }
+
+  .footer-nav {
+    flex: 3 1 600px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+  }
+
+  .footer-column h4 {
+    color: black;
+    font-size: 13px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-column li {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .footer-column li a {
+    color: darkred;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  .footer-column li a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-middle {
+    border-top: 1px solid darkred;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-social a {
+    color: darkred;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover {
+    color: black;
+  }
+
+  .footer-extras {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .footer-language select {
+    background-color: transparent;
+    color: black;
+    border: 1px solid darkred;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .footer-links-small {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links-small a {
+    color: black;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .footer-links-small a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid darkred;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: darkred;
+  }
+
+  /* ✅ Responsive Fixes */
+  @media (max-width: 900px) {
+    .footer-nav {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+    }
+    .footer-nav {
+      grid-template-columns: 1fr;
+    }
+    .footer-middle {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .footer-extras {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .footer-links-small {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+</body></html>

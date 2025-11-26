@@ -1,0 +1,1144 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan clipper</title>
+  <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png">
+  <style>
+    /* ===== RESET ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: whitesmoke;
+      color: #333;
+      overflow-x: hidden; /* ✅ Prevent horizontal overflow */
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: transparent;
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 20px;
+      z-index: 1000;
+    }
+.menu-left {
+  position: absolute;
+  left: 20px;
+  top: 10px;
+}
+
+
+    .menu-right {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+    }
+
+    .menu-toggle {
+      width: 28px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 100%;
+      background: black;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: white;
+      text-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .logo span {
+      color: #e60000;
+    }
+
+    /* ===== DROPDOWN ===== */
+    .dropdown {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
+      min-width: 200px;
+      z-index: 1200;
+      overflow: hidden;
+    }
+
+    .dropdown.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transform: translateX(-40px);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    .dropdown.active a {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .dropdown a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    #dropdown1 {
+      top: 45px;
+      left: 20px;
+    }
+
+    #dropdown2 {
+      top: 45px;
+      right: 20px;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero-section {
+      width: 100%;
+      margin-top: 90px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-section img {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    @media (min-width: 1025px) {
+      .hero-section {
+        height: calc(100vh - 90px);
+      }
+      .hero-section img {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    /* ===== LEAF SECTION ===== */
+    .container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      background-color: #fff;
+      padding: 60px 10%;
+      margin: 60px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      gap: 40px;
+      max-width: 1200px;
+    }
+
+    .left {
+      flex: 1;
+      min-width: 250px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #222;
+      line-height: 1.5;
+    }
+
+    .right {
+      flex: 2;
+      min-width: 300px;
+      font-size: 17px;
+      font-weight: 500;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 40px 6%;
+      }
+      .left, .right {
+        width: 100%;
+        font-size: 18px;
+      }
+    }
+
+    /* ===== UNDER 30K SECTION ===== */
+    .under30k {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 40px;
+      background: white;
+      max-width: 1200px;
+      margin: 40px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .under30k img {
+      width: 100%;
+      max-width: 450px;
+      border-radius: 10px;
+    }
+
+    .under30k .text-section {
+      flex: 1;
+      padding: 20px 40px;
+      min-width: 280px;
+    }
+
+    .under30k h2 {
+      font-size: 26px;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 10px;
+    }
+
+    .under30k p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .under30k {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .under30k .text-section {
+        padding: 20px 0;
+      }
+    }
+
+    /* ===== AWARDS SECTION ===== */
+    .section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 10%;
+      gap: 40px;
+      flex-wrap: wrap;
+      background: #fff;
+      border-radius: 12px;
+      margin: 40px auto;
+      max-width: 1200px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .section img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 10px;
+    }
+
+    .section .text {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .section .text h2 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .section .text p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    .reverse {
+      flex-direction: row-reverse;
+    }
+
+    @media (max-width: 768px) {
+      .section, .reverse {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+      }
+      .section .text h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="menu-left">
+      <div id="menu1" class="menu-toggle"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="menu-right">
+      <div id="menu2" class="menu-toggle"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="logo">NISSAN <span>NORMAL</span></div>
+
+    <div id="dropdown1" class="dropdown">
+      <a href="nissan.html">Home</a>
+      <a href="models.html">Models</a>
+      <a href="performance.html">Performance</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div id="dropdown2" class="dropdown">
+      <a href="normal.html">Normal</a>
+      <a href="sports.html">Sports</a>
+      <a href="luxury.html">Luxury</a>
+      <a href="premium.html">Premium</a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <img src="https://www-asia.nissan-cdn.net/content/dam/Nissan/jp/vehicles/clipper_ev/2501/top/clipper_ev_2501_top_pfa_pc_01.jpg.ximg.full.hero.jpg" alt="Nissan Leaf Hero">
+  </section>
+
+  <script>
+    const menu1 = document.getElementById("menu1");
+    const menu2 = document.getElementById("menu2");
+    const dropdown1 = document.getElementById("dropdown1");
+    const dropdown2 = document.getElementById("dropdown2");
+
+    function toggleDropdown(menu, dropdown, otherMenu, otherDropdown) {
+      menu.classList.toggle("open");
+      dropdown.classList.toggle("active");
+      otherMenu.classList.remove("open");
+      otherDropdown.classList.remove("active");
+
+      const links = dropdown.querySelectorAll("a");
+      links.forEach((link, i) => {
+        link.style.transitionDelay = dropdown.classList.contains("active")
+          ? `${i * 0.08}s`
+          : "0s";
+      });
+    }
+
+    menu1.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleDropdown(menu1, dropdown1, menu2, dropdown2);
+    });
+
+    menu2.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleDropdown(menu2, dropdown2, menu1, dropdown1);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (
+        !menu1.contains(e.target) &&
+        !menu2.contains(e.target) &&
+        !dropdown1.contains(e.target) &&
+        !dropdown2.contains(e.target)
+      ) {
+        [menu1, menu2].forEach((m) => m.classList.remove("open"));
+        [dropdown1, dropdown2].forEach((d) => d.classList.remove("active"));
+      }
+    });
+  </script>
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan Charging</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+
+    .charging-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .charging-image {
+      flex: 1;
+    }
+
+    .charging-image img {
+      width: 100%;
+      max-width: 450px;
+      border-radius: 10px;
+    }
+
+    .charging-text {
+      flex: 1;
+    }
+
+    .charging-text h2 {
+      font-size: 28px;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 10px;
+    }
+
+    .charging-text p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .charging-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .charging-text {
+        margin-top: 15px;
+      }
+
+      .charging-image img {
+        max-width: 100%;
+      }
+    }
+  </style>
+
+
+
+  <section class="charging-section">
+    <div class="charging-image">
+      <img src="https://wieck-nissanao-production.s3.amazonaws.com/photos/d995505c6ce5091a72242db574d002839fcf4bb0/preview-768x432.jpg" alt="Nissan EV charging at station">
+    </div>
+
+    <div class="charging-text">
+      <h2>Charging Made Easy</h2>
+      <p>
+        Whether you’re at home or on the go, charging your Nissan electric vehicle is effortless. 
+        Plug in overnight to start every day at 100%, or use rapid public chargers to boost your range in minutes. 
+        With multiple charging options and intelligent battery management, you’ll always be ready to drive wherever the road leads.
+      </p>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan Charger &amp; Gallery</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+
+    /* --- Charger Section --- */
+    .charger-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      padding: 30px;
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .charger-text {
+      flex: 1;
+    }
+
+    .charger-text h2 {
+      font-size: 30px;
+      font-weight: bold;
+      color: #111;
+      margin-bottom: 15px;
+    }
+
+    .charger-text p {
+      font-size: 17px;
+      color: #555;
+    }
+
+    .charger-image {
+      flex: 1;
+      text-align: right;
+    }
+
+    .charger-image img {
+      width: 100%;
+      max-width: 450px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* --- Two Image Section --- */
+    .two-image-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .two-image {
+      flex: 1;
+      text-align: center;
+      background: #fff;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .two-image img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 10px;
+    }
+
+    /* --- Responsive Design --- */
+    @media (max-width: 768px) {
+      .charger-section {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+
+      .charger-text {
+        margin-top: 20px;
+      }
+
+      .charger-image img {
+        max-width: 100%;
+      }
+
+      .two-image-section {
+        flex-direction: column;
+      }
+
+      .two-image img {
+        max-width: 100%;
+      }
+    }
+  </style>
+
+
+
+  <!-- Top Charger Section -->
+  <section class="charger-section">
+    <div class="charger-text">
+      <h2>Efficient Nissan Charger</h2>
+      <p>
+        The Nissan Charger is designed for speed, safety, and convenience. 
+        Whether you’re charging at home or on the go, it delivers powerful performance with intelligent energy management. 
+        Compact, reliable, and easy to use, it ensures your Nissan EV is always ready to drive with maximum efficiency.
+      </p>
+    </div>
+
+    <div class="charger-image">
+      <img src="https://smartchargeamerica.com/wp-content/uploads/2016/12/ClipperCreek-HCS-40-electric-car-charging-station-EVSE-1-600x700.jpg" alt="Nissan electric vehicle charger">
+    </div>
+  </section>
+
+  <!-- Two Image Gallery Section -->
+  <section class="two-image-section">
+    <div class="two-image">
+      <img src="https://wieck-nissanao-production.s3.amazonaws.com/photos/83a53fdcdf8a158232c6ea515d643794b0ebf29b/preview-768x432.jpg" alt="Nissan charger left image">
+    </div>
+
+    <div class="two-image">
+      <img src="https://wieck-nissanao-production.s3.amazonaws.com/photos/f8d936172480a5d114aa61496f2218e6bc57646f/preview-768x432.jpg" alt="Nissan charger right image">
+    </div>
+  </section>
+
+
+
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nissan Clipper Grip</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 30px 20px;
+    }
+
+    .clipper-section {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      padding: 25px;
+      flex-wrap: wrap; /* allows stacking on small screens */
+    }
+
+    .clipper-image {
+      flex: 1 1 45%;
+      text-align: center;
+    }
+
+    .clipper-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .clipper-text {
+      flex: 1 1 50%;
+      text-align: left;
+    }
+
+    .clipper-text h2 {
+      font-size: 30px;
+      font-weight: bold;
+      color: #111;
+      margin-bottom: 15px;
+    }
+
+    .clipper-text p {
+      font-size: 17px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .clipper-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .clipper-text {
+        text-align: center;
+      }
+
+      .clipper-text h2 {
+        font-size: 24px;
+      }
+
+      .clipper-text p {
+        font-size: 15px;
+      }
+    }
+  </style>
+
+
+
+  <section class="clipper-section">
+    <div class="clipper-image">
+      <img src="https://wieck-nissanao-production.s3.amazonaws.com/photos/15b4e3dd67daecf97a6f653295511d4ef4292226/preview-768x432.jpg" alt="Nissan Clipper on the road">
+    </div>
+
+    <div class="clipper-text">
+      <h2>Exceptional Grip on Every Road</h2>
+      <p>
+        The Nissan Clipper is built for confident driving and stability in all conditions. 
+        Its precision-engineered suspension system and advanced traction control provide superior grip, 
+        ensuring smooth handling on city streets, rugged roads, or wet surfaces. 
+        Whether carrying heavy loads or navigating sharp turns, the Clipper maintains perfect balance and control, 
+        giving you a reliable and secure driving experience every time.
+      </p>
+    </div>
+  </section>
+
+
+
+
+<section class="leaf-feature">
+  <div class="image-overlay">
+    <img src="https://www-asia.nissan-cdn.net/content/dam/Nissan/jp/vehicles/clipper_ev/2406/exterior_interior/clipper_ev_2406_exterior_interior_th1_main_01.jpg.ximg.l_12_m.smart.jpg" alt="2026 Nissan LEAF in blue driving up a curved ramp with pillars on both sides">
+    <div class="text-content">
+      <p class="play"> <strong>2026 Nissan EV</strong></p>
+      <h2>2026 <span>NISSAN EV</span></h2>
+      <p class="tagline">All-electric, all-new<br>A bold new EV for a brave new electric world.</p>
+    </div>
+  </div>
+</section>
+<style>
+    /* ===== LEAF FEATURE SECTION ===== */
+.leaf-feature {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: black;
+}
+
+.leaf-feature img {
+  width: 100%;
+  height: 100%;
+  max-height: 650px;
+  object-fit: cover;
+  filter: brightness(0.75);
+  display: block;
+}
+
+.image-overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.text-content {
+  position: absolute;
+  bottom: 10%;
+  left: 8%;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+.text-content .play {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  background: rgba(255,255,255,0.1);
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  backdrop-filter: blur(3px);
+}
+
+.text-content h2 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 10px 0;
+}
+
+.text-content h2 span {
+  color: #00a2e8; /* Electric blue accent */
+}
+
+.text-content .tagline {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Responsive design for tablet and mobile */
+@media (max-width: 1024px) {
+  .text-content h2 {
+    font-size: 2.2rem;
+  }
+  .text-content .tagline {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .text-content {
+    left: 5%;
+    bottom: 8%;
+    text-align: left;
+  }
+  .text-content h2 {
+    font-size: 1.8rem;
+  }
+  .text-content .tagline {
+    font-size: 1rem;
+  }
+  .text-content .play {
+    font-size: 1rem;
+    padding: 5px 10px;
+  }
+}
+
+</style>
+
+<footer class="footer-real">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand-chat">
+        <a href="/" class="footer-logo" aria-label="Homepage">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nissan_2020_logo.svg/512px-Nissan_2020_logo.svg.png" alt="Brand Logo">
+        </a>
+        <button class="footer-live-chat" aria-label="Live Chat">Live Chat</button>
+      </div>
+
+      <nav class="footer-nav">
+        <div class="footer-column">
+          <h4>ABOUT</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/about.html">About Nissan</a></li>
+            <li><a href="https://www.nissanusa.com/about/culture.html">Culture</a></li>
+            <li><a href="https://usa.nissannews.com/en-US/">News &amp; Events</a></li>
+            <li><a href="https://www.nissanusa.com/business-fleet.html">Business &amp; Fleet</a></li>
+            <li><a href="https://www.nissanusa.com/accessibility.html">Accessibility</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>SHOP</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/vehicles/new.html">All Vehicles</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/search-inventory">Search Inventory</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-brochure.html">View a Brochure</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/build-price">Build &amp; Price</a></li>
+            <li><a href="https://www.nissanusa.com/dealer-locator.html">Locate a Dealer</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OWNERS</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/owners.html">Owner Portal</a></li>
+            <li><a href="https://www.nissanusa.com/parts-service">Schedule Service</a></li>
+            <li><a href="https://www.nissanusa.com/owners/manuals-guides.html">Manuals &amp; Guides</a></li>
+            <li><a href="https://www.nissanusa.com/connect.html">Connected Services</a></li>
+            <li><a href="https://www.nissanusa.com/maintenance-schedules/">Maintenance Schedules</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>OFFERS &amp; FINANCING</h4>
+          <ul>
+            <li><a href="https://www.nissanusa.com/shopping-tools/deals-incentives-offers.html">Deals &amp; Offers</a></li>
+            <li><a href="https://www.nissanfinance.com/s/login/?language=en_US">Financing Options</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/lease-finance-payment-calculator">Estimate Payments</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/pre-approval.html">Get Pre-Approved</a></li>
+            <li><a href="https://www.nissanusa.com/shopping-tools/request-internet-quote.html">Internet Quote</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-middle">
+      <div class="footer-social">
+        <a href="https://www.tiktok.com/@nissanusa?lang=en" aria-label="TikTok">TikTok</a>
+        <a href="https://www.instagram.com/nissanusa/" aria-label="Instagram">Instagram</a>
+        <a href="https://www.youtube.com/user/nissanusa/featured" aria-label="YouTube">YouTube</a>
+        <a href="https://twitter.com/NissanUSA" aria-label="Twitter">Twitter</a>
+        <a href="https://www.facebook.com/nissanusa/" aria-label="Facebook">Facebook</a>
+        <a href="https://www.pinterest.com/nissanusa/" aria-label="Pinterest">Pinterest</a>
+      </div>
+
+      <div class="footer-extras">
+        <div class="footer-language">
+          <label for="lang-select" class="sr-only">Select Language</label>
+          <select id="lang-select" aria-label="Language selection">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+        <div class="footer-links-small">
+          <a href="https://www.nissanusa.com/sitemap.html">Site Map</a>
+          <a href="https://www.nissanusa.com/contact-us.html">Contact Us</a>
+          <a href="https://www.nissanusa.com/data-privacy.html">Do Not Sell or Share My Personal Information</a>
+          <a href="https://www.nissanusa.com/legal-terms.html">Terms of Use</a>
+          <a href="https://www.nissanusa.com/privacy.html">Privacy Notice</a>
+          <a href="https://www.nissanusa.com/recalls-vin">Recall Information</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="current-year">2025</span> Nissan. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* ✅ Prevent horizontal overflow */
+  }
+
+  .footer-real {
+    background-color: whitesmoke;
+    color: darkred;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 40px 20px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .footer-brand-chat {
+    flex: 1 1 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo img {
+    height: 110px;
+    max-width: 100%;
+    filter: brightness(0.95) contrast(1);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .footer-logo img:hover {
+    filter: brightness(1) contrast(1.05);
+    transform: scale(1.05);
+  }
+
+  .footer-live-chat {
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid darkred;
+    color: black;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .footer-live-chat:hover {
+    border-color: darkred;
+    background-color: whitesmoke;
+  }
+
+  .footer-nav {
+    flex: 3 1 600px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+  }
+
+  .footer-column h4 {
+    color: black;
+    font-size: 13px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-column li {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .footer-column li a {
+    color: darkred;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  .footer-column li a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-middle {
+    border-top: 1px solid darkred;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-social a {
+    color: darkred;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover {
+    color: black;
+  }
+
+  .footer-extras {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .footer-language select {
+    background-color: transparent;
+    color: black;
+    border: 1px solid darkred;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .footer-links-small {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links-small a {
+    color: black;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .footer-links-small a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid darkred;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: darkred;
+  }
+
+  /* ✅ Responsive Fixes */
+  @media (max-width: 900px) {
+    .footer-nav {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+    }
+    .footer-nav {
+      grid-template-columns: 1fr;
+    }
+    .footer-middle {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .footer-extras {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .footer-links-small {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+</body></html>
